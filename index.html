@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="km" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate-key="page_title">វិស្វកម្មមេកានិក - Mechanical Engineering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class', // Enable class-based dark mode
+        theme: {
+          extend: {}
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Base font */
+        body {
+            font-family: 'Kantumruy Pro', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Specify fonts for different languages */
+        :lang(en) body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        /* Animation for page content */
+        .page-content {
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        .page-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Active nav link style */
+        .nav-link.active {
+            color: #2563EB; /* blue-600 */
+            font-weight: 600;
+            border-bottom: 2px solid #2563EB;
+        }
+        /* Dark mode active nav link style */
+        .dark .nav-link.active {
+            color: #60A5FA; /* blue-400 */
+            border-bottom-color: #60A5FA;
+        }
+        /* SVG Logo continuous rotation animation */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .logo-gear {
+            animation: spin 10s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+
+    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-3 text-blue-600 dark:text-blue-400" onclick="showPage('home')">
+                <svg class="logo-gear h-9 w-9 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M19.1255 7.96289L19.3755 7.71289C19.8635 7.22489 20.6275 7.22489 21.1155 7.71289L21.2875 7.88489C21.7755 8.37289 21.7755 9.13689 21.2875 9.62489L21.0375 9.87489" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4.87451 16.0371L4.62451 16.2871C4.13651 16.7751 3.37251 16.7751 2.88451 16.2871L2.71251 16.1151C2.22451 15.6271 2.22451 14.8631 2.71251 14.3751L2.96251 14.1251" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M7.96289 4.87451L7.71289 4.62451C7.22489 4.13651 7.22489 3.37251 7.71289 2.88451L7.88489 2.71251C8.37289 2.22451 9.13689 2.22451 9.62489 2.71251L9.87489 2.96251" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M16.0371 19.1255L16.2871 19.3755C16.7751 19.8635 16.7751 20.6275 16.2871 21.1155L16.1151 21.2875C15.6271 21.7755 14.8631 21.7755 14.3751 21.2875L14.1251 21.0375" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M22 12H19" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M5 12H2" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 5V2" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 22V19" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span class="text-2xl font-bold" data-translate-key="brand_name">វិស្វករមេកានិក</span>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center" onclick="showPage('home')">
+                    <i class="fas fa-home fa-fw mr-2"></i><span data-translate-key="nav_home">ទំព័រដើម</span>
+                </a>
+                <a href="#about" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center" onclick="showPage('about')">
+                    <i class="fas fa-info-circle fa-fw mr-2"></i><span data-translate-key="nav_about">អំពីជំនាញ</span>
+                </a>
+                <a href="#specializations" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center" onclick="showPage('specializations')">
+                    <i class="fas fa-cogs fa-fw mr-2"></i><span data-translate-key="nav_specializations">ឯកទេស</span>
+                </a>
+                <a href="#careers" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center" onclick="showPage('careers')">
+                    <i class="fas fa-briefcase fa-fw mr-2"></i><span data-translate-key="nav_careers">អាជីព</span>
+                </a>
+                <a href="#education" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center" onclick="showPage('education')">
+                    <i class="fas fa-graduation-cap fa-fw mr-2"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
+                </a>
+                <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center" onclick="showPage('contact')">
+                    <i class="fas fa-envelope fa-fw mr-2"></i><span data-translate-key="nav_contact">ទំនាក់ទំនង</span>
+                </a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition" aria-label="Toggle dark mode">
+                    <i id="theme-icon" class="fas fa-sun fa-lg"></i>
+                </button>
+
+                <div class="relative" id="lang-switcher-container">
+                    <button id="lang-switcher-btn" class="flex items-center p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <img id="current-lang-flag" src="https://flagcdn.com/kh.svg" alt="Language" class="w-8 h-5 rounded-sm border border-gray-200">
+                        <i class="fas fa-chevron-down w-4 h-4 ml-2 text-gray-500 dark:text-gray-400"></i>
+                    </button>
+                    <div id="lang-options" class="hidden absolute right-0 mt-2 w-40 bg-white dark:bg-gray-700 rounded-md shadow-lg py-1 z-50">
+                        <a href="#" onclick="setLanguage('km')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <img src="https://flagcdn.com/kh.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_km">ភាសាខ្មែរ</span>
+                        </a>
+                        <a href="#" onclick="setLanguage('en')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <img src="https://flagcdn.com/gb.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_en">English</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-600 dark:text-gray-300 focus:outline-none">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 shadow-lg">
+            <a href="#home" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center" onclick="showPage('home')">
+                <i class="fas fa-home fa-fw mr-3"></i><span data-translate-key="nav_home">ទំព័រដើម</span>
+            </a>
+            <a href="#about" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center" onclick="showPage('about')">
+                <i class="fas fa-info-circle fa-fw mr-3"></i><span data-translate-key="nav_about">អំពីជំនាញ</span>
+            </a>
+            <a href="#specializations" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center" onclick="showPage('specializations')">
+                <i class="fas fa-cogs fa-fw mr-3"></i><span data-translate-key="nav_specializations">ឯកទេស</span>
+            </a>
+            <a href="#careers" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center" onclick="showPage('careers')">
+                <i class="fas fa-briefcase fa-fw mr-3"></i><span data-translate-key="nav_careers">អាជីព</span>
+            </a>
+            <a href="#education" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center" onclick="showPage('education')">
+                <i class="fas fa-graduation-cap fa-fw mr-3"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
+            </a>
+            <a href="#contact" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center" onclick="showPage('contact')">
+                <i class="fas fa-envelope fa-fw mr-3"></i><span data-translate-key="nav_contact">ទំនាក់ទំនង</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="home" class="page-content active">
+            <div class="bg-blue-600 text-white min-h-[60vh] flex items-center bg-cover bg-center rounded-lg shadow-xl -mt-12 -mx-6" style="background-image: linear-gradient(rgba(37, 99, 235, 0.75), rgba(30, 64, 175, 0.75)), url('photo/១.jpg');">
+                <div class="text-center w-full px-6">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight" data-translate-key="hero_title">ស្វែងយល់ពីពិភពនៃវិស្វកម្មមេកានិក</h1>
+                    <p class="text-lg md:text-xl mb-8 text-blue-200 max-w-3xl mx-auto" data-translate-key="hero_subtitle">ពីគំនិតច្នៃប្រឌិត រហូតដល់ការបង្កើតនវានុវត្តន៍ដែលផ្លាស់ប្តូរពិភពលោក។</p>
+                    <button onclick="showPage('about')" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-full hover:bg-blue-100 transition duration-300 text-lg shadow-xl" data-translate-key="hero_button">ចាប់ផ្តើមស្វែងយល់</button>
+                </div>
+            </div>
+            <div class="py-16">
+                <h2 class="text-center text-3xl font-bold mb-10 text-gray-900 dark:text-gray-100" data-translate-key="home_why_title">ហេតុអ្វីត្រូវជ្រើសរើសជំនាញវិស្វកម្មមេកានិក?</h2>
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg dark:shadow-blue-900/50">
+                        <i class="fas fa-cogs fa-3x text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="home_why_1_title">ឱកាសទូលំទូលាយ </h3>
+                        <p class="text-gray-600 dark:text-gray-400" data-translate-key="home_why_1_desc">ធ្វើការក្នុងវិស័យជាច្រើនដូចជា យានយន្ត អាកាសយានិក ថាមពល និងបច្ចេកវិទ្យា។</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg dark:shadow-blue-900/50">
+                        <i class="fas fa-lightbulb fa-3x text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="home_why_2_title">ដោះស្រាយបញ្ហាជាក់ស្តែង </h3>
+                        <p class="text-gray-600 dark:text-gray-400" data-translate-key="home_why_2_desc">ប្រើប្រាស់ភាពច្នៃប្រឌិតរបស់អ្នកដើម្បីបង្កើតដំណោះស្រាយសម្រាប់បញ្ហាប្រឈមរបស់ពិភពលោក។</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg dark:shadow-blue-900/50">
+                        <i class="fas fa-chart-line fa-3x text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="home_why_3_title">អាជីពមានស្ថិរភាព</h3>
+                        <p class="text-gray-600 dark:text-gray-400" data-translate-key="home_why_3_desc">ជំនាញដែលមានតម្រូវការខ្ពស់ និងផ្តល់នូវប្រាក់ចំណូលល្អ និងឱកាសរីកចម្រើន។</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-16 text-center">
+                <button onclick="showPage('about')" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300 text-lg shadow-lg inline-flex items-center group">
+                    <span data-translate-key="next_button_about">អំពីជំនាញ</span> <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-2 transition-transform"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="about" class="page-content py-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="about_title">តើអ្វីទៅជាវិស្វកម្មមេកានិក?</h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="about_subtitle">ជំនាញដែលប្រើប្រាស់គោលការណ៍ រូបវិទ្យា និងគណិតវិទ្យា ដើម្បីរចនា វិភាគ ផលិត និងថែទាំប្រព័ន្ធមេកានិកគ្រប់ប្រភេទ។</p>
+            </div>
+            <div class="flex flex-wrap items-center -mx-4 mb-12">
+                 <div class="w-full md:w-1/2 px-4 mb-8 md:mb-0">
+                    <video autoplay loop muted playsinline class="rounded-xl shadow-xl w-full" src="Video/Vd1.mp4" alt="[វីដេអូបង្ហាញពីគំនិតវិស្វកម្ម]">
+                        Your browser does not support the video tag. </video>
+                 </div>
+                 <div class="w-full md:w-1/2 px-4">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-600 dark:text-blue-400" data-translate-key="about_heading">អ្នកបង្កើត</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed" data-translate-key="about_p1">វិស្វករមេកានិកគឺជាអ្នកដោះស្រាយបញ្ហាប្រកបដោយភាពច្នៃប្រឌិត។ ពួកគេចូលរួមនៅក្នុងគ្រប់ដំណាក់កាលនៃផលិតផល ចាប់ពីការស្រាវជ្រាវ និងការអភិវឌ្ឍន៍ រហូតដល់ការរចនា ការផលិត និងការធ្វើតេស្ត។</p>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-translate-key="about_p2">ពួកគេធ្វើការលើអ្វីៗគ្រប់យ៉ាង ចាប់ពីឧបករណ៍តូចៗ រហូតដល់គ្រឿងម៉ាស៊ីនធំៗ ដូចជា យានយន្ត យន្តហោះ រោងចក្រថាមពល និងមនុស្សយន្តជាដើម។</p>
+                 </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-gray-100" data-translate-key="about_skills_title">ជំនាញសំខាន់ៗរបស់មេកានិក</h3>
+                 <div data-translate-key="about_skills_list">
+                    </div>
+            </div>
+            <div class="mt-16 text-center">
+                <button onclick="showPage('specializations')" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300 text-lg shadow-lg inline-flex items-center group">
+                    <span data-translate-key="next_button_spec">ផ្នែកឯកទេស</span> <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-2 transition-transform"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="specializations" class="page-content py-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="spec_title">ផ្នែកឯកទេសសំខាន់ៗ</h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="spec_subtitle">វិស្វកម្មមេកានិកគឺជាជំនាញដ៏ធំទូលាយ ដែលមានឯកទេសជាច្រើនគួរឱ្យចាប់អារម្មណ៍។</p>
+            </div>
+             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
+                    <i class="fas fa-robot fa-3x text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card1_title"></h3>
+                    <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card1_desc"></p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
+                    <i class="fas fa-car fa-3x text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card2_title"></h3>
+                    <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card2_desc"></p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
+                    <i class="fas fa-plane-departure fa-3x text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card3_title"></h3>
+                    <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card3_desc"></p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
+                    <i class="fas fa-bolt fa-3x text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card4_title"></h3>
+                    <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card4_desc"></p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
+                    <i class="fas fa-industry fa-3x text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card5_title"></h3>
+                    <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card5_desc"></p>
+                </div>
+                 </div>
+            <div class="mt-16 text-center">
+                <button onclick="showPage('careers')" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300 text-lg shadow-lg inline-flex items-center group">
+                    <span data-translate-key="next_button_careers">ឱកាសអាជីព</span> <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-2 transition-transform"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="careers" class="page-content py-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="careers_title">ឱកាសអាជីព</h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="careers_subtitle">សញ្ញាបត្រវិស្វកម្មមេកានិក អាចបើកផ្លូវទៅកាន់អាជីពជាច្រើនប្រភេទ នៅក្នុងវិស័យផ្សេងៗគ្នា។</p>
+            </div>
+            <div class="max-w-4xl mx-auto space-y-4" data-translate-key="careers_list">
+            </div>
+            <div class="mt-16 text-center">
+                <button onclick="showPage('education')" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300 text-lg shadow-lg inline-flex items-center group">
+                    <span data-translate-key="next_button_education">កម្រិតសិក្សា</span> <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-2 transition-transform"></i>
+                </button>
+            </div>
+        </section>
+        
+        <section id="education" class="page-content py-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="education_title">កម្រិតសិក្សា</h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="education_subtitle">ស្វែងយល់អំពីកម្រិតសញ្ញាបត្រដែលអ្នកអាចបន្តការសិក្សាក្នុងជំនាញវិស្វកម្មមេកានិក។</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                 <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center text-center">
+                    <i class="fas fa-graduation-cap fa-3x text-blue-500 mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-gray-100" data-translate-key="education_level1_title">កម្រិតវិស្វកម្ម (បរិញ្ញាបត្ររង)</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate-key="education_level1_desc">កម្មវិធីសិក្សារយៈពេល ២ ឆ្នាំ ដែលផ្តោតលើមូលដ្ឋានគ្រឹះនៃវិស្វកម្មមេកានិក។</p>
+                    <div class="text-left w-full text-gray-900 dark:text-gray-100" data-translate-key="education_level1_details">
+                    </div>
+                 </div>
+                 <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center text-center">
+                    <i class="fas fa-user-tie fa-3x text-blue-500 mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-gray-100" data-translate-key="education_level2_title">កម្រិតវិស្វករ (បរិញ្ញាបត្រ)</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate-key="education_level2_desc">កម្មវិធីសិក្សារយៈពេល ៤-៥ ឆ្នាំ ដែលផ្តល់ចំណេះដឹងកាន់តែស៊ីជម្រៅក្នុងឯកទេសផ្សេងៗ។</p>
+                    <div class="text-left w-full text-gray-900 dark:text-gray-100" data-translate-key="education_level2_details">
+                    </div>
+                 </div>
+                 <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center text-center">
+                    <i class="fas fa-university fa-3x text-blue-500 mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-gray-100" data-translate-key="education_local_title">ស្ថាប័នសិក្សាក្នុងស្រុក</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate-key="education_local_desc">ស្វែងយល់ពីសាកលវិទ្យាល័យ និងវិទ្យាស្ថានល្បីៗនៅកម្ពុជា ដែលមានផ្តល់ជំនាញវិស្វកម្មមេកានិក។</p>
+                    <div class="text-left w-full text-gray-900 dark:text-gray-100" data-translate-key="education_local_details">
+                    </div>
+                 </div>
+            </div>
+            <div class="mt-16 text-center">
+                <button onclick="showPage('contact')" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300 text-lg shadow-lg inline-flex items-center group">
+                    <span data-translate-key="next_button_contact">ទំនាក់ទំនង</span> <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-2 transition-transform"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="contact" class="page-content py-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="contact_title">ទំនាក់ទំនងមកពួកយើង</h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="contact_subtitle">យើងរីករាយនឹងឆ្លើយតបរាល់សំណួររបស់អ្នក។ សូមទំនាក់ទំនងតាមរយៈបណ្តាញខាងក្រោម៖</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-10 items-start">
+                <div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 space-y-6 w-full">
+                    <a href="tel:+85512345678" class="flex items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
+                        <i class="fas fa-phone fa-2x w-8 text-center text-blue-500"></i>
+                        <div class="ml-4">
+                            <p class="font-semibold text-lg text-gray-900 dark:text-gray-100" data-translate-key="contact_phone">ទូរស័ព្ទ</p>
+                            <p class="text-gray-600 dark:text-gray-400">+855 12 345 678</p>
+                        </div>
+                    </a>
+                    <a href="https://www.facebook.com/" target="_blank" class="flex items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
+                        <i class="fab fa-facebook fa-2x w-8 text-center text-blue-600"></i>
+                        <div class="ml-4">
+                            <p class="font-semibold text-lg text-gray-900 dark:text-gray-100" data-translate-key="contact_facebook">ហ្វេសប៊ុក</p>
+                            <p class="text-gray-600 dark:text-gray-400" data-translate-key="contact_fb_user">Mechanical Engineering Page</p>
+                        </div>
+                    </a>
+                    <a href="https://t.me/yourusername" target="_blank" class="flex items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
+                        <i class="fab fa-telegram fa-2x w-8 text-center text-sky-500"></i>
+                        <div class="ml-4">
+                            <p class="font-semibold text-lg text-gray-900 dark:text-gray-100" data-translate-key="contact_telegram">តេឡេក្រាម</p>
+                            <p class="text-gray-600 dark:text-gray-400">@MechEngChannel</p>
+                        </div>
+                    </a>
+                    <a href="mailto:info@mecheng.edu" class="flex items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
+                        <i class="fas fa-envelope fa-2x w-8 text-center text-gray-500 dark:text-gray-400"></i>
+                        <div class="ml-4">
+                            <p class="font-semibold text-lg text-gray-900 dark:text-gray-100" data-translate-key="contact_email">អ៊ីមែល</p>
+                            <p class="text-gray-600 dark:text-gray-400">info@mecheng.edu</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full">
+                    <h3 class="font-bold text-xl mb-4 text-gray-900 dark:text-gray-100" data-translate-key="contact_form_title">សំណុំបែបបទទំនាក់ទំនង</h3>
+                    <form id="contactForm" class="space-y-4" onsubmit="event.preventDefault(); sendEmail();">
+                        <div>
+                            <label for="contactName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="contact_form_name">ឈ្មោះ</label>
+                            <input type="text" id="contactName" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                        <div>
+                            <label for="contactEmail" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="contact_form_email">អ៊ីមែល</label>
+                            <input type="email" id="contactEmail" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                        <div>
+                            <label for="contactMessage" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="contact_form_message">សារ</label>
+                            <textarea id="contactMessage" rows="4" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 font-semibold transition" data-translate-key="contact_form_submit">ផ្ញើសារ</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 dark:bg-gray-950 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400" data-translate-key="footer_text">ចាប់ផ្តើមដំណើររបស់អ្នកក្នុងវិស័យវិស្វកម្មមេកានិកនៅថ្ងៃនេះ ហើយរួមចំណែកបង្កើតបច្ចេកវិទ្យាថ្មីៗ។</p>
+            <div class="mt-4">
+                <p class="text-gray-500 text-sm" data-translate-key="footer_copyright">រក្សាសិទ្ធិគ្រប់យ៉ាង © 2025 | បង្កើតដោយ ខៀវ សំណាង</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            km: {
+                page_title: "វិស្វកម្មមេកានិក",
+                brand_name: "វិស្វករមេកានិក",
+                nav_home: "ទំព័រដើម",
+                nav_about: "អំពីជំនាញ",
+                nav_specializations: "ឯកទេស",
+                nav_careers: "អាជីព",
+                nav_education: "កម្រិតសិក្សា",
+                nav_contact: "ទំនាក់ទំនង",
+                lang_km: "ភាសាខ្មែរ",
+                lang_en: "English",
+                hero_title: "ស្វែងយល់ពីពិភពនៃវិស្វកម្មមេកានិក",
+                hero_subtitle: "ពីគំនិតច្នៃប្រឌិត រហូតដល់ការបង្កើតនវានុវត្តន៍ដែលផ្លាស់ប្តូរពិភពលោក។",
+                hero_button: "ចាប់ផ្តើមស្វែងយល់",
+                home_why_title: "ហេតុអ្វីត្រូវជ្រើសរើសជំនាញវិស្វកម្មមេកានិក?",
+                home_why_1_title: "ឱកាសទូលំទូលាយ",
+                home_why_1_desc: "ធ្វើការក្នុងវិស័យជាច្រើនដូចជា យានយន្ត អាកាសយានិក ថាមពល និងបច្ចេកវិទ្យា។",
+                home_why_2_title: "ដោះស្រាយបញ្ហាជាក់ស្តែង",
+                home_why_2_desc: "ប្រើប្រាស់ភាពច្នៃប្រឌិតរបស់អ្នកដើម្បីបង្កើតដំណោះស្រាយសម្រាប់បញ្ហាប្រឈមរបស់ពិភពលោក។",
+                home_why_3_title: "អាជីពមានស្ថិរភាព",
+                home_why_3_desc: "ជំនាញដែលមានតម្រូវការខ្ពស់ និងផ្តល់នូវប្រាក់ចំណូលល្អ និងឱកាសរីកចម្រើន។",
+                next_button_about: "អំពីជំនាញ",
+                about_title: "តើអ្វីទៅជាវិស្វកម្មមេកានិក?",
+                about_subtitle: "ជំនាញដែលប្រើប្រាស់គោលការណ៍ រូបវិទ្យា និងគណិតវិទ្យា ដើម្បីរចនា វិភាគ ផលិត និងថែទាំប្រព័ន្ធមេកានិកគ្រប់ប្រភេទ។",
+                about_heading: "អ្នកបង្កើត",
+                about_p1: "វិស្វករមេកានិកគឺជាអ្នកដោះស្រាយបញ្ហាប្រកបដោយភាពច្នៃប្រឌិត។ ពួកគេចូលរួមនៅក្នុងគ្រប់ដំណាក់កាលនៃផលិតផល ចាប់ពីការស្រាវជ្រាវ និងការអភិវឌ្ឍន៍ រហូតដល់ការរចនា ការផលិត និងការធ្វើតេស្ត។",
+                about_p2: "ពួកគេធ្វើការលើអ្វីៗគ្រប់យ៉ាង ចាប់ពីឧបករណ៍តូចៗ រហូតដល់គ្រឿងម៉ាស៊ីនធំៗ ដូចជា យានយន្ត យន្តហោះ រោងចក្រថាមពល និងមនុស្សយន្តជាដើម។",
+                 // EDITED Title
+                about_skills_title: "ជំនាញសំខាន់ៗរបស់មេកានិក",
+                 // EDITED List Layout (Grid 2 Columns)
+                about_skills_list: `
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-6 max-w-md mx-auto">
+                        <div class="flex flex-col items-center"><i class="fas fa-brain fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">ការគិតវិភាគ</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-users-cog fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">ការដោះស្រាយបញ្ហា</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-calculator fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">គណិតវិទ្យា</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-drafting-compass fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">ការរចនា (CAD)</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-code fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">សរសេរកូដ CNC</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-industry fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">ប្រើប្រាស់ម៉ាស៊ីន CNC</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-project-diagram fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">ប្រព័ន្ធប្រេង និងខ្យល់</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-microchip fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">គ្រឿងអេឡិចត្រូនិក</p></div>
+                    </div>`,
+                spec_title: "ផ្នែកឯកទេសសំខាន់ៗ",
+                spec_subtitle: "វិស្វកម្មមេកានិកគឺជាជំនាញដ៏ធំទូលាយ ដែលមានឯកទេសជាច្រើនគួរឱ្យចាប់អារម្មណ៍។",
+                spec_card1_title: "រ៉ូបូតវិទ្យា និងស្វ័យប្រវត្តិកម្ម",
+                spec_card1_desc: "ការរចនា និងបង្កើតមនុស្សយន្តសម្រាប់ឧស្សាហកម្ម វេជ្ជសាស្ត្រ និងការរុករក។",
+                spec_card2_title: "វិស័យយានយន្ត",
+                spec_card2_desc: "អភិវឌ្ឍន៍រថយន្ត ម៉ូតូ និងប្រព័ន្ធដឹកជញ្ជូនជំនាន់ថ្មី ដែលមានសុវត្ថិភាព និងប្រសិទ្ធភាព។",
+                spec_card3_title: "អាកាសយានិក",
+                spec_card3_desc: "ការរចនាយន្តហោះ យានអវកាស និងផ្កាយរណប ព្រមទាំងប្រព័ន្ធជំរុញរបស់វា។",
+                spec_card4_title: "ថាមពល",
+                spec_card4_desc: "ការអភិវឌ្ឍន៍ប្រភពថាមពលកកើតឡើងវិញ និងប្រព័ន្ធថាមពលប្រកបដោយនិរន្តរភាព។",
+                spec_card5_title: "ការផលិត",
+                spec_card5_desc: "បង្កើនប្រសិទ្ធភាពដំណើរការផលិតកម្ម ដោយប្រើប្រាស់បច្ចេកវិទ្យាទំនើបដូចជា 3D Printing។",
+                next_button_careers: "ឱកាសអាជីព",
+                careers_title: "ឱកាសអាជីព",
+                careers_subtitle: "សញ្ញាបត្រវិស្វកម្មមេកានិក អាចបើកផ្លូវទៅកាន់អាជីពជាច្រើនប្រភេទ នៅក្នុងវិស័យផ្សេងៗគ្នា។",
+                careers_list: `
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex items-start space-x-4">
+                        <i class="fas fa-pencil-ruler fa-2x w-8 text-center text-blue-500 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">វិស្វកររចនា</h3>
+                            <p class="text-gray-600 dark:text-gray-400">បង្កើតគំរូ 3D និងគំនូរប្លង់បច្ចេកទេសសម្រាប់ផលិតផល និងគ្រឿងម៉ាស៊ីនថ្មីៗ ដោយប្រើប្រាស់កម្មវិធីដូចជា SolidWorks ឬ AutoCAD។</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex items-start space-x-4">
+                        <i class="fas fa-cogs fa-2x w-8 text-center text-blue-500 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">វិស្វករផលិតកម្ម</h3>
+                            <p class="text-gray-600 dark:text-gray-400">គ្រប់គ្រង និងបង្កើនប្រសិទ្ធភាពខ្សែសង្វាក់ផលិតកម្មក្នុងរោងចក្រ ដើម្បីធានាបាននូវគុណភាព និងល្បឿននៃការផលិត។</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex items-start space-x-4">
+                        <i class="fas fa-flask fa-2x w-8 text-center text-blue-500 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">អ្នកស្រាវជ្រាវ និងអភិវឌ្ឍន៍</h3>
+                            <p class="text-gray-600 dark:text-gray-400">ស្រាវជ្រាវបច្ចេកវិទ្យាថ្មីៗ និងអភិវឌ្ឍផលិតផលគំរូ ដើម្បីបង្កើតនវានុវត្តន៍សម្រាប់ក្រុមហ៊ុន។</p>
+                        </div>
+                    </div>`,
+                next_button_education: "កម្រិតសិក្សា",
+                education_title: "កម្រិតសិក្សា",
+                education_subtitle: "ស្វែងយល់អំពីកម្រិតសញ្ញាបត្រដែលអ្នកអាចបន្តការសិក្សាក្នុងជំនាញវិស្វកម្មមេកានិក។",
+                education_level1_title: "កម្រិតវិស្វកម្ម (បរិញ្ញាបត្ររង)",
+                education_level1_desc: "កម្មវិធីសិក្សារយៈពេល ២ ឆ្នាំ ដែលផ្តោតលើមូលដ្ឋានគ្រឹះនៃវិស្វកម្មមេកានិក។",
+                education_level1_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">មុខវិជ្ជាសំខាន់ៗ៖</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li>ទែម៉ូឌីណាមិច</li><li>មេកានិចនៃសន្ទនីយ៍</li><li>ការរចនាគ្រឿងម៉ាស៊ីន</li><li>វិទ្យាសាស្ត្រវត្ថុធាតុដើម</li></ul>`,
+                education_level2_title: "កម្រិតវិស្វករ (បរិញ្ញាបត្រ)",
+                education_level2_desc: "កម្មវិធីសិក្សារយៈពេល ៤-៥ ឆ្នាំ ដែលផ្តល់ចំណេះដឹងកាន់តែស៊ីជម្រៅក្នុងឯកទេសផ្សេងៗ។",
+                education_level2_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">មុខវិជ្ជាកម្រិតខ្ពស់រួមមាន៖</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li>ការវិភាគរំញ័រមេកានិក</li><li>ការផ្ទេរកំដៅ</li><li>ប្រព័ន្ធបញ្ជាស្វ័យប្រវត្តិ</li><li>ការវិភាគធាតុកំណត់ (FEA)</li></ul>`,
+                education_local_title: "ស្ថាប័នសិក្សាក្នុងស្រុក",
+                education_local_desc: "ស្វែងយល់ពីសាកលវិទ្យាល័យ និងវិទ្យាស្ថានល្បីៗនៅកម្ពុជា ដែលមានផ្តល់ជំនាញវិស្វកម្មមេកានិក។",
+                 // EDITED KM Local Institution Name
+                education_local_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">ស្ថាប័នឧទាហរណ៍៖ </h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li><a href="https://www.rpisvr.edu.kh/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">វិទ្យាស្ថានពហុបច្ចេកទេសភូមិភាគតេជោសែន ស្វាយរៀង (RPITSSR)</a> - ផ្តល់ការបណ្តុះបណ្តាលជំនាញបច្ចេកទេស រួមទាំងផ្នែកមេកានិក។</li></ul>`,
+                next_button_contact: "ទំនាក់ទំនង",
+                contact_title: "ទំនាក់ទំនងមកពួកយើង",
+                contact_subtitle: "យើងរីករាយនឹងឆ្លើយតបរាល់សំណួររបស់អ្នក។ សូមទំនាក់ទំនងតាមរយៈបណ្តាញខាងក្រោម៖",
+                contact_phone: "ទូរស័ព្ទ",
+                contact_facebook: "ហ្វេសប៊ុក",
+                contact_fb_user: "ទំព័រវិស្វកម្មមេកានិក",
+                contact_telegram: "តេឡេក្រាម",
+                contact_email: "អ៊ីមែល",
+                contact_form_title: "សំណុំបែបបទទំនាក់ទំនង",
+                contact_form_name: "ឈ្មោះ",
+                contact_form_email: "អ៊ីមែល",
+                contact_form_message: "សារ",
+                contact_form_submit: "ផ្ញើសារ",
+                footer_text: "ចាប់ផ្តើមដំណើររបស់អ្នកក្នុងវិស័យវិស្វកម្មមេកានិកនៅថ្ងៃនេះ ហើយរួមចំណែកបង្កើតបច្ចេកវិទ្យាថ្មីៗ។",
+                footer_copyright: "រក្សាសិទ្ធិគ្រប់យ៉ាង © 2025 | បង្កើតដោយ ខៀវ សំណាង"
+            },
+            en: {
+                page_title: "Mechanical Engineering",
+                brand_name: "Mechanical Engineer",
+                nav_home: "Home",
+                nav_about: "About",
+                nav_specializations: "Specializations",
+                nav_careers: "Careers",
+                nav_education: "Education",
+                nav_contact: "Contact",
+                lang_km: "Khmer",
+                lang_en: "English",
+                hero_title: "Explore the World of Mechanical Engineering",
+                hero_subtitle: "From creative ideas to world-changing innovations.",
+                hero_button: "Start Exploring",
+                home_why_title: "Why Choose Mechanical Engineering?",
+                home_why_1_title: "Broad Opportunities",
+                home_why_1_desc: "Work in diverse sectors like automotive, aerospace, energy, and technology.",
+                home_why_2_title: "Solve Real Problems",
+                home_why_2_desc: "Use your creativity to build solutions for the world's challenges.",
+                home_why_3_title: "Stable Career",
+                home_why_3_desc: "A high-demand field offering good income and growth opportunities.",
+                next_button_about: "About The Field",
+                about_title: "What is Mechanical Engineering?",
+                about_subtitle: "The discipline that applies principles of physics and mathematics to design, analyze, manufacture, and maintain mechanical systems.",
+                about_heading: "Creators",
+                about_p1: "Mechanical engineers are creative problem solvers. They are involved in every stage of a product, from research and development to design, manufacturing, and testing.",
+                about_p2: "They work on everything from small devices to large machines, such as vehicles, aircraft, power plants, and robots.",
+                 // EDITED Title
+                about_skills_title: "Key Skills in Mechanics",
+                 // EDITED List Layout (Grid 2 Columns)
+                about_skills_list: `
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-6 max-w-md mx-auto">
+                        <div class="flex flex-col items-center"><i class="fas fa-brain fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">Analytical Thinking</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-users-cog fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">Problem-Solving</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-calculator fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">Mathematics</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-drafting-compass fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">Design (CAD)</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-code fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">CNC Programming</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-industry fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">CNC Machine Operation</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-project-diagram fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">Hydraulics & Pneumatics</p></div>
+                        <div class="flex flex-col items-center"><i class="fas fa-microchip fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">Electronics</p></div>
+                    </div>`,
+                spec_title: "Key Specializations",
+                spec_subtitle: "Mechanical engineering is a broad field with many interesting specializations.",
+                spec_card1_title: "Robotics & Automation",
+                spec_card1_desc: "Designing and building robots for industry, medicine, and exploration.",
+                spec_card2_title: "Automotive",
+                spec_card2_desc: "Developing the next generation of safe and efficient cars, motorcycles, and transport systems.",
+                spec_card3_title: "Aerospace",
+                spec_card3_desc: "Designing aircraft, spacecraft, satellites, and their propulsion systems.",
+                spec_card4_title: "Energy",
+                spec_card4_desc: "Developing renewable energy sources and sustainable power systems.",
+                spec_card5_title: "Manufacturing",
+                spec_card5_desc: "Optimizing production processes using modern technologies like 3D Printing.",
+                next_button_careers: "Career Opportunities",
+                careers_title: "Career Opportunities",
+                careers_subtitle: "A degree in mechanical engineering can open doors to a wide variety of careers in different sectors.",
+                careers_list: `
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex items-start space-x-4">
+                        <i class="fas fa-pencil-ruler fa-2x w-8 text-center text-blue-500 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Design Engineer</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Create 3D models and technical drawings for new products and machinery using software like SolidWorks or AutoCAD.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex items-start space-x-4">
+                        <i class="fas fa-cogs fa-2x w-8 text-center text-blue-500 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Manufacturing Engineer</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Manage and optimize production lines in factories to ensure quality and manufacturing speed.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex items-start space-x-4">
+                        <i class="fas fa-flask fa-2x w-8 text-center text-blue-500 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">R&D Engineer</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Research new technologies and develop prototype products to create innovations for the company.</p>
+                        </div>
+                    </div>`,
+                next_button_education: "Education Levels",
+                education_title: "Education Levels",
+                education_subtitle: "Learn about the degree levels you can pursue in mechanical engineering.",
+                education_level1_title: "Associate Degree",
+                education_level1_desc: "A 2-year program focusing on the fundamental principles of mechanical engineering.",
+                education_level1_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">Key Subjects:</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li>Thermodynamics</li><li>Fluid Mechanics</li><li>Machine Design</li><li>Materials Science</li></ul>`,
+                education_level2_title: "Bachelor's Degree",
+                education_level2_desc: "A 4-5 year program providing in-depth knowledge in various specializations.",
+                education_level2_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">Advanced Subjects Include:</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li>Mechanical Vibration Analysis</li><li>Heat Transfer</li><li>Automatic Control Systems</li><li>Finite Element Analysis (FEA)</li></ul>`,
+                education_local_title: "Local Institutions in Cambodia",
+                education_local_desc: "Explore notable universities and institutes in Cambodia offering Mechanical Engineering programs.",
+                 // EDITED EN Local Institution Name
+                education_local_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">Example Institution:</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li><a href="https://www.rpisvr.edu.kh/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Regional Polytechnic Institute Techo Sen Svay Rieng (RPITSSR)</a> - Offers technical training programs, including mechanics.</li></ul>`,
+                next_button_contact: "Contact Us",
+                contact_title: "Contact Us",
+                contact_subtitle: "We are happy to answer your questions. Please contact us through the channels below:",
+                contact_phone: "Phone",
+                contact_facebook: "Facebook",
+                contact_fb_user: "Mechanical Engineering Page",
+                contact_telegram: "Telegram",
+                contact_email: "Email",
+                contact_form_title: "Contact Form",
+                contact_form_name: "Name",
+                contact_form_email: "Email",
+                contact_form_message: "Message",
+                contact_form_submit: "Send Message",
+                footer_text: "Start your journey in mechanical engineering today and contribute to creating new technologies.",
+                footer_copyright: "All rights reserved © 2025 | Built By Khiev Samnang"
+            }
+        };
+
+        // --- Page Navigation ---
+        const pages = document.querySelectorAll('.page-content');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function showPage(pageId) {
+            try {
+                if (event) {
+                    event.preventDefault();
+                }
+                pages.forEach(page => page.classList.remove('active'));
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                } else {
+                    console.error(`Page with ID "${pageId}" not found.`);
+                    document.getElementById('home')?.classList.add('active');
+                    pageId = 'home';
+                }
+                
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${pageId}`);
+                });
+                
+                if (mobileMenu) {
+                    mobileMenu.classList.add('hidden');
+                }
+                if (window.location.hash !== `#${pageId}`) {
+                   window.history.pushState(null, '', `#${pageId}`);
+                }
+                window.scrollTo(0, 0);
+            } catch (error) {
+                console.error("Error in showPage function:", error);
+            }
+        }
+
+        // --- Email Sending (Mailto) ---
+        function sendEmail() {
+            try {
+                const name = document.getElementById('contactName').value;
+                const email = document.getElementById('contactEmail').value;
+                const message = document.getElementById('contactMessage').value;
+                
+                const subject = `Message from Website by ${name}`;
+                const body = `Message:\n${message}\n\nFrom: ${name}\nEmail: ${email}`;
+                
+                const recipientEmail = 'info@mecheng.edu';
+                
+                if (!name || !email || !message) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+
+                window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            } catch(error) {
+                console.error("Error sending email:", error);
+                alert('Could not open email client. Please copy the address: ' + recipientEmail);
+            }
+        }
+
+        // --- Theme Switching ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function updateTheme(isDark) {
+             if (!htmlEl) {
+                 console.error("<html> element not found.");
+                 return;
+             }
+            if (isDark) {
+                htmlEl.classList.add('dark');
+            } else {
+                htmlEl.classList.remove('dark');
+            }
+
+            if (themeIcon) {
+                if (isDark) {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                } else {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                }
+            } else {
+                 console.warn("Theme icon element not found.");
+            }
+            try {
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            } catch (error) {
+                console.error("Could not save theme to localStorage:", error);
+            }
+        }
+        
+        function toggleDarkMode() {
+             if (!htmlEl) {
+                 console.error("Cannot toggle dark mode: <html> element not found.");
+                 return;
+             }
+            const isCurrentlyDark = htmlEl.classList.contains('dark');
+            updateTheme(!isCurrentlyDark);
+        }
+
+        // --- Language Switching ---
+        const currentLangFlag = document.getElementById('current-lang-flag');
+        const flagSources = {
+            km: 'https://flagcdn.com/kh.svg',
+            en: 'https://flagcdn.com/gb.svg'
+        };
+        
+        function setLanguage(lang) {
+            const langData = translations[lang];
+            if (!langData) {
+                console.error(`Translations for language "${lang}" not found.`);
+                return;
+            }
+
+            if (htmlEl) {
+                htmlEl.lang = lang;
+            } else {
+                 console.error("<html> element not found for setting lang attribute.");
+            }
+
+            if (currentLangFlag) {
+                 currentLangFlag.src = flagSources[lang];
+            } else {
+                 console.warn("Current language flag element not found.");
+            }
+
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.getAttribute('data-translate-key');
+                if (langData[key] !== undefined) {
+                    if (key.includes('_list') || key.includes('_details')) {
+                        el.innerHTML = langData[key]; // Inject HTML for lists/details
+                    } else {
+                        el.textContent = langData[key]; // Set text for simple elements
+                    }
+                } else {
+                     console.warn(`Translation key "${key}" not found for language "${lang}".`);
+                }
+            });
+            
+            const langOptionsEl = document.getElementById('lang-options');
+            if (langOptionsEl) {
+                langOptionsEl.classList.add('hidden');
+            } else {
+                 console.warn("Language options dropdown element not found.");
+            }
+
+            try {
+                localStorage.setItem('preferredLanguage', lang);
+            } catch (error) {
+                console.error("Could not save language preference to localStorage:", error);
+            }
+        }
+        
+        // --- Language Dropdown Logic ---
+        const langSwitcherBtn = document.getElementById('lang-switcher-btn');
+        const langOptions = document.getElementById('lang-options');
+        
+        if (langSwitcherBtn && langOptions) {
+            langSwitcherBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langOptions.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', (e) => {
+                const container = document.getElementById('lang-switcher-container');
+                if (container && !container.contains(e.target)) {
+                    langOptions.classList.add('hidden');
+                }
+            });
+        } else {
+             console.warn("Language switcher button or options element not found.");
+        }
+
+        // --- Mobile Menu Toggle ---
+        const menuBtn = document.getElementById('menu-btn');
+         if (menuBtn) {
+             menuBtn.addEventListener('click', () => {
+                 const mobileMenuEl = document.getElementById('mobile-menu');
+                 if (mobileMenuEl) {
+                    mobileMenuEl.classList.toggle('hidden');
+                 } else {
+                     console.error("Mobile menu element not found on click.");
+                 }
+             });
+
+             const mobileMenuEl = document.getElementById('mobile-menu');
+             if (mobileMenuEl) {
+                mobileMenuEl.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => mobileMenuEl.classList.add('hidden'));
+                });
+             } else {
+                  console.warn("Mobile menu element not found for attaching link listeners.");
+             }
+         } else {
+              console.warn("Mobile menu button not found.");
+         }
+
+        // --- Initial Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM fully loaded and parsed"); 
+
+            // 1. Initialize Theme
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                let initialIsDark = false; // Default to light
+                if (savedTheme === 'dark') {
+                    initialIsDark = true;
+                } else if (savedTheme === 'light'){
+                    initialIsDark = false;
+                }
+                console.log("Initial theme check:", { savedTheme, initialIsDark });
+                updateTheme(initialIsDark);
+            } catch (error) {
+                console.error("Error initializing theme:", error);
+                updateTheme(false); // Default to light on error
+            }
+            
+            const themeToggleBtnLoaded = document.getElementById('theme-toggle');
+            if (themeToggleBtnLoaded) {
+                 console.log("Attaching theme toggle listener.");
+                themeToggleBtnLoaded.addEventListener('click', toggleDarkMode);
+            } else {
+                 console.error("Theme toggle button not found after DOM load!");
+            }
+
+            // 2. Initialize Language and Page
+            try {
+                const preferredLanguage = localStorage.getItem('preferredLanguage') || 'km';
+                 console.log("Initializing language:", preferredLanguage);
+                setLanguage(preferredLanguage); // Apply language FIRST
+                
+                const hash = window.location.hash;
+                let page = hash ? hash.substring(1) : 'home';
+                const validPageIds = ['home', 'about', 'specializations', 'careers', 'education', 'contact'];
+                if (!validPageIds.includes(page)) {
+                    console.warn(`Invalid page ID "${page}" in hash, defaulting to home.`);
+                    page = 'home';
+                    window.location.hash = '#home';
+                }
+
+                console.log("Initializing page:", page);
+                pages.forEach(p => p.classList.remove('active'));
+                const targetPage = document.getElementById(page);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                     navLinks.forEach(link => {
+                           link.classList.toggle('active', link.getAttribute('href') === `#${page}`);
+                       });
+                } else {
+                    console.error(`Initial page ID "${page}" not found AFTER validation check.`);
+                    document.getElementById('home')?.classList.add('active');
+                     navLinks.forEach(link => {
+                           link.classList.toggle('active', link.getAttribute('href') === `#home`);
+                       });
+                }
+                window.scrollTo(0, 0);
+
+            } catch (error) {
+                 console.error("Error initializing language or page:", error);
+            }
+        });
+
+        // Handle browser back/forward navigation
+        window.onpopstate = (event) => {
+             console.log("onpopstate triggered");
+             const hash = window.location.hash;
+             let page = hash ? hash.substring(1) : 'home';
+             const validPageIds = ['home', 'about', 'specializations', 'careers', 'education', 'contact'];
+             if (!validPageIds.includes(page)) {
+                console.warn(`Invalid page ID "${page}" in popstate, defaulting to home.`);
+                page = 'home';
+             }
+
+             console.log("Navigating via popstate to:", page);
+              pages.forEach(p => p.classList.remove('active'));
+              const targetPage = document.getElementById(page);
+               if (targetPage) {
+                 targetPage.classList.add('active');
+                  navLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === `#${page}`);
+                    });
+               } else {
+                     console.error(`Popstate target page ID "${page}" not found AFTER validation check.`);
+                     document.getElementById('home')?.classList.add('active');
+                     navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === `#home`);
+                        });
+               }
+              window.scrollTo(0, 0);
+        };
+    </script>
+</body>
+</html>
