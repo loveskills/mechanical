@@ -102,7 +102,7 @@
             </div>
 
             <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition" aria-label="Toggle dark mode">
+                <button id="theme-toggle" class="hidden md:flex p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition" aria-label="Toggle dark mode">
                     <i id="theme-icon" class="fas fa-sun fa-lg"></i>
                 </button>
 
@@ -144,6 +144,12 @@
             <a href="#education" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center" onclick="showPage('education')">
                 <i class="fas fa-graduation-cap fa-fw mr-3"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
             </a>
+            
+            <a href="#" id="mobile-theme-toggle" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center" onclick="event.preventDefault(); toggleDarkMode();">
+                <i id="mobile-theme-icon" class="fas fa-sun fa-fw mr-3"></i>
+                <span data-translate-key="nav_theme_toggle">ប្តូរពន្លឺ</span>
+            </a>
+
             <a href="#contact" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center" onclick="showPage('contact')">
                 <i class="fas fa-envelope fa-fw mr-3"></i><span data-translate-key="nav_contact">ទំនាក់ទំនង</span>
             </a>
@@ -193,11 +199,11 @@
             </div>
             <div class="flex flex-wrap items-center -mx-4 mb-12">
                  <div class="w-full md:w-1/2 px-4 mb-8 md:mb-0">
-                    <video autoplay loop muted playsinline class="rounded-xl shadow-xl w-full" src="Video/Vd1.mp4" alt="[វីដេអូបង្ហាញពីគំនិតវិស្វកម្ម]">
-                        Your browser does not support the video tag. </video>
+                     <video autoplay loop muted playsinline class="rounded-xl shadow-xl w-full" src="Video/Vd1.mp4" alt="[វីដេអូបង្ហាញពីគំនិតវិស្វកម្ម]">
+                         Your browser does not support the video tag. </video>
                  </div>
                  <div class="w-full md:w-1/2 px-4">
-                    <h3 class="text-2xl font-semibold mb-4 text-blue-600 dark:text-blue-400" data-translate-key="about_heading">អ្នកបង្កើត</h3>
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-600 dark:text-blue-400" data-translate-key="about_heading">អំពីជំនាញមេកានិក</h3>
                     <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed" data-translate-key="about_p1">វិស្វករមេកានិកគឺជាអ្នកដោះស្រាយបញ្ហាប្រកបដោយភាពច្នៃប្រឌិត។ ពួកគេចូលរួមនៅក្នុងគ្រប់ដំណាក់កាលនៃផលិតផល ចាប់ពីការស្រាវជ្រាវ និងការអភិវឌ្ឍន៍ រហូតដល់ការរចនា ការផលិត និងការធ្វើតេស្ត។</p>
                     <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-translate-key="about_p2">ពួកគេធ្វើការលើអ្វីៗគ្រប់យ៉ាង ចាប់ពីឧបករណ៍តូចៗ រហូតដល់គ្រឿងម៉ាស៊ីនធំៗ ដូចជា យានយន្ត យន្តហោះ រោងចក្រថាមពល និងមនុស្សយន្តជាដើម។</p>
                  </div>
@@ -205,7 +211,7 @@
             <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
                 <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-gray-100" data-translate-key="about_skills_title">ជំនាញសំខាន់ៗរបស់មេកានិក</h3>
                  <div data-translate-key="about_skills_list">
-                    </div>
+                     </div>
             </div>
             <div class="mt-16 text-center">
                 <button onclick="showPage('specializations')" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300 text-lg shadow-lg inline-flex items-center group">
@@ -220,32 +226,32 @@
                 <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="spec_subtitle">វិស្វកម្មមេកានិកគឺជាជំនាញដ៏ធំទូលាយ ដែលមានឯកទេសជាច្រើនគួរឱ្យចាប់អារម្មណ៍។</p>
             </div>
              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
-                    <i class="fas fa-robot fa-3x text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card1_title"></h3>
-                    <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card1_desc"></p>
-                </div>
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
-                    <i class="fas fa-car fa-3x text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card2_title"></h3>
-                    <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card2_desc"></p>
-                </div>
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
-                    <i class="fas fa-plane-departure fa-3x text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card3_title"></h3>
-                    <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card3_desc"></p>
-                </div>
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
-                    <i class="fas fa-bolt fa-3x text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card4_title"></h3>
-                    <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card4_desc"></p>
-                </div>
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
-                    <i class="fas fa-industry fa-3x text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card5_title"></h3>
-                    <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card5_desc"></p>
-                </div>
+                 <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
+                     <i class="fas fa-robot fa-3x text-blue-500 mb-4"></i>
+                     <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card1_title"></h3>
+                     <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card1_desc"></p>
                  </div>
+                 <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
+                     <i class="fas fa-car fa-3x text-blue-500 mb-4"></i>
+                     <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card2_title"></h3>
+                     <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card2_desc"></p>
+                 </div>
+                 <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
+                     <i class="fas fa-plane-departure fa-3x text-blue-500 mb-4"></i>
+                     <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card3_title"></h3>
+                     <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card3_desc"></p>
+                 </div>
+                 <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
+                     <i class="fas fa-bolt fa-3x text-blue-500 mb-4"></i>
+                     <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card4_title"></h3>
+                     <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card4_desc"></p>
+                 </div>
+                 <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
+                     <i class="fas fa-industry fa-3x text-blue-500 mb-4"></i>
+                     <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="spec_card5_title"></h3>
+                     <p class="text-gray-600 dark:text-gray-400" data-translate-key="spec_card5_desc"></p>
+                 </div>
+             </div>
             <div class="mt-16 text-center">
                 <button onclick="showPage('careers')" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300 text-lg shadow-lg inline-flex items-center group">
                     <span data-translate-key="next_button_careers">ឱកាសអាជីព</span> <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-2 transition-transform"></i>
@@ -270,29 +276,29 @@
         <section id="education" class="page-content py-10">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="education_title">កម្រិតសិក្សា</h2>
-                <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="education_subtitle">ស្វែងយល់អំពីកម្រិតសញ្ញាបត្រដែលអ្នកអាចបន្តការសិក្សាក្នុងជំនាញវិស្វកម្មមេកានិក។</p>
+                <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="education_subtitle">ស្វែងយល់អំពីកម្រិតសញ្ញាបត្រដែលអ្នកអាចបន្តការសិក្សាក្នុងជំនាញវិស្វកម្មមេកានិក。</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
                  <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center text-center">
-                    <i class="fas fa-graduation-cap fa-3x text-blue-500 mb-4"></i>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-gray-100" data-translate-key="education_level1_title">កម្រិតវិស្វកម្ម (បរិញ្ញាបត្ររង)</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate-key="education_level1_desc">កម្មវិធីសិក្សារយៈពេល ២ ឆ្នាំ ដែលផ្តោតលើមូលដ្ឋានគ្រឹះនៃវិស្វកម្មមេកានិក។</p>
-                    <div class="text-left w-full text-gray-900 dark:text-gray-100" data-translate-key="education_level1_details">
-                    </div>
+                     <i class="fas fa-graduation-cap fa-3x text-blue-500 mb-4"></i>
+                     <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-gray-100" data-translate-key="education_level1_title">កម្រិតវិស្វកម្ម (បរិញ្ញាបត្ររង)</h3>
+                     <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate-key="education_level1_desc">កម្មវិធីសិក្សារយៈពេល ២ ឆ្នាំ ដែលផ្តោតលើមូលដ្ឋានគ្រឹះនៃវិស្វកម្មមេកានិក។</p>
+                     <div class="text-left w-full text-gray-900 dark:text-gray-100" data-translate-key="education_level1_details">
+                     </div>
                  </div>
                  <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center text-center">
-                    <i class="fas fa-user-tie fa-3x text-blue-500 mb-4"></i>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-gray-100" data-translate-key="education_level2_title">កម្រិតវិស្វករ (បរិញ្ញាបត្រ)</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate-key="education_level2_desc">កម្មវិធីសិក្សារយៈពេល ៤-៥ ឆ្នាំ ដែលផ្តល់ចំណេះដឹងកាន់តែស៊ីជម្រៅក្នុងឯកទេសផ្សេងៗ។</p>
-                    <div class="text-left w-full text-gray-900 dark:text-gray-100" data-translate-key="education_level2_details">
-                    </div>
+                     <i class="fas fa-user-tie fa-3x text-blue-500 mb-4"></i>
+                     <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-gray-100" data-translate-key="education_level2_title">កម្រិតវិស្វករ (បរិញ្ញាបត្រ)</h3>
+                     <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate-key="education_level2_desc">កម្មវិធីសិក្សារយៈពេល ៤-៥ ឆ្នាំ ដែលផ្តល់ចំណេះដឹងកាន់តែស៊ីជម្រៅក្នុងឯកទេសផ្សេងៗ។</p>
+                     <div class="text-left w-full text-gray-900 dark:text-gray-100" data-translate-key="education_level2_details">
+                     </div>
                  </div>
                  <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center text-center">
-                    <i class="fas fa-university fa-3x text-blue-500 mb-4"></i>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-gray-100" data-translate-key="education_local_title">ស្ថាប័នសិក្សាក្នុងស្រុក</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate-key="education_local_desc">ស្វែងយល់ពីសាកលវិទ្យាល័យ និងវិទ្យាស្ថានល្បីៗនៅកម្ពុជា ដែលមានផ្តល់ជំនាញវិស្វកម្មមេកានិក។</p>
-                    <div class="text-left w-full text-gray-900 dark:text-gray-100" data-translate-key="education_local_details">
-                    </div>
+                     <i class="fas fa-university fa-3x text-blue-500 mb-4"></i>
+                     <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-gray-100" data-translate-key="education_local_title">R.P.I.T.S.S.R</h3>
+                     <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate-key="education_local_desc">ទីតាំង៖ ភូមិមេភ្លើង សង្កាត់ស្វាយរៀង ក្រុងស្វាយរៀង ខេត្តស្វាយរៀង ( ជាប់និងស្រះវង់ )</p>
+                     <div class="text-left w-full text-gray-900 dark:text-gray-100" data-translate-key="education_local_details">
+                     </div>
                  </div>
             </div>
             <div class="mt-16 text-center">
@@ -309,37 +315,37 @@
             </div>
             <div class="grid md:grid-cols-2 gap-10 items-start">
                 <div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 space-y-6 w-full">
-                    <a href="tel:+85512345678" class="flex items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
+                    <a href="tel:+85512521375" class="flex items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
                         <i class="fas fa-phone fa-2x w-8 text-center text-blue-500"></i>
                         <div class="ml-4">
                             <p class="font-semibold text-lg text-gray-900 dark:text-gray-100" data-translate-key="contact_phone">ទូរស័ព្ទ</p>
-                            <p class="text-gray-600 dark:text-gray-400">+855 12 345 678</p>
+                            <p class="text-gray-600 dark:text-gray-400">+855 012 52 13 75</p>
                         </div>
                     </a>
-                    <a href="https://www.facebook.com/" target="_blank" class="flex items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
+                    <a href="https://web.facebook.com/profile.php?id=100075802995392" target="_blank" class="flex items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
                         <i class="fab fa-facebook fa-2x w-8 text-center text-blue-600"></i>
                         <div class="ml-4">
                             <p class="font-semibold text-lg text-gray-900 dark:text-gray-100" data-translate-key="contact_facebook">ហ្វេសប៊ុក</p>
-                            <p class="text-gray-600 dark:text-gray-400" data-translate-key="contact_fb_user">Mechanical Engineering Page</p>
+                            <p class="text-gray-600 dark:text-gray-400" data-translate-key="contact_fb_user">ផេកមេកានិកឧស្សាហកម្ម</p>
                         </div>
                     </a>
-                    <a href="https://t.me/yourusername" target="_blank" class="flex items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
+                    <a href="https://t.me/chorkratana" target="_blank" class="flex items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
                         <i class="fab fa-telegram fa-2x w-8 text-center text-sky-500"></i>
                         <div class="ml-4">
                             <p class="font-semibold text-lg text-gray-900 dark:text-gray-100" data-translate-key="contact_telegram">តេឡេក្រាម</p>
-                            <p class="text-gray-600 dark:text-gray-400">@MechEngChannel</p>
+                            <p class="text-gray-600 dark:text-gray-400">@Chork Ratana</p>
                         </div>
                     </a>
-                    <a href="mailto:info@mecheng.edu" class="flex items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
+                    <a href="mailto:ratana.lyon2uni@gmail.com" class="flex items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
                         <i class="fas fa-envelope fa-2x w-8 text-center text-gray-500 dark:text-gray-400"></i>
                         <div class="ml-4">
                             <p class="font-semibold text-lg text-gray-900 dark:text-gray-100" data-translate-key="contact_email">អ៊ីមែល</p>
-                            <p class="text-gray-600 dark:text-gray-400">info@mecheng.edu</p>
+                            <p class="text-gray-600 dark:text-gray-400">ratana.lyon2uni@gmail.com</p>
                         </div>
                     </a>
                 </div>
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full">
-                    <h3 class="font-bold text-xl mb-4 text-gray-900 dark:text-gray-100" data-translate-key="contact_form_title">សំណុំបែបបទទំនាក់ទំនង</h3>
+                    <h3 class="font-bold text-xl mb-4 text-gray-900 dark:text-gray-100" data-translate-key="contact_form_title">ផ្ញើសារ</h3>
                     <form id="contactForm" class="space-y-4" onsubmit="event.preventDefault(); sendEmail();">
                         <div>
                             <label for="contactName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="contact_form_name">ឈ្មោះ</label>
@@ -381,6 +387,7 @@
                 nav_careers: "អាជីព",
                 nav_education: "កម្រិតសិក្សា",
                 nav_contact: "ទំនាក់ទំនង",
+                nav_theme_toggle: "ប្តូរពន្លឺ",
                 lang_km: "ភាសាខ្មែរ",
                 lang_en: "English",
                 hero_title: "ស្វែងយល់ពីពិភពនៃវិស្វកម្មមេកានិក",
@@ -396,12 +403,10 @@
                 next_button_about: "អំពីជំនាញ",
                 about_title: "តើអ្វីទៅជាវិស្វកម្មមេកានិក?",
                 about_subtitle: "ជំនាញដែលប្រើប្រាស់គោលការណ៍ រូបវិទ្យា និងគណិតវិទ្យា ដើម្បីរចនា វិភាគ ផលិត និងថែទាំប្រព័ន្ធមេកានិកគ្រប់ប្រភេទ។",
-                about_heading: "អ្នកបង្កើត",
+                about_heading: "អំពីជំនាញមេកានិក", 
                 about_p1: "វិស្វករមេកានិកគឺជាអ្នកដោះស្រាយបញ្ហាប្រកបដោយភាពច្នៃប្រឌិត។ ពួកគេចូលរួមនៅក្នុងគ្រប់ដំណាក់កាលនៃផលិតផល ចាប់ពីការស្រាវជ្រាវ និងការអភិវឌ្ឍន៍ រហូតដល់ការរចនា ការផលិត និងការធ្វើតេស្ត។",
                 about_p2: "ពួកគេធ្វើការលើអ្វីៗគ្រប់យ៉ាង ចាប់ពីឧបករណ៍តូចៗ រហូតដល់គ្រឿងម៉ាស៊ីនធំៗ ដូចជា យានយន្ត យន្តហោះ រោងចក្រថាមពល និងមនុស្សយន្តជាដើម។",
-                 // EDITED Title
                 about_skills_title: "ជំនាញសំខាន់ៗរបស់មេកានិក",
-                 // EDITED List Layout (Grid 2 Columns)
                 about_skills_list: `
                     <div class="grid grid-cols-2 gap-x-8 gap-y-6 max-w-md mx-auto">
                         <div class="flex flex-col items-center"><i class="fas fa-brain fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">ការគិតវិភាគ</p></div>
@@ -413,6 +418,7 @@
                         <div class="flex flex-col items-center"><i class="fas fa-project-diagram fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">ប្រព័ន្ធប្រេង និងខ្យល់</p></div>
                         <div class="flex flex-col items-center"><i class="fas fa-microchip fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">គ្រឿងអេឡិចត្រូនិក</p></div>
                     </div>`,
+                next_button_spec: "ផ្នែកឯកទេស", 
                 spec_title: "ផ្នែកឯកទេសសំខាន់ៗ",
                 spec_subtitle: "វិស្វកម្មមេកានិកគឺជាជំនាញដ៏ធំទូលាយ ដែលមានឯកទេសជាច្រើនគួរឱ្យចាប់អារម្មណ៍។",
                 spec_card1_title: "រ៉ូបូតវិទ្យា និងស្វ័យប្រវត្តិកម្ម",
@@ -449,29 +455,37 @@
                             <h3 class="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">អ្នកស្រាវជ្រាវ និងអភិវឌ្ឍន៍</h3>
                             <p class="text-gray-600 dark:text-gray-400">ស្រាវជ្រាវបច្ចេកវិទ្យាថ្មីៗ និងអភិវឌ្ឍផលិតផលគំរូ ដើម្បីបង្កើតនវានុវត្តន៍សម្រាប់ក្រុមហ៊ុន។</p>
                         </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex items-start space-x-4">
+                        <i class="fas fa-user-tie fa-2x w-8 text-center text-blue-500 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">សហគ្រិន (ម្ចាស់អាជីវកម្ម)</h3>
+                            <p class="text-gray-600 dark:text-gray-400">បើកកន្លែងផលិត ក្រុមហ៊ុនផ្តល់សេវាកម្មថែទាំ ឬក្រុមហ៊ុនប្រឹក្សាយោបល់ផ្ទាល់ខ្លួន ដោយប្រើជំនាញមេកានិករបស់អ្នក។</p>
+                        </div>
                     </div>`,
                 next_button_education: "កម្រិតសិក្សា",
                 education_title: "កម្រិតសិក្សា",
                 education_subtitle: "ស្វែងយល់អំពីកម្រិតសញ្ញាបត្រដែលអ្នកអាចបន្តការសិក្សាក្នុងជំនាញវិស្វកម្មមេកានិក។",
                 education_level1_title: "កម្រិតវិស្វកម្ម (បរិញ្ញាបត្ររង)",
                 education_level1_desc: "កម្មវិធីសិក្សារយៈពេល ២ ឆ្នាំ ដែលផ្តោតលើមូលដ្ឋានគ្រឹះនៃវិស្វកម្មមេកានិក។",
-                education_level1_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">មុខវិជ្ជាសំខាន់ៗ៖</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li>ទែម៉ូឌីណាមិច</li><li>មេកានិចនៃសន្ទនីយ៍</li><li>ការរចនាគ្រឿងម៉ាស៊ីន</li><li>វិទ្យាសាស្ត្រវត្ថុធាតុដើម</li></ul>`,
+                education_level1_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">មុខវិជ្ជាសំខាន់ៗ៖</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li>គូរប្លង់ 2D & 3D និងរបៀបមើលប្លង់</li><li>ក្រឡឹង ហ្វែស និងសំលៀង (CNC)</li><li>ផ្សារអគ្គីសនី និងផ្សារដោយឧស្ម័ន</li><li>គ្រប់គ្រងផលិតកម្ម និងត្រួតពិនិត្យគុណភាព</li><li>សរសេរកូដ និងបំលែងកូដ (CNC)</li></ul>`,
                 education_level2_title: "កម្រិតវិស្វករ (បរិញ្ញាបត្រ)",
                 education_level2_desc: "កម្មវិធីសិក្សារយៈពេល ៤-៥ ឆ្នាំ ដែលផ្តល់ចំណេះដឹងកាន់តែស៊ីជម្រៅក្នុងឯកទេសផ្សេងៗ។",
-                education_level2_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">មុខវិជ្ជាកម្រិតខ្ពស់រួមមាន៖</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li>ការវិភាគរំញ័រមេកានិក</li><li>ការផ្ទេរកំដៅ</li><li>ប្រព័ន្ធបញ្ជាស្វ័យប្រវត្តិ</li><li>ការវិភាគធាតុកំណត់ (FEA)</li></ul>`,
-                education_local_title: "ស្ថាប័នសិក្សាក្នុងស្រុក",
-                education_local_desc: "ស្វែងយល់ពីសាកលវិទ្យាល័យ និងវិទ្យាស្ថានល្បីៗនៅកម្ពុជា ដែលមានផ្តល់ជំនាញវិស្វកម្មមេកានិក។",
-                 // EDITED KM Local Institution Name
-                education_local_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">ស្ថាប័នឧទាហរណ៍៖ </h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li><a href="https://www.rpisvr.edu.kh/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">វិទ្យាស្ថានពហុបច្ចេកទេសភូមិភាគតេជោសែន ស្វាយរៀង (RPITSSR)</a> - ផ្តល់ការបណ្តុះបណ្តាលជំនាញបច្ចេកទេស រួមទាំងផ្នែកមេកានិក។</li></ul>`,
+                education_level2_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">មុខវិជ្ជាកម្រិតខ្ពស់រួមមាន៖</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li>សិក្សាអំពីរថយន្តនិងដំណើរការ</li><li>ការវិភាគរំញ័រមេកានិក</li><li>ការផ្ទេរកំដៅ</li><li>ប្រព័ន្ធបញ្ជាស្វ័យប្រវត្តិ</li><li>ការវិភាគធាតុកំណត់ (FEA)</li><li>សរសេរនិងធ្វើបត (Arduino system)</li><li>និងផ្សេងៗទៀត...</li></ul>`,
+                education_local_title: "R.P.I.T.S.S.R",
+                education_local_desc: "ទីតាំង៖ ភូមិមេភ្លើង សង្កាត់ស្វាយរៀង ក្រុងស្វាយរៀង ខេត្តស្វាយរៀង ( ជាប់និងស្រះវង់ )",
+                education_local_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">គេហទំព័ររបស់វិទ្យាស្ថាន៖ </h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li><a href="https://www.rpisvr.edu.kh/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">វិទ្យាស្ថានពហុបច្ចេកទេសភូមិភាគតេជោសែន ស្វាយរៀង (RPITSSR)</a> - ផ្តល់ការបណ្តុះបណ្តាលជំនាញបច្ចេកទេស រួមទាំងផ្នែកមេកានិក។</li></ul>`,
                 next_button_contact: "ទំនាក់ទំនង",
                 contact_title: "ទំនាក់ទំនងមកពួកយើង",
                 contact_subtitle: "យើងរីករាយនឹងឆ្លើយតបរាល់សំណួររបស់អ្នក។ សូមទំនាក់ទំនងតាមរយៈបណ្តាញខាងក្រោម៖",
                 contact_phone: "ទូរស័ព្ទ",
                 contact_facebook: "ហ្វេសប៊ុក",
-                contact_fb_user: "ទំព័រវិស្វកម្មមេកានិក",
+                // EDITED: Updated KM text
+                contact_fb_user: "ផេកមេកានិកឧស្សាហកម្ម",
                 contact_telegram: "តេឡេក្រាម",
                 contact_email: "អ៊ីមែល",
-                contact_form_title: "សំណុំបែបបទទំនាក់ទំនង",
+                // EDITED: Updated KM text
+                contact_form_title: "ផ្ញើសារ",
                 contact_form_name: "ឈ្មោះ",
                 contact_form_email: "អ៊ីមែល",
                 contact_form_message: "សារ",
@@ -488,6 +502,7 @@
                 nav_careers: "Careers",
                 nav_education: "Education",
                 nav_contact: "Contact",
+                nav_theme_toggle: "Toggle Theme",
                 lang_km: "Khmer",
                 lang_en: "English",
                 hero_title: "Explore the World of Mechanical Engineering",
@@ -503,12 +518,10 @@
                 next_button_about: "About The Field",
                 about_title: "What is Mechanical Engineering?",
                 about_subtitle: "The discipline that applies principles of physics and mathematics to design, analyze, manufacture, and maintain mechanical systems.",
-                about_heading: "Creators",
+                about_heading: "About Mechanical Engineering",
                 about_p1: "Mechanical engineers are creative problem solvers. They are involved in every stage of a product, from research and development to design, manufacturing, and testing.",
                 about_p2: "They work on everything from small devices to large machines, such as vehicles, aircraft, power plants, and robots.",
-                 // EDITED Title
                 about_skills_title: "Key Skills in Mechanics",
-                 // EDITED List Layout (Grid 2 Columns)
                 about_skills_list: `
                     <div class="grid grid-cols-2 gap-x-8 gap-y-6 max-w-md mx-auto">
                         <div class="flex flex-col items-center"><i class="fas fa-brain fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">Analytical Thinking</p></div>
@@ -520,6 +533,7 @@
                         <div class="flex flex-col items-center"><i class="fas fa-project-diagram fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">Hydraulics & Pneumatics</p></div>
                         <div class="flex flex-col items-center"><i class="fas fa-microchip fa-2x text-blue-500 mb-2"></i><p class="text-gray-900 dark:text-gray-100 text-center">Electronics</p></div>
                     </div>`,
+                next_button_spec: "Specializations",
                 spec_title: "Key Specializations",
                 spec_subtitle: "Mechanical engineering is a broad field with many interesting specializations.",
                 spec_card1_title: "Robotics & Automation",
@@ -556,29 +570,38 @@
                             <h3 class="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">R&D Engineer</h3>
                             <p class="text-gray-600 dark:text-gray-400">Research new technologies and develop prototype products to create innovations for the company.</p>
                         </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex items-start space-x-4">
+                        <i class="fas fa-user-tie fa-2x w-8 text-center text-blue-500 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Entrepreneur (Business Owner)</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Open your own manufacturing facility, maintenance service company, or consulting firm using your mechanical skills.</p>
+                        </div>
                     </div>`,
                 next_button_education: "Education Levels",
                 education_title: "Education Levels",
                 education_subtitle: "Learn about the degree levels you can pursue in mechanical engineering.",
                 education_level1_title: "Associate Degree",
                 education_level1_desc: "A 2-year program focusing on the fundamental principles of mechanical engineering.",
-                education_level1_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">Key Subjects:</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li>Thermodynamics</li><li>Fluid Mechanics</li><li>Machine Design</li><li>Materials Science</li></ul>`,
+                education_level1_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">Key Subjects:</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li>2D & 3D Drafting and Blueprint Reading</li><li>Lathing, Milling, and Grinding (CNC)</li><li>Electric and Gas Welding</li><li>Production Management and Quality Control</li><li>CNC Programming and G-Code</li></ul>`,
                 education_level2_title: "Bachelor's Degree",
                 education_level2_desc: "A 4-5 year program providing in-depth knowledge in various specializations.",
-                education_level2_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">Advanced Subjects Include:</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li>Mechanical Vibration Analysis</li><li>Heat Transfer</li><li>Automatic Control Systems</li><li>Finite Element Analysis (FEA)</li></ul>`,
-                education_local_title: "Local Institutions in Cambodia",
-                education_local_desc: "Explore notable universities and institutes in Cambodia offering Mechanical Engineering programs.",
-                 // EDITED EN Local Institution Name
-                education_local_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">Example Institution:</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li><a href="https://www.rpisvr.edu.kh/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Regional Polytechnic Institute Techo Sen Svay Rieng (RPITSSR)</a> - Offers technical training programs, including mechanics.</li></ul>`,
+                education_level2_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">Advanced Subjects Include:</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li>Automotive Engineering and Operation</li><li>Mechanical Vibration Analysis</li><li>Heat Transfer</li><li>Automatic Control Systems</li><li>Finite Element Analysis (FEA)</li><li>Robotics & Programming (Arduino System)</li><li>And more...</li></ul>`,
+                education_local_title: "R.P.I.T.S.S.R",
+                education_local_desc: "Location: Me Phleung Village, Svay Rieng Sangkat, Svay Rieng City, Svay Rieng Province (near Sras Vong).",
+                education_local_details: `<h4 class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">Institute's Website:</h4><ul class="space-y-2 text-gray-600 dark:text-gray-400 list-disc list-inside"><li><a href="https://www.rpisvr.edu.kh/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Regional Polytechnic Institute Techo Sen Svay Rieng (RPITSSR)</a> - Offers technical training programs, including mechanics.</li></ul>`,
                 next_button_contact: "Contact Us",
                 contact_title: "Contact Us",
                 contact_subtitle: "We are happy to answer your questions. Please contact us through the channels below:",
+                // EDITED: Updated EN text for phone
                 contact_phone: "Phone",
                 contact_facebook: "Facebook",
-                contact_fb_user: "Mechanical Engineering Page",
+                // EDITED: Updated EN text for FB page name
+                contact_fb_user: "Industrial Mechanics Page",
                 contact_telegram: "Telegram",
                 contact_email: "Email",
-                contact_form_title: "Contact Form",
+                 // EDITED: Updated EN text for form title
+                contact_form_title: "Send Message",
                 contact_form_name: "Name",
                 contact_form_email: "Email",
                 contact_form_message: "Message",
@@ -634,7 +657,8 @@
                 const subject = `Message from Website by ${name}`;
                 const body = `Message:\n${message}\n\nFrom: ${name}\nEmail: ${email}`;
                 
-                const recipientEmail = 'info@mecheng.edu';
+                // EDITED: Update recipient email based on the HTML change
+                const recipientEmail = 'ratana.lyon2uni@gmail.com'; 
                 
                 if (!name || !email || !message) {
                     alert('Please fill in all fields.');
@@ -651,13 +675,14 @@
         // --- Theme Switching ---
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
+        const mobileThemeIcon = document.getElementById('mobile-theme-icon');
         const htmlEl = document.documentElement;
 
         function updateTheme(isDark) {
-             if (!htmlEl) {
-                 console.error("<html> element not found.");
-                 return;
-             }
+                 if (!htmlEl) {
+                     console.error("<html> element not found.");
+                     return;
+                 }
             if (isDark) {
                 htmlEl.classList.add('dark');
             } else {
@@ -673,8 +698,21 @@
                     themeIcon.classList.add('fa-sun');
                 }
             } else {
-                 console.warn("Theme icon element not found.");
+                 console.warn("Desktop theme icon element not found.");
             }
+
+            if (mobileThemeIcon) {
+                if (isDark) {
+                    mobileThemeIcon.classList.remove('fa-sun');
+                    mobileThemeIcon.classList.add('fa-moon');
+                } else {
+                    mobileThemeIcon.classList.remove('fa-moon');
+                    mobileThemeIcon.classList.add('fa-sun');
+                }
+            } else {
+                 console.warn("Mobile theme icon element not found.");
+            }
+
             try {
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
             } catch (error) {
@@ -683,10 +721,10 @@
         }
         
         function toggleDarkMode() {
-             if (!htmlEl) {
-                 console.error("Cannot toggle dark mode: <html> element not found.");
-                 return;
-             }
+                 if (!htmlEl) {
+                     console.error("Cannot toggle dark mode: <html> element not found.");
+                     return;
+                 }
             const isCurrentlyDark = htmlEl.classList.contains('dark');
             updateTheme(!isCurrentlyDark);
         }
@@ -720,7 +758,14 @@
             document.querySelectorAll('[data-translate-key]').forEach(el => {
                 const key = el.getAttribute('data-translate-key');
                 if (langData[key] !== undefined) {
-                    if (key.includes('_list') || key.includes('_details')) {
+                    // Update email and phone text content directly if it's the specific <p> tag
+                    if (key === 'contact_phone' && el.nextElementSibling?.tagName === 'P') {
+                       el.nextElementSibling.textContent = '+855 012 52 13 75';
+                    } else if (key === 'contact_telegram' && el.nextElementSibling?.tagName === 'P') {
+                       el.nextElementSibling.textContent = '@Chork Ratana';
+                    } else if (key === 'contact_email' && el.nextElementSibling?.tagName === 'P') {
+                       el.nextElementSibling.textContent = 'ratana.lyon2uni@gmail.com';
+                    } else if (key.includes('_list') || key.includes('_details')) {
                         el.innerHTML = langData[key]; // Inject HTML for lists/details
                     } else {
                         el.textContent = langData[key]; // Set text for simple elements
@@ -770,17 +815,19 @@
              menuBtn.addEventListener('click', () => {
                  const mobileMenuEl = document.getElementById('mobile-menu');
                  if (mobileMenuEl) {
-                    mobileMenuEl.classList.toggle('hidden');
+                     mobileMenuEl.classList.toggle('hidden');
                  } else {
-                     console.error("Mobile menu element not found on click.");
+                      console.error("Mobile menu element not found on click.");
                  }
              });
 
              const mobileMenuEl = document.getElementById('mobile-menu');
              if (mobileMenuEl) {
-                mobileMenuEl.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => mobileMenuEl.classList.add('hidden'));
-                });
+                 mobileMenuEl.querySelectorAll('a').forEach(link => {
+                     if (link.id !== 'mobile-theme-toggle') {
+                         link.addEventListener('click', () => mobileMenuEl.classList.add('hidden'));
+                     }
+                 });
              } else {
                   console.warn("Mobile menu element not found for attaching link listeners.");
              }
@@ -795,7 +842,7 @@
             // 1. Initialize Theme
             try {
                 const savedTheme = localStorage.getItem('theme');
-                let initialIsDark = false; // Default to light
+                let initialIsDark = false; 
                 if (savedTheme === 'dark') {
                     initialIsDark = true;
                 } else if (savedTheme === 'light'){
@@ -805,7 +852,7 @@
                 updateTheme(initialIsDark);
             } catch (error) {
                 console.error("Error initializing theme:", error);
-                updateTheme(false); // Default to light on error
+                updateTheme(false); 
             }
             
             const themeToggleBtnLoaded = document.getElementById('theme-toggle');
@@ -837,14 +884,14 @@
                 if (targetPage) {
                     targetPage.classList.add('active');
                      navLinks.forEach(link => {
-                           link.classList.toggle('active', link.getAttribute('href') === `#${page}`);
-                       });
+                          link.classList.toggle('active', link.getAttribute('href') === `#${page}`);
+                     });
                 } else {
                     console.error(`Initial page ID "${page}" not found AFTER validation check.`);
                     document.getElementById('home')?.classList.add('active');
                      navLinks.forEach(link => {
-                           link.classList.toggle('active', link.getAttribute('href') === `#home`);
-                       });
+                          link.classList.toggle('active', link.getAttribute('href') === `#home`);
+                     });
                 }
                 window.scrollTo(0, 0);
 
@@ -860,8 +907,8 @@
              let page = hash ? hash.substring(1) : 'home';
              const validPageIds = ['home', 'about', 'specializations', 'careers', 'education', 'contact'];
              if (!validPageIds.includes(page)) {
-                console.warn(`Invalid page ID "${page}" in popstate, defaulting to home.`);
-                page = 'home';
+                 console.warn(`Invalid page ID "${page}" in popstate, defaulting to home.`);
+                 page = 'home';
              }
 
              console.log("Navigating via popstate to:", page);
@@ -870,14 +917,14 @@
                if (targetPage) {
                  targetPage.classList.add('active');
                   navLinks.forEach(link => {
-                        link.classList.toggle('active', link.getAttribute('href') === `#${page}`);
-                    });
+                       link.classList.toggle('active', link.getAttribute('href') === `#${page}`);
+                  });
                } else {
                      console.error(`Popstate target page ID "${page}" not found AFTER validation check.`);
                      document.getElementById('home')?.classList.add('active');
                      navLinks.forEach(link => {
-                            link.classList.toggle('active', link.getAttribute('href') === `#home`);
-                        });
+                          link.classList.toggle('active', link.getAttribute('href') === `#home`);
+                     });
                }
               window.scrollTo(0, 0);
         };
