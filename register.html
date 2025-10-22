@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="km" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate-key="page_title">បំពេញពាក្យស្នើសុំ - វិស្វកម្មមេកានិក</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- NEW: Add jsPDF and html2canvas libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class', // Enable class-based dark mode
+        theme: {
+          extend: {}
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- MODIFIED: Use specific Khmer font 'Moul' for the preview header -->
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&family=Moul&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Base font */
+        body {
+            font-family: 'Kantumruy Pro', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Specify fonts for different languages */
+        :lang(en) body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        /* Animation for page content */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Active nav link style */
+        .nav-link.active {
+            color: #2563EB; /* blue-600 */
+            font-weight: 600;
+            border-bottom: 2px solid #2563EB;
+        }
+        /* Dark mode active nav link style */
+        .dark .nav-link.active {
+            color: #60A5FA; /* blue-400 */
+            border-bottom-color: #60A5FA;
+        }
+        /* SVG Logo continuous rotation animation */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .logo-gear {
+            animation: spin 10s linear infinite;
+        }
+        /* Custom style for date picker calendar icon */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            filter: invert(0.5);
+        }
+        .dark input[type="date"]::-webkit-calendar-picker-indicator {
+             filter: invert(0.8);
+        }
+
+        /* --- NEW: Styling for the official form preview --- */
+        #previewContent {
+            font-family: 'Kantumruy Pro', sans-serif; /* Default font for preview */
+        }
+        #previewContent .preview-header {
+             font-family: 'Moul', cursive; /* Specific font for header text */
+             text-align: center;
+             margin-bottom: 1.5rem;
+        }
+         #previewContent .preview-header h1 {
+             font-size: 1.1rem;
+             line-height: 1.6;
+             font-weight: normal;
+             margin-bottom: 0.25rem;
+         }
+         #previewContent .preview-header h2 {
+             font-size: 1rem;
+             line-height: 1.5;
+             font-weight: normal;
+             margin-bottom: 0.5rem;
+         }
+        #previewContent .section-title {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        #previewContent .field-row {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            align-items: baseline; /* Align text nicely */
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px dotted #ccc;
+        }
+         .dark #previewContent .field-row {
+             border-bottom-color: #555;
+         }
+        #previewContent .field-label {
+            font-weight: normal; /* Changed from bold */
+            min-width: 120px; /* Adjust as needed */
+            margin-right: 10px;
+            margin-bottom: 5px; /* Add spacing on wrap */
+            color: #555; /* Slightly lighter label color */
+        }
+         .dark #previewContent .field-label {
+             color: #bbb;
+         }
+        #previewContent .field-value {
+             flex-grow: 1;
+             font-weight: bold; /* Make value bold */
+             word-break: break-word; /* Prevent long text overflow */
+        }
+        #previewContent .placeholder-logo {
+            width: 80px;
+            height: 80px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #888;
+            margin-right: 1rem; /* Space between logo and text */
+        }
+         .dark #previewContent .placeholder-logo {
+             border-color: #555;
+             color: #aaa;
+         }
+         #previewContent .preview-top-section {
+             display: flex;
+             align-items: center; /* Align logo and header text */
+             justify-content: center; /* Center items horizontally */
+             margin-bottom: 1.5rem;
+             padding-bottom: 1rem;
+             border-bottom: 2px solid black;
+         }
+         .dark #previewContent .preview-top-section {
+              border-bottom-color: #ccc;
+         }
+
+        /* Loading indicator style */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spinLoader 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spinLoader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+
+    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3 text-blue-600 dark:text-blue-400">
+                <svg class="logo-gear h-9 w-9 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M19.1255 7.96289L19.3755 7.71289C19.8635 7.22489 20.6275 7.22489 21.1155 7.71289L21.2875 7.88489C21.7755 8.37289 21.7755 9.13689 21.2875 9.62489L21.0375 9.87489" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4.87451 16.0371L4.62451 16.2871C4.13651 16.7751 3.37251 16.7751 2.88451 16.2871L2.71251 16.1151C2.22451 15.6271 2.22451 14.8631 2.71251 14.3751L2.96251 14.1251" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M7.96289 4.87451L7.71289 4.62451C7.22489 4.13651 7.22489 3.37251 7.71289 2.88451L7.88489 2.71251C8.37289 2.22451 9.13689 2.22451 9.62489 2.71251L9.87489 2.96251" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M16.0371 19.1255L16.2871 19.3755C16.7751 19.8635 16.7751 20.6275 16.2871 21.1155L16.1151 21.2875C15.6271 21.7755 14.8631 21.7755 14.3751 21.2875L14.1251 21.0375" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M22 12H19" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M5 12H2" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 5V2" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 22V19" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span class="text-2xl font-bold" data-translate-key="brand_name">វិស្វករមេកានិក</span>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html#home" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-home fa-fw mr-2"></i><span data-translate-key="nav_home">ទំព័រដើម</span>
+                </a>
+                <a href="index.html#specializations" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-cogs fa-fw mr-2"></i><span data-translate-key="nav_specializations">ឯកទេស</span>
+                </a>
+                <a href="index.html#education" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-graduation-cap fa-fw mr-2"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
+                </a>
+                <a href="index.html#gallery" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-images fa-fw mr-2"></i><span data-translate-key="nav_gallery">កម្រងរូបភាព</span>
+                </a>
+                <a href="register.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center active">
+                    <i class="fas fa-file-alt fa-fw mr-2"></i><span data-translate-key="nav_register">បំពេញពាក្យស្នើសុំ</span>
+                </a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="flex p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition" aria-label="Toggle dark mode">
+                    <i id="theme-icon" class="fas fa-sun fa-lg"></i>
+                </button>
+
+                <div class="relative hidden md:block" id="lang-switcher-container">
+                    <button id="lang-switcher-btn" class="flex items-center p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <img id="current-lang-flag" src="https://flagcdn.com/kh.svg" alt="Language" class="w-8 h-5 rounded-sm border border-gray-200">
+                        <i class="fas fa-chevron-down w-4 h-4 ml-2 text-gray-500 dark:text-gray-400"></i>
+                    </button>
+                    <div id="lang-options" class="hidden absolute right-0 mt-2 w-40 bg-white dark:bg-gray-700 rounded-md shadow-lg py-1 z-50">
+                        <a href="#" onclick="setLanguage('km')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <img src="https://flagcdn.com/kh.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_km">ភាសាខ្មែរ</span>
+                        </a>
+                        <a href="#" onclick="setLanguage('en')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <img src="https://flagcdn.com/gb.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_en">English</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-600 dark:text-gray-300 focus:outline-none">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 shadow-lg">
+            <a href="index.html#home" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-home fa-fw mr-3"></i><span data-translate-key="nav_home">ទំព័រដើម</span>
+            </a>
+            <a href="index.html#specializations" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-cogs fa-fw mr-3"></i><span data-translate-key="nav_specializations">ឯកទេស</span>
+            </a>
+            <a href="index.html#education" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-graduation-cap fa-fw mr-3"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
+            </a>
+            <a href="index.html#gallery" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-images fa-fw mr-3"></i><span data-translate-key="nav_gallery">កម្រងរូបភាព</span>
+            </a>
+            <a href="register.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center active">
+                <i class="fas fa-file-alt fa-fw mr-3"></i><span data-translate-key="nav_register">បំពេញពាក្យស្នើសុំ</span>
+            </a>
+            
+            <a href="#" onclick="setLanguage('km')" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <img src="https://flagcdn.com/kh.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_km">ភាសាខ្មែរ</span>
+            </a>
+            <a href="#" onclick="setLanguage('en')" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <img src="https://flagcdn.com/gb.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_en">English</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="register" class="py-10" style="animation: fadeIn 0.6s ease-in-out;">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="register_title">បំពេញពាក្យស្នើសុំ</h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="register_subtitle">បំពេញទម្រង់ខាងក្រោមដើម្បីដាក់ពាក្យស្នើសុំចូលរៀន។</p>
+            </div>
+            <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8"> <!-- Increased max-width -->
+                <!-- Registration Form (initially visible) -->
+                <form id="registrationForm" class="space-y-6" onsubmit="event.preventDefault(); showPreview();">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="regLastName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_lastname">នាមត្រកូល</label>
+                            <input type="text" id="regLastName" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                        <div>
+                            <label for="regFirstName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_firstname">នាមខ្លួន</label>
+                            <input type="text" id="regFirstName" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_gender">ភេទ</label>
+                            <div class="mt-2 flex space-x-4">
+                                <label class="flex items-center">
+                                    <input type="radio" name="gender" value="male" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 dark:border-gray-600 dark:bg-gray-700" required>
+                                    <span class="ml-2 text-gray-700 dark:text-gray-300" data-translate-key="register_gender_male">ប្រុស</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="gender" value="female" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                                    <span class="ml-2 text-gray-700 dark:text-gray-300" data-translate-key="register_gender_female">ស្រី</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="regDob" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_dob">ថ្ងៃខែឆ្នាំកំណើត</label>
+                            <input type="date" id="regDob" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="regPob" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_pob">ទីកន្លែងកំណើត</label>
+                        <input type="text" id="regPob" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="regFatherName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_father">ឈ្មោះឪពុក</label>
+                            <input type="text" id="regFatherName" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                        <div>
+                            <label for="regMotherName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_mother">ឈ្មោះម្តាយ</label>
+                            <input type="text" id="regMotherName" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="regPhonePersonal" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_phone_personal">លេខទូរស័ព្ទផ្ទាល់ខ្លួន</label>
+                            <input type="tel" id="regPhonePersonal" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                        <div>
+                            <label for="regPhoneGuardian" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_phone_guardian">លេខទូរស័ព្ទអាណាព្យាបាល</label>
+                            <input type="tel" id="regPhoneGuardian" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_has_email">តើអ្នកមានអ៊ីមែលដែរឬទេ?</label>
+                        <div class="mt-2 flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" id="hasEmailYes" name="hasEmail" value="yes" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                                <span class="ml-2 text-gray-700 dark:text-gray-300" data-translate-key="register_choice_yes">មាន</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" id="hasEmailNo" name="hasEmail" value="no" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 dark:border-gray-600 dark:bg-gray-700" checked>
+                                <span class="ml-2 text-gray-700 dark:text-gray-300" data-translate-key="register_choice_no">គ្មាន</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="emailInputContainer" class="hidden">
+                        <label for="regEmail" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_email">អ៊ីមែល</label>
+                        <input type="email" id="regEmail" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100">
+                    </div>
+                    
+                    <div>
+                        <label for="regCourse" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_course">ជ្រើសរើសជំនាញ</label>
+                        <select id="regCourse" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100">
+                            <option value="associate" data-translate-key="register_option_associate">កម្រិតវិស្វកម្ម (បរិញ្ញាបត្ររង)</option>
+                            <option value="bachelor" data-translate-key="register_option_bachelor">កម្រិតវិស្វករ (បរិញ្ញាបត្រ)</option>
+                            <option value="cnc" data-translate-key="register_option_cnc">វគ្គខ្លី CNC</option>
+                            <option value="other" data-translate-key="register_option_other">ផ្សេងៗ</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="regMessage" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_message">សារ (ស្រេចចិត្ត)</label>
+                        <textarea id="regMessage" rows="3" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 font-bold transition text-lg" data-translate-key="register_form_preview">មើលពាក្យស្នើសុំ</button>
+                </form>
+
+                <!-- Preview Section (initially hidden) -->
+                <div id="previewSection" class="hidden mt-6 space-y-6">
+                    <!-- MODIFIED: Preview content structure changed -->
+                    <div id="previewContent" class="p-6 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                        <div class="preview-top-section">
+                             <!-- Placeholder Logo -->
+                            <div class="placeholder-logo">LOGO</div>
+                             <div class="preview-header">
+                                 <h1>ព្រះរាជាណាចក្រកម្ពុជា</h1>
+                                 <h2>ជាតិ សាសនា ព្រះមហាក្សត្រ</h2>
+                                 <!-- Decorative element -->
+                                 <div class="text-xs">*** <svg xmlns="http://www.w3.org/2000/svg" class="inline h-3 w-3 mx-1" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v1.168a6.996 6.996 0 015.74 3.036 1 1 0 01-1.48 1.348A4.998 4.998 0 0011 7.18V10l3.707 3.707a1 1 0 01-1.414 1.414L10 11.414l-3.293 3.293a1 1 0 01-1.414-1.414L9 10V7.18a4.998 4.998 0 00-4.26-1.584 1 1 0 11-1.48-1.348A6.996 6.996 0 019 5.168V4a1 1 0 011-1zm-.5 10.586l.5.5.5-.5a.5.5 0 00-.707 0l-.147.146-.146-.146a.5.5 0 00-.707 0z" clip-rule="evenodd" />
+                                    </svg>
+                                   ***</div>
+                             </div>
+                        </div>
+
+                         <h3 class="section-title">ពាក្យស្នើសុំ</h3>
+
+                         <!-- Personal Info Section -->
+                        <div class="section-content">
+                            <div class="field-row">
+                                <span class="field-label" data-translate-key="register_form_lastname">នាមត្រកូល:</span>
+                                <span class="field-value" id="previewLastName"></span>
+                            </div>
+                            <div class="field-row">
+                                <span class="field-label" data-translate-key="register_form_firstname">នាមខ្លួន:</span>
+                                <span class="field-value" id="previewFirstName"></span>
+                            </div>
+                             <div class="field-row">
+                                <span class="field-label">ឈ្មោះជាឡាតាំង:</span>
+                                <span class="field-value" id="previewLatinName"></span> <!-- Assuming combination -->
+                            </div>
+                            <div class="field-row">
+                                <span class="field-label" data-translate-key="register_form_gender">ភេទ:</span>
+                                <span class="field-value" id="previewGender"></span>
+                            </div>
+                            <div class="field-row">
+                                <span class="field-label" data-translate-key="register_form_dob">ថ្ងៃខែឆ្នាំកំណើត:</span>
+                                <span class="field-value" id="previewDob"></span>
+                            </div>
+                             <div class="field-row">
+                                <span class="field-label">សញ្ជាតិ:</span>
+                                <span class="field-value">-</span> <!-- Not in form -->
+                            </div>
+                             <div class="field-row">
+                                <span class="field-label">ជនជាតិ:</span>
+                                <span class="field-value">-</span> <!-- Not in form -->
+                            </div>
+                            <div class="field-row">
+                                <span class="field-label" data-translate-key="register_form_pob">ទីកន្លែងកំណើត:</span>
+                                <span class="field-value" id="previewPob"></span>
+                            </div>
+                            <!-- Add more fields as needed -->
+                        </div>
+
+                        <h3 class="section-title">ព័ត៌មានគ្រួសារ</h3>
+                         <div class="section-content">
+                            <div class="field-row">
+                                <span class="field-label" data-translate-key="register_form_father">ឈ្មោះឪពុក:</span>
+                                <span class="field-value" id="previewFatherName"></span>
+                            </div>
+                             <div class="field-row">
+                                <span class="field-label">មុខរបរ:</span>
+                                <span class="field-value">-</span> <!-- Not in form -->
+                            </div>
+                             <div class="field-row">
+                                <span class="field-label" data-translate-key="register_form_mother">ឈ្មោះម្តាយ:</span>
+                                <span class="field-value" id="previewMotherName"></span>
+                            </div>
+                             <div class="field-row">
+                                <span class="field-label">មុខរបរ:</span>
+                                <span class="field-value">-</span> <!-- Not in form -->
+                            </div>
+                        </div>
+
+                         <h3 class="section-title">ព័ត៌មានទំនាក់ទំនង</h3>
+                         <div class="section-content">
+                             <div class="field-row">
+                                <span class="field-label" data-translate-key="register_form_phone_personal">លេខទូរស័ព្ទផ្ទាល់ខ្លួន:</span>
+                                <span class="field-value" id="previewPhonePersonal"></span>
+                            </div>
+                            <div class="field-row">
+                                <span class="field-label" data-translate-key="register_form_phone_guardian">លេខទូរស័ព្ទអាណាព្យាបាល:</span>
+                                <span class="field-value" id="previewPhoneGuardian"></span>
+                            </div>
+                             <div class="field-row">
+                                <span class="field-label" data-translate-key="register_form_email">អ៊ីមែល:</span>
+                                <span class="field-value" id="previewEmail"></span>
+                            </div>
+                              <div class="field-row">
+                                <span class="field-label">អាសយដ្ឋានបច្ចុប្បន្ន:</span>
+                                <span class="field-value">-</span> <!-- Not in form -->
+                            </div>
+                        </div>
+
+                        <h3 class="section-title">ព័ត៌មានសិក្សា</h3>
+                         <div class="section-content">
+                            <div class="field-row">
+                                <span class="field-label" data-translate-key="register_form_course">ជំនាញដែលជ្រើសរើស:</span>
+                                <span class="field-value" id="previewCourse"></span>
+                            </div>
+                             <div class="field-row">
+                                <span class="field-label">កម្រិតសិក្សាចុងក្រោយ:</span>
+                                <span class="field-value">-</span> <!-- Not in form -->
+                            </div>
+                             <div class="field-row">
+                                <span class="field-label">ឆ្នាំបញ្ចប់:</span>
+                                <span class="field-value">-</span> <!-- Not in form -->
+                            </div>
+                             <div class="field-row">
+                                <span class="field-label">និទ្ទេស:</span>
+                                <span class="field-value">-</span> <!-- Not in form -->
+                            </div>
+                        </div>
+
+                        <!-- Optional Message -->
+                        <div id="previewMessageSection" class="hidden">
+                             <h3 class="section-title">សារបន្ថែម</h3>
+                             <div class="section-content">
+                                 <div class="field-row" style="border-bottom: none;"> <!-- No border for last item -->
+                                     <span class="field-value" id="previewMessage"></span>
+                                 </div>
+                             </div>
+                        </div>
+
+                         <div class="loader hidden"></div> <!-- Loading indicator -->
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <button id="downloadPdfBtn" type="button" class="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 font-semibold transition inline-flex items-center justify-center">
+                            <i class="fas fa-file-pdf mr-2"></i> <span data-translate-key="register_download_pdf">ទាញយក PDF</span>
+                        </button>
+                        <button id="downloadImageBtn" type="button" class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 font-semibold transition inline-flex items-center justify-center">
+                           <i class="fas fa-file-image mr-2"></i> <span data-translate-key="register_download_image">ទាញយករូបភាព</span>
+                        </button>
+                         <button id="editFormBtn" type="button" class="w-full bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 py-2 px-4 rounded-md hover:bg-gray-400 dark:hover:bg-gray-500 font-semibold transition inline-flex items-center justify-center">
+                           <i class="fas fa-edit mr-2"></i> <span data-translate-key="register_edit_form">កែសម្រួល</span>
+                        </button>
+                    </div>
+                     <p class="text-xs text-center text-gray-500 dark:text-gray-400" data-translate-key="register_download_note">ចំណាំ៖ ការទាញយកអាចចំណាយពេលបន្តិចអាស្រ័យលើទំហំទិន្នន័យ។</p>
+                </div>
+
+                <!-- Success Message (Repurposed/Hidden for now) -->
+                <div id="registrationSuccess" class="hidden mt-6 p-4 rounded-md bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200">
+                    <p class="font-semibold" data-translate-key="register_success_title">ការដាក់ពាក្យជោគជ័យ!</p>
+                    <p data-translate-key="register_success_msg">សូមអរគុណ! យើងនឹងទាក់ទងអ្នកក្នុងពេលឆាប់ៗនេះ។</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="container mx-auto px-6 py-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="contact_title">ទំនាក់ទំនងមកពួកយើង</h2>
+            <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="contact_subtitle">យើងរីករាយនឹងឆ្លើយតបរាល់សំណួររបស់អ្នក។ សូមទំនាក់ទំនងតាមរយៈបណ្តាញខាងក្រោម៖</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10 items-start">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full flex flex-col items-center justify-center">
+                <div class="flex space-x-4 md:space-x-6">
+                    <a href="https://web.facebook.com/profile.php?id=100075802995392" target="_blank" class="w-12 h-12 md:w-16 md:h-16 bg-blue-600 rounded-full flex items-center justify-center text-white hover:opacity-90 transform hover:scale-105 transition-all duration-300" aria-label="Facebook">
+                        <i class="fab fa-facebook-f fa-lg md:fa-2x"></i>
+                    </a>
+                    <a href="https://t.me/chorkratana" target="_blank" class="w-12 h-12 md:w-16 md:h-16 bg-sky-500 rounded-full flex items-center justify-center text-white hover:opacity-90 transform hover:scale-105 transition-all duration-300" aria-label="Telegram">
+                        <i class="fab fa-telegram-plane fa-lg md:fa-2x"></i>
+                    </a>
+                    <a href="tel:+85512521375" class="w-12 h-12 md:w-16 md:h-16 bg-green-500 rounded-full flex items-center justify-center text-white hover:opacity-90 transform hover:scale-105 transition-all duration-300" aria-label="Phone">
+                        <i class="fas fa-phone fa-lg md:fa-2x"></i>
+                    </a>
+                    <a href="mailto:ratana.lyon2uni@gmail.com" class="w-12 h-12 md:w-16 md:h-16 bg-red-500 rounded-full flex items-center justify-center text-white hover:opacity-90 transform hover:scale-105 transition-all duration-300" aria-label="Email">
+                        <i class="fas fa-envelope fa-lg md:fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full">
+                <h3 class="font-bold text-xl mb-4 text-gray-900 dark:text-gray-100" data-translate-key="contact_form_title">ផ្ញើសារ</h3>
+                
+                <button id="showContactFormBtn" onclick="toggleContactForm()" type="button" class="w-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 py-3 px-4 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 font-bold transition text-lg inline-flex items-center justify-center" data-translate-key="contact_show_form_btn">
+                    <i class="fas fa-pencil-alt mr-2"></i>
+                    ចុចទីនេះដើម្បីផ្ញើសារ
+                </button>
+
+                <form id="contactForm" class="space-y-6 hidden" onsubmit="event.preventDefault(); sendEmail();">
+                    <div>
+                        <label for="contactName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="contact_form_name">ឈ្មោះ</label>
+                        <div class="relative mt-1">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-gray-400"></i>
+                            </div>
+                            <input type="text" id="contactName" class="block w-full pl-10 pr-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="contactEmail" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="contact_form_email">អ៊ីមែល</label>
+                        <div class="relative mt-1">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                            <input type="email" id="contactEmail" class="block w-full pl-10 pr-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="contactMessage" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="contact_form_message">សារ</label>
+                         <div class="relative mt-1">
+                             <div class="absolute top-0 left-0 pl-3 pt-3 flex items-center pointer-events-none">
+                                <i class="fas fa-pencil-alt text-gray-400"></i>
+                            </div>
+                            <textarea id="contactMessage" rows="4" class="block w-full pl-10 pr-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required></textarea>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button type="button" onclick="closeContactForm()" class="w-full bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200 py-3 px-4 rounded-md hover:bg-gray-300 dark:hover:bg-gray-500 font-semibold transition text-base" data-translate-key="contact_form_cancel">
+                            បោះបង់
+                        </button>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 font-bold transition text-base inline-flex items-center justify-center" data-translate-key="contact_form_submit">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            ផ្ញើសារ
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 dark:bg-gray-950 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400" data-translate-key="footer_text">ចាប់ផ្តើមដំណើររបស់អ្នកក្នុងវិស័យវិស្វកម្មមេកានិកនៅថ្ងៃនេះ ហើយរួមចំណែកបង្កើតបច្ចេកវិទ្យាថ្មីៗ។</p>
+            <div class="mt-4">
+                <p class="text-gray-500 text-sm" data-translate-key="footer_copyright">រក្សាសិទ្ធិគ្រប់យ៉ាង © 2025 | បង្កើតដោយ ខៀវ សំណាង</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // NEW: Add jsPDF reference
+        const { jsPDF } = window.jspdf;
+
+        const translations = {
+            km: {
+                page_title: "បំពេញពាក្យស្នើសុំ",
+                brand_name: "វិស្វករមេកានិក",
+                nav_home: "ទំព័រដើម",
+                nav_specializations: "ឯកទេស",
+                nav_education: "កម្រិតសិក្សា",
+                nav_register: "បំពេញពាក្យស្នើសុំ",
+                nav_gallery: "កម្រងរូបភាព",
+                nav_theme_toggle: "ប្តូរពន្លឺ",
+                lang_km: "ភាសាខ្មែរ",
+                lang_en: "English",
+                contact_title: "ទំនាក់ទំនងមកពួកយើង",
+                contact_subtitle: "យើងរីករាយនឹងឆ្លើយតបរាល់សំណួររបស់អ្នក។ សូមទំនាក់ទំនងតាមរយៈបណ្តាញខាងក្រោម៖",
+                contact_phone: "ទូរស័ព្ទ",
+                contact_facebook: "ហ្វេសប៊ុក",
+                contact_telegram: "តេឡេក្រាម",
+                contact_email: "អ៊ីមែល",
+                contact_form_title: "ផ្ញើសារ",
+                contact_show_form_btn: "ចុចទីនេះដើម្បីផ្ញើសារ",
+                contact_form_name: "ឈ្មោះ",
+                contact_form_email: "អ៊ីមែល",
+                contact_form_message: "សារ",
+                contact_form_submit: "ផ្ញើសារ",
+                contact_form_cancel: "បោះបង់",
+                footer_text: "ចាប់ផ្តើមដំណើររបស់អ្នកក្នុងវិស័យវិស្វកម្មមេកានិកនៅថ្ងៃនេះ ហើយរួមចំណែកបង្កើតបច្ចេកវិទ្យាថ្មីៗ។",
+                footer_copyright: "រក្សាសិទ្ធិគ្រប់យ៉ាង © 2025 | បង្កើតដោយ ខៀវ សំណាង",
+                register_title: "បំពេញពាក្យស្នើសុំ",
+                register_subtitle: "បំពេញទម្រង់ខាងក្រោមដើម្បីដាក់ពាក្យស្នើសុំចូលរៀន។",
+                register_form_lastname: "នាមត្រកូល",
+                register_form_firstname: "នាមខ្លួន",
+                register_form_gender: "ភេទ",
+                register_gender_male: "ប្រុស",
+                register_gender_female: "ស្រី",
+                register_form_dob: "ថ្ងៃខែឆ្នាំកំណើត",
+                register_form_pob: "ទីកន្លែងកំណើត",
+                register_form_father: "ឈ្មោះឪពុក",
+                register_form_mother: "ឈ្មោះម្តាយ",
+                register_form_phone_personal: "លេខទូរស័ព្ទផ្ទាល់ខ្លួន",
+                register_form_phone_guardian: "លេខទូរស័ព្ទអាណាព្យាបាល",
+                register_form_has_email: "តើអ្នកមានអ៊ីមែលដែរឬទេ?",
+                register_choice_yes: "មាន",
+                register_choice_no: "គ្មាន",
+                register_form_email: "អ៊ីមែល",
+                register_form_course: "ជ្រើសរើសជំនាញ",
+                register_option_associate: "កម្រិតវិស្វកម្ម (បរិញ្ញាបត្ររង)",
+                register_option_bachelor: "កម្រិតវិស្វករ (បរិញ្ញាបត្រ)",
+                register_option_cnc: "វគ្គខ្លី CNC",
+                register_option_other: "ផ្សេងៗ",
+                register_form_message: "សារ (ស្រេចចិត្ត)",
+                register_form_preview: "មើលពាក្យស្នើសុំ",
+                register_success_title: "ការដាក់ពាក្យជោគជ័យ!",
+                register_success_msg: "សូមអរគុណ! យើងនឹងទាក់ទងអ្នកក្នុងពេលឆាប់ៗនេះ。",
+                register_preview_title: "មើលព័ត៌មានដែលបានបំពេញ",
+                register_download_pdf: "ទាញយក PDF",
+                register_download_image: "ទាញយករូបភាព",
+                register_edit_form: "កែសម្រួល",
+                register_download_note: "ចំណាំ៖ ការទាញយកអាចចំណាយពេលបន្តិចអាស្រ័យលើទំហំទិន្នន័យ។",
+                // NEW: Validation messages
+                validation_fill_all: "សូមបំពេញគ្រប់ប្រអប់ដែលត្រូវការ។",
+                validation_fill_email: "សូមបំពេញអ៊ីមែលរបស់អ្នក ឬជ្រើសរើស 'គ្មាន'។",
+                register_generating: "កំពុងបង្កើត..." // For loader text
+            },
+            en: {
+                page_title: "Application Form",
+                brand_name: "Mechanical Engineer",
+                nav_home: "Home",
+                nav_specializations: "Specializations",
+                nav_education: "Education",
+                nav_register: "Application Form",
+                nav_gallery: "Gallery",
+                nav_theme_toggle: "Toggle Theme",
+                lang_km: "Khmer",
+                lang_en: "English",
+                contact_title: "Contact Us",
+                contact_subtitle: "We are happy to answer your questions. Please contact us through the channels below:",
+                contact_phone: "Phone",
+                contact_facebook: "Facebook",
+                contact_telegram: "Telegram",
+                contact_email: "Email",
+                contact_form_title: "Send Message",
+                contact_show_form_btn: "Click here to send a message",
+                contact_form_name: "Name",
+                contact_form_email: "Email",
+                contact_form_message: "Message",
+                contact_form_submit: "Send Message",
+                contact_form_cancel: "Cancel",
+                footer_text: "Start your journey in mechanical engineering today and contribute to creating new technologies.",
+                footer_copyright: "All rights reserved © 2025 | Built By Khiev Samnang",
+                register_title: "Application Form",
+                register_subtitle: "Fill the form below to apply for admission.",
+                register_form_lastname: "Last Name",
+                register_form_firstname: "First Name",
+                register_form_gender: "Gender",
+                register_gender_male: "Male",
+                register_gender_female: "Female",
+                register_form_dob: "Date of Birth",
+                register_form_pob: "Place of Birth",
+                register_form_father: "Father's Name",
+                register_form_mother: "Mother's Name",
+                register_form_phone_personal: "Personal Phone",
+                register_form_phone_guardian: "Guardian's Phone",
+                register_form_has_email: "Do you have an email?",
+                register_choice_yes: "Yes",
+                register_choice_no: "No",
+                register_form_email: "Email",
+                register_form_course: "Select Course",
+                register_option_associate: "Associate Degree",
+                register_option_bachelor: "Bachelor's Degree",
+                register_option_cnc: "CNC Short Course",
+                register_option_other: "Other",
+                register_form_message: "Message (Optional)",
+                register_form_preview: "Preview Application",
+                register_success_title: "Application Successful!",
+                register_success_msg: "Thank you! We will contact you shortly.",
+                register_preview_title: "Preview Submitted Information",
+                register_download_pdf: "Download PDF",
+                register_download_image: "Download Image",
+                register_edit_form: "Edit Form",
+                register_download_note: "Note: Download might take a moment depending on the data size.",
+                 // NEW: Validation messages
+                validation_fill_all: "Please fill all required fields.",
+                validation_fill_email: "Please enter your email or select 'No'.",
+                register_generating: "Generating..." // For loader text
+            }
+        };
+
+        // --- Email Sending (Mailto) ---
+        function sendEmail() {
+            try {
+                const name = document.getElementById('contactName').value;
+                const email = document.getElementById('contactEmail').value;
+                const message = document.getElementById('contactMessage').value;
+                
+                const subject = `Message from Website by ${name}`;
+                const body = `Message:\n${message}\n\nFrom: ${name}\nEmail: ${email}`;
+                
+                const recipientEmail = 'ratana.lyon2uni@gmail.com'; 
+                
+                if (!name || !email || !message) {
+                    showCustomMessage(getTranslation('validation_fill_all') || 'Please fill in all fields.');
+                    return;
+                }
+
+                window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            } catch(error) {
+                console.error("Error sending email:", error);
+                showCustomMessage('Could not open email client. Please copy the address: ' + recipientEmail);
+            }
+        }
+
+        // --- Show Preview Function ---
+        function showPreview() {
+            try {
+                // Collect all form data
+                const lastName = document.getElementById('regLastName').value;
+                const firstName = document.getElementById('regFirstName').value;
+                const genderRadio = document.querySelector('input[name="gender"]:checked');
+                const dob = document.getElementById('regDob').value;
+                const pob = document.getElementById('regPob').value;
+                const fatherName = document.getElementById('regFatherName').value;
+                const motherName = document.getElementById('regMotherName').value;
+                const phonePersonal = document.getElementById('regPhonePersonal').value;
+                const phoneGuardian = document.getElementById('regPhoneGuardian').value;
+                const hasEmail = document.querySelector('input[name="hasEmail"]:checked').value;
+                const email = document.getElementById('regEmail').value;
+                const courseSelect = document.getElementById('regCourse');
+                const courseValue = courseSelect.value;
+                const courseText = courseSelect.options[courseSelect.selectedIndex].text;
+                const message = document.getElementById('regMessage').value;
+
+                // Simple validation check
+                if (!lastName || !firstName || !genderRadio || !dob || !pob || !fatherName || !motherName || !phonePersonal || !phoneGuardian) {
+                    showCustomMessage(getTranslation('validation_fill_all') || 'Please fill all required fields.');
+                    return;
+                }
+                
+                if (hasEmail === 'yes' && !email) {
+                    showCustomMessage(getTranslation('validation_fill_email') || 'Please enter your email or select "No".');
+                    return;
+                }
+                
+                // Get gender text based on current language
+                const genderValue = genderRadio.value;
+                const genderText = genderValue === 'male' ? (getTranslation('register_gender_male') || 'Male') : (getTranslation('register_gender_female') || 'Female');
+                const latinName = `${firstName} ${lastName}`; // Simple combination
+
+                // Populate preview content using IDs
+                document.getElementById('previewLastName').textContent = lastName;
+                document.getElementById('previewFirstName').textContent = firstName;
+                document.getElementById('previewLatinName').textContent = latinName; // Add Latin name
+                document.getElementById('previewGender').textContent = genderText;
+                document.getElementById('previewDob').textContent = dob;
+                document.getElementById('previewPob').textContent = pob;
+                document.getElementById('previewFatherName').textContent = fatherName;
+                document.getElementById('previewMotherName').textContent = motherName;
+                document.getElementById('previewPhonePersonal').textContent = phonePersonal;
+                document.getElementById('previewPhoneGuardian').textContent = phoneGuardian;
+                document.getElementById('previewEmail').textContent = hasEmail === 'yes' ? email : (getTranslation('register_choice_no') || 'No');
+                document.getElementById('previewCourse').textContent = courseText;
+
+                // Show/hide optional message section
+                const messageSection = document.getElementById('previewMessageSection');
+                const messageValue = document.getElementById('previewMessage');
+                if (message && messageSection && messageValue) {
+                    messageValue.textContent = message;
+                    messageSection.classList.remove('hidden');
+                } else if(messageSection) {
+                    messageSection.classList.add('hidden');
+                }
+
+
+                // Hide the form and show the preview section
+                const form = document.getElementById('registrationForm');
+                const previewSection = document.getElementById('previewSection');
+                
+                if (form) form.classList.add('hidden');
+                if (previewSection) previewSection.classList.remove('hidden');
+
+                // Scroll to preview
+                 previewSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+
+            } catch (error) {
+                console.error("Error showing preview:", error);
+                showCustomMessage('An error occurred while generating the preview.');
+            }
+        }
+
+        // --- Download PDF function ---
+        async function downloadPdf() {
+            const previewContent = document.getElementById('previewContent');
+            const downloadBtn = document.getElementById('downloadPdfBtn');
+            const loader = previewContent.querySelector('.loader'); // Get loader inside preview
+
+            if (!previewContent || !downloadBtn) {
+                console.error('Preview content or PDF download button not found.');
+                return;
+            }
+             if (loader) loader.classList.remove('hidden'); // Show loader
+             downloadBtn.disabled = true;
+             const originalBtnHTML = downloadBtn.innerHTML; // Store full HTML
+             downloadBtn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> ${getTranslation('register_generating') || 'Generating...'}`;
+
+
+            try {
+                 // Temporarily remove loader from the element to be captured
+                 if (loader) loader.style.display = 'none';
+
+                const canvas = await html2canvas(previewContent, {
+                     scale: 2,
+                     useCORS: true,
+                      backgroundColor: document.documentElement.classList.contains('dark') ? '#374151' : '#f9fafb', // Match preview bg
+                      logging: false,
+                      // Ensure fonts are loaded - might need more robust solution
+                      onclone: (clonedDoc) => {
+                          // Try to apply styles again in cloned document if needed
+                      }
+                 });
+
+                 // Restore loader display after capture
+                  if (loader) loader.style.display = '';
+
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF({
+                    orientation: 'p',
+                    unit: 'px',
+                    // Use A4 size and scale image to fit width
+                    format: 'a4'
+                });
+
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const ratio = imgWidth / imgHeight;
+                
+                let finalImgWidth = pdfWidth;
+                let finalImgHeight = pdfWidth / ratio;
+
+                // If scaled height exceeds page height, adjust based on height instead
+                if (finalImgHeight > pdfHeight) {
+                    finalImgHeight = pdfHeight;
+                    finalImgWidth = pdfHeight * ratio;
+                }
+
+                // Center the image (optional)
+                 const xPos = (pdfWidth - finalImgWidth) / 2;
+                 const yPos = 0; // Start from top
+
+
+                 pdf.addImage(imgData, 'PNG', xPos, yPos, finalImgWidth, finalImgHeight);
+                 const fileName = `application_${document.getElementById('previewLastName')?.textContent || 'applicant'}.pdf`;
+                 pdf.save(fileName);
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                showCustomMessage('Could not generate PDF.');
+                 // Restore loader display in case of error
+                  if (loader) loader.style.display = '';
+            } finally {
+                 if (loader) loader.classList.add('hidden'); // Hide loader visually
+                 downloadBtn.disabled = false;
+                 downloadBtn.innerHTML = originalBtnHTML; // Restore original button content
+            }
+        }
+
+        // --- Download Image function ---
+         async function downloadImage() {
+             const previewContent = document.getElementById('previewContent');
+             const downloadBtn = document.getElementById('downloadImageBtn');
+             const loader = previewContent.querySelector('.loader'); // Get loader inside preview
+
+             if (!previewContent || !downloadBtn) {
+                 console.error('Preview content or Image download button not found.');
+                 return;
+             }
+              if (loader) loader.classList.remove('hidden'); // Show loader
+              downloadBtn.disabled = true;
+              const originalBtnHTML = downloadBtn.innerHTML; // Store full HTML
+              downloadBtn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> ${getTranslation('register_generating') || 'Generating...'}`;
+
+
+             try {
+                   // Temporarily remove loader from the element to be captured
+                   if (loader) loader.style.display = 'none';
+
+                  const canvas = await html2canvas(previewContent, {
+                     scale: 2,
+                     useCORS: true,
+                     backgroundColor: document.documentElement.classList.contains('dark') ? '#374151' : '#f9fafb', // Match preview bg
+                     logging: false
+                 });
+
+                  // Restore loader display after capture
+                   if (loader) loader.style.display = '';
+
+                 const imageURL = canvas.toDataURL('image/png');
+                 const link = document.createElement('a');
+                 link.href = imageURL;
+                 const fileName = `application_${document.getElementById('previewLastName')?.textContent || 'applicant'}.png`;
+                 link.download = fileName;
+                 document.body.appendChild(link);
+                 link.click();
+                 document.body.removeChild(link);
+             } catch (error) {
+                 console.error('Error generating image:', error);
+                 showCustomMessage('Could not generate image.');
+                 // Restore loader display in case of error
+                  if (loader) loader.style.display = '';
+             } finally {
+                  if (loader) loader.classList.add('hidden'); // Hide loader visually
+                  downloadBtn.disabled = false;
+                  downloadBtn.innerHTML = originalBtnHTML; // Restore original button content
+             }
+         }
+
+        // --- Edit Form function ---
+        function editForm() {
+            const form = document.getElementById('registrationForm');
+            const previewSection = document.getElementById('previewSection');
+
+            if (form) form.classList.remove('hidden');
+            if (previewSection) previewSection.classList.add('hidden');
+
+             // Scroll back to form
+             form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // --- Custom Message Box ---
+        function showCustomMessage(message, type = 'error') {
+            let existingBox = document.getElementById('customMessageBox');
+            if (existingBox) {
+                existingBox.remove();
+            }
+            const messageBox = document.createElement('div');
+            messageBox.id = 'customMessageBox';
+            const bgColor = type === 'success' ? '#10B981' : '#EF4444'; // Green for success, Red for error
+            messageBox.style = `position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: ${bgColor}; color: white; padding: 16px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 1000; font-family: 'Kantumruy Pro', sans-serif; max-width: 90%; text-align: center;`;
+            
+            const messageText = document.createElement('p');
+            messageText.textContent = message;
+            messageText.style = "margin: 0; margin-right: 20px;";
+
+            const closeButton = document.createElement('button');
+            closeButton.textContent = '×';
+            closeButton.style = "position: absolute; top: 5px; right: 10px; background: none; border: none; color: white; font-size: 20px; cursor: pointer;";
+            closeButton.onclick = () => messageBox.remove();
+
+            messageBox.appendChild(messageText);
+            messageBox.appendChild(closeButton);
+            document.body.appendChild(messageBox);
+
+            setTimeout(() => {
+                if (document.getElementById('customMessageBox')) {
+                    messageBox.remove();
+                }
+            }, 5000);
+        }
+
+        // --- Contact Form Toggle ---
+        function toggleContactForm() {
+            try {
+                const form = document.getElementById('contactForm');
+                const button = document.getElementById('showContactFormBtn');
+                if (form) form.classList.remove('hidden');
+                if (button) button.classList.add('hidden');
+            } catch (error) {
+                console.error("Error showing contact form:", error);
+            }
+        }
+
+        function closeContactForm() {
+            try {
+                const form = document.getElementById('contactForm');
+                const button = document.getElementById('showContactFormBtn');
+                if (form) {
+                    form.classList.add('hidden');
+                    form.reset(); 
+                }
+                if (button) button.classList.remove('hidden');
+            } catch (error) {
+                console.error("Error closing contact form:", error);
+            }
+        }
+
+        // --- Theme Switching ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function updateTheme(isDark) {
+                 if (!htmlEl) {
+                     console.error("<html> element not found.");
+                     return;
+                 }
+            if (isDark) {
+                htmlEl.classList.add('dark');
+            } else {
+                htmlEl.classList.remove('dark');
+            }
+
+            if (themeIcon) {
+                if (isDark) {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                } else {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                }
+            } else {
+                 console.warn("Desktop theme icon element not found.");
+            }
+
+
+            try {
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            } catch (error) {
+                console.error("Could not save theme to localStorage:", error);
+            }
+        }
+        
+        function toggleDarkMode() {
+                 if (!htmlEl) {
+                     console.error("Cannot toggle dark mode: <html> element not found.");
+                     return;
+                 }
+            const isCurrentlyDark = htmlEl.classList.contains('dark');
+            updateTheme(!isCurrentlyDark);
+        }
+
+        // --- Language Switching ---
+        const currentLangFlag = document.getElementById('current-lang-flag');
+        const flagSources = {
+            km: 'https://flagcdn.com/kh.svg',
+            en: 'https://flagcdn.com/gb.svg'
+        };
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        // Helper function to get translation safely
+        function getTranslation(key) {
+             try {
+                const currentLang = localStorage.getItem('preferredLanguage') || 'km';
+                // Check if translations and the specific language exist
+                if (typeof translations !== 'undefined' && translations[currentLang] && translations[currentLang][key]) {
+                    return translations[currentLang][key];
+                }
+                 // Fallback to English if Khmer key not found
+                 if (currentLang === 'km' && typeof translations !== 'undefined' && translations['en'] && translations['en'][key]) {
+                     // console.warn(`Khmer key "${key}" not found, using English fallback.`);
+                     return translations['en'][key];
+                 }
+                 // Fallback to the key itself if no translation found
+                  // console.warn(`Translation key "${key}" not found for language "${currentLang}" or fallback.`);
+                  return key; // Return the key as a last resort
+             } catch (e) {
+                  console.error("Error getting translation for key:", key, e);
+                  return key; // Return key on error
+             }
+        }
+
+
+        function setLanguage(lang) {
+            const langData = translations[lang];
+            if (!langData) {
+                console.error(`Translations for language "${lang}" not found.`);
+                return;
+            }
+
+            // Update localStorage FIRST
+            try {
+                localStorage.setItem('preferredLanguage', lang);
+                console.log("Saved language:", lang);
+            } catch (error) {
+                console.error("Could not save language preference to localStorage:", error);
+            }
+
+
+            if (htmlEl) {
+                htmlEl.lang = lang;
+            } else {
+                 console.error("<html> element not found for setting lang attribute.");
+            }
+
+            if (currentLangFlag) {
+                 currentLangFlag.src = flagSources[lang];
+            } else {
+                 // console.warn("Current language flag element not found.");
+            }
+
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.getAttribute('data-translate-key');
+                 const translatedText = getTranslation(key); // Use the helper
+
+                if (translatedText !== key || lang === 'en') { // Update if translation found or if target is English (to clear old Khmer)
+                    if (key.includes('_list') || key.includes('_details')) {
+                        el.innerHTML = translatedText;
+                    } else {
+                         if (el.tagName === 'OPTION') {
+                             el.textContent = translatedText;
+                         } else if (el.tagName === 'INPUT' && el.type === 'submit') {
+                            el.value = translatedText;
+                         } else if (el.tagName === 'TITLE') {
+                             el.textContent = translatedText;
+                         }
+                         else {
+                             let textUpdated = false;
+                             for (let node of el.childNodes) {
+                                if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
+                                    node.textContent = translatedText;
+                                    textUpdated = true;
+                                    break;
+                                } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SPAN' && !node.hasAttribute('data-translate-key')) {
+                                     // Check if it's likely the text span based on lack of key
+                                     if(node.childNodes.length === 1 && node.firstChild.nodeType === Node.TEXT_NODE){
+                                          node.firstChild.textContent = translatedText;
+                                           textUpdated = true;
+                                           break;
+                                     } else if (node.textContent.trim().length > 0) {
+                                         // More complex case, might replace all content
+                                         // node.textContent = translatedText; textUpdated = true; break;
+                                     }
+                                }
+                             }
+                              if (!textUpdated && !el.querySelector('i') && !el.querySelector('img')) { // Only update if no text node found and no icon/img
+                                   el.textContent = translatedText;
+                              }
+                         }
+                    }
+                } else {
+                      // console.warn(`Translation key "${key}" not found for language "${lang}". Keeping existing text:`, el.textContent.trim());
+                }
+            });
+
+            // Re-populate preview if it's visible after language change
+            const previewSection = document.getElementById('previewSection');
+             if (previewSection && !previewSection.classList.contains('hidden')) {
+                  // Temporarily store form data if needed, or just recall showPreview
+                  // This assumes showPreview reads directly from the form elements
+                  console.log("Re-rendering preview after language change");
+                  showPreview(); // Re-run preview logic to update labels/values
+             }
+
+
+            // Close mobile menu on lang select
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+            
+            // Close language dropdown
+            const langOptionsEl = document.getElementById('lang-options');
+            if (langOptionsEl) {
+                langOptionsEl.classList.add('hidden');
+            }
+
+        }
+        
+        // --- Language Dropdown Logic ---
+        const langSwitcherBtn = document.getElementById('lang-switcher-btn');
+        const langOptions = document.getElementById('lang-options');
+        
+        if (langSwitcherBtn && langOptions) {
+            langSwitcherBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langOptions.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', (e) => {
+                const container = document.getElementById('lang-switcher-container');
+                if (container && !container.contains(e.target)) {
+                    langOptions.classList.add('hidden');
+                }
+            });
+        } else {
+             console.warn("Language switcher button or options element not found.");
+        }
+        
+        // --- Mobile Menu Toggle ---
+        const menuBtn = document.getElementById('menu-btn');
+         if (menuBtn) {
+             menuBtn.addEventListener('click', () => {
+                 const mobileMenuEl = document.getElementById('mobile-menu');
+                 if (mobileMenuEl) {
+                     mobileMenuEl.classList.toggle('hidden');
+                 } else {
+                      console.error("Mobile menu element not found on click.");
+                 }
+             });
+
+             const mobileMenuEl = document.getElementById('mobile-menu');
+             if (mobileMenuEl) {
+                 mobileMenuEl.querySelectorAll('a').forEach(link => {
+                     // Check if it's a language link
+                     if (!link.onclick || (link.onclick && !link.onclick.toString().includes("setLanguage"))) {
+                         link.addEventListener('click', () => mobileMenuEl.classList.add('hidden'));
+                     }
+                 });
+             } else {
+                  // console.warn("Mobile menu element not found for attaching link listeners.");
+             }
+         } else {
+              console.warn("Mobile menu button not found.");
+         }
+
+        // --- Conditional Email Field Logic ---
+        const hasEmailYes = document.getElementById('hasEmailYes');
+        const hasEmailNo = document.getElementById('hasEmailNo');
+        const emailContainer = document.getElementById('emailInputContainer');
+        const emailInput = document.getElementById('regEmail');
+
+        function toggleEmailField() {
+            if (hasEmailYes && hasEmailNo && emailContainer && emailInput) {
+                if (hasEmailYes.checked) {
+                    emailContainer.classList.remove('hidden');
+                    emailInput.required = true;
+                } else {
+                    emailContainer.classList.add('hidden');
+                    emailInput.required = false;
+                    emailInput.value = ''; // Clear value if hidden
+                }
+            } else {
+                console.warn("Email toggle elements not all found.");
+            }
+        }
+        // --- END: Conditional Email Field Logic ---
+
+
+        // --- Initial Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM fully loaded and parsed"); 
+
+            // 1. Initialize Theme
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                let initialIsDark = false; 
+                if (savedTheme === 'dark') {
+                    initialIsDark = true;
+                } else if (savedTheme === 'light'){
+                    initialIsDark = false;
+                }
+                // console.log("Initial theme check:", { savedTheme, initialIsDark });
+                updateTheme(initialIsDark);
+            } catch (error) {
+                console.error("Error initializing theme:", error);
+                updateTheme(false); 
+            }
+            
+            const themeToggleBtnLoaded = document.getElementById('theme-toggle');
+            if (themeToggleBtnLoaded) {
+                 // console.log("Attaching theme toggle listener.");
+                themeToggleBtnLoaded.addEventListener('click', toggleDarkMode);
+            } else {
+                 console.error("Theme toggle button not found after DOM load!");
+            }
+
+            // 2. Initialize Language
+            try {
+                const preferredLanguage = localStorage.getItem('preferredLanguage') || 'km';
+                 // console.log("Initializing language:", preferredLanguage);
+                setLanguage(preferredLanguage); 
+                
+            } catch (error) {
+                 console.error("Error initializing language:", error);
+            }
+
+            // 3. Attach listeners for conditional email
+            if (hasEmailYes) hasEmailYes.addEventListener('change', toggleEmailField);
+            if (hasEmailNo) hasEmailNo.addEventListener('change', toggleEmailField);
+
+            // 4. Attach listeners for new preview buttons
+            const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+            const downloadImageBtn = document.getElementById('downloadImageBtn');
+            const editFormBtn = document.getElementById('editFormBtn');
+
+            if (downloadPdfBtn) downloadPdfBtn.addEventListener('click', downloadPdf);
+            if (downloadImageBtn) downloadImageBtn.addEventListener('click', downloadImage);
+            if (editFormBtn) editFormBtn.addEventListener('click', editForm);
+        });
+
+    </script>
+</body>
+</html>
+
