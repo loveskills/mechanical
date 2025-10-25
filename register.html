@@ -65,14 +65,38 @@
              filter: invert(0.8);
         }
 
-        /* --- NEW: Styling for the official form preview --- */
+        /* --- Styling for the official form preview --- */
         #previewContent {
             font-family: 'Kantumruy Pro', sans-serif; /* Default font for preview */
+            /* Added padding for better centering appearance in image capture */
+            padding: 1rem;
+             /* Ensure white background for capture */
+            background-color: #ffffff !important;
+            color: #1f2937 !important; /* Default text color for capture */
         }
+        /* Force text color for children elements during capture if needed */
+        #previewContent * {
+             color: #1f2937 !important;
+        }
+         /* Force specific dark mode elements to light mode for capture */
+         #previewContent .dark\:border-gray-600 { border-color: #d1d5db !important; }
+         #previewContent .dark\:bg-gray-700 { background-color: #f9fafb !important; }
+         #previewContent .dark\:text-gray-200 { color: #1f2937 !important; }
+         #previewContent .dark\:text-gray-400 { color: #6b7280 !important; }
+         #previewContent .dark\:border-bottom-color\:ccc { border-bottom-color: #000000 !important; }
+         #previewContent .dark\:border-bottom-color\:555 { border-bottom-color: #cccccc !important; }
+         #previewContent .dark\:color\:bbb { color: #555555 !important; }
+         #previewContent .dark\:border-color\:555 { border-color: #cccccc !important; }
+         #previewContent .dark\:color\:aaa { color: #888888 !important; }
+
+
         #previewContent .preview-header {
              font-family: 'Moul', cursive; /* Specific font for header text */
              text-align: center;
-             margin-bottom: 1.5rem;
+             margin-bottom: 0.5rem; /* Reduced margin */
+             /* NEW: Allow header text to grow */
+             flex-grow: 1;
+             /* Removed left margin, handled by flex container */
         }
          #previewContent .preview-header h1 {
              font-size: 1.1rem;
@@ -86,6 +110,16 @@
              font-weight: normal;
              margin-bottom: 0.5rem;
          }
+        /* NEW: Styling for Main Title */
+        #previewContent .main-title {
+            font-family: 'Moul', cursive;
+            font-size: 1.3rem;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            text-decoration: underline;
+        }
         #previewContent .section-title {
             font-weight: bold;
             text-decoration: underline;
@@ -93,58 +127,100 @@
             margin-bottom: 1rem;
             font-size: 1.1rem;
         }
-        #previewContent .field-row {
-            display: flex;
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
-            align-items: baseline; /* Align text nicely */
-            margin-bottom: 0.75rem;
+        /* MODIFIED: Field row styling for grid layout */
+        #previewContent .field-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Default to 1 column */
+            gap: 0.75rem 1rem; /* Row gap and column gap */
             padding-bottom: 0.25rem;
-            border-bottom: 1px dotted #ccc;
+            border-bottom: 1px dotted #ccc !important; /* Ensure border color for capture */
+            margin-bottom: 0.75rem;
         }
-         .dark #previewContent .field-row {
-             border-bottom-color: #555;
+        /* Apply 2 columns only for medium screens and UP in normal view */
+        @media (min-width: 768px) {
+            #previewContent:not(.force-2-col) .field-grid { /* Check for force class */
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        /* Force 2 columns when class is added (for PDF/Image) */
+        #previewContent.force-2-col .field-grid {
+            grid-template-columns: 1fr 1fr !important;
+        }
+
+
+         #previewContent .field-item {
+             display: flex;
+             align-items: baseline;
+             flex-wrap: wrap; /* Allow wrap within item if needed */
          }
         #previewContent .field-label {
-            font-weight: normal; /* Changed from bold */
-            min-width: 120px; /* Adjust as needed */
-            margin-right: 10px;
-            margin-bottom: 5px; /* Add spacing on wrap */
-            color: #555; /* Slightly lighter label color */
+            font-weight: normal;
+            min-width: auto; /* Removed fixed min-width */
+            margin-right: 8px; /* Slightly reduced margin */
+            margin-bottom: 2px; /* Reduced bottom margin */
+            color: #555 !important; /* Ensure label color for capture */
+            white-space: nowrap; /* Prevent label wrapping */
         }
-         .dark #previewContent .field-label {
-             color: #bbb;
-         }
+
         #previewContent .field-value {
              flex-grow: 1;
-             font-weight: bold; /* Make value bold */
-             word-break: break-word; /* Prevent long text overflow */
+             font-weight: bold;
+             word-break: break-word;
         }
+
+        /* Keep single column layout for address and message */
+         #previewContent .field-single-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px dotted #ccc !important; /* Ensure border color for capture */
+        }
+
+
+        /* MODIFIED: Logo container to stack logo and name */
+         #previewContent .logo-container {
+             display: flex;
+             flex-direction: column; /* Stack vertically */
+             align-items: center; /* Center items horizontally */
+             margin-right: 1rem; /* Space between logo group and header */
+             flex-shrink: 0;
+         }
+
         #previewContent .placeholder-logo {
-            width: 80px;
-            height: 80px;
-            border: 1px solid #ccc;
+            width: 70px;
+            height: 70px;
+            border: 1px solid #ccc !important; /* Ensure border color for capture */
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.8rem;
-            color: #888;
-            margin-right: 1rem; /* Space between logo and text */
+            color: #888 !important; /* Ensure color for capture */
+            margin-bottom: 0.25rem; /* Space between logo and name */
+            /* NEW: Ensure image fits */
+            object-fit: cover;
         }
-         .dark #previewContent .placeholder-logo {
-             border-color: #555;
-             color: #aaa;
+
+         /* MODIFIED: Style for logo name */
+         #previewContent .logo-name {
+             font-family: 'Moul', cursive;
+             font-size: 0.8rem; /* Adjusted size */
+             line-height: 1.1; /* Adjusted line height */
+             text-align: center;
+             max-width: 80px;
+             /* Removed margin-right, handled by container */
          }
+
          #previewContent .preview-top-section {
              display: flex;
-             align-items: center; /* Align logo and header text */
-             justify-content: center; /* Center items horizontally */
-             margin-bottom: 1.5rem;
+             align-items: center;
+             justify-content: center;
+             margin-bottom: 0.5rem; /* Reduced margin */
              padding-bottom: 1rem;
-             border-bottom: 2px solid black;
+             border-bottom: 2px solid black !important; /* Ensure border color for capture */
          }
-         .dark #previewContent .preview-top-section {
-              border-bottom-color: #ccc;
-         }
+
 
         /* Loading indicator style */
         .loader {
@@ -274,6 +350,12 @@
                         </div>
                     </div>
 
+                    <!-- Latin Name Field -->
+                    <div>
+                        <label for="regLatinName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_latin_name">ឈ្មោះជាឡាតាំង</label>
+                        <input type="text" id="regLatinName" placeholder="Firstname Lastname" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                    </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_gender">ភេទ</label>
@@ -301,12 +383,31 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
+                            <label for="regNationality" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_nationality">សញ្ជាតិ</label>
+                            <input type="text" id="regNationality" value="ខ្មែរ" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                        <div>
+                            <label for="regRace" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_race">ជនជាតិ</label>
+                            <input type="text" id="regRace" value="ខ្មែរ" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
                             <label for="regFatherName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_father">ឈ្មោះឪពុក</label>
                             <input type="text" id="regFatherName" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                         <div>
+                            <label for="regFatherOccupation" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_father_occupation">មុខរបរឪពុក</label>
+                            <input type="text" id="regFatherOccupation" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
                         </div>
                         <div>
                             <label for="regMotherName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_mother">ឈ្មោះម្តាយ</label>
                             <input type="text" id="regMotherName" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                         <div>
+                            <label for="regMotherOccupation" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_mother_occupation">មុខរបរម្តាយ</label>
+                            <input type="text" id="regMotherOccupation" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
                         </div>
                     </div>
                     
@@ -319,6 +420,12 @@
                             <label for="regPhoneGuardian" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_phone_guardian">លេខទូរស័ព្ទអាណាព្យាបាល</label>
                             <input type="tel" id="regPhoneGuardian" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
                         </div>
+                    </div>
+
+                    <!-- Residence Field -->
+                    <div>
+                        <label for="regAddress" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_residence">ទីលំនៅបច្ចុប្បន្ន</label>
+                        <textarea id="regAddress" rows="3" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-opacity-50" required></textarea>
                     </div>
 
                     <div>
@@ -349,6 +456,21 @@
                             <option value="other" data-translate-key="register_option_other">ផ្សេងៗ</option>
                         </select>
                     </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label for="regLastStudy" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_last_study">កម្រិតសិក្សាចុងក្រោយ</label>
+                            <input type="text" id="regLastStudy" placeholder="ឧ: បាក់ឌុប, បរិញ្ញាបត្ររង" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                        <div>
+                            <label for="regGradYear" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_grad_year">ឆ្នាំបញ្ចប់</label>
+                            <input type="number" id="regGradYear" placeholder="YYYY" min="1950" max="2099" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                         <div>
+                            <label for="regGrade" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_grade">និទ្ទេស</label>
+                            <input type="text" id="regGrade" placeholder="ឧ: A, B, 3.5" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                    </div>
                     
                     <div>
                         <label for="regMessage" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="register_form_message">សារ (ស្រេចចិត្ត)</label>
@@ -360,11 +482,14 @@
 
                 <!-- Preview Section (initially hidden) -->
                 <div id="previewSection" class="hidden mt-6 space-y-6">
-                    <!-- MODIFIED: Preview content structure changed -->
-                    <div id="previewContent" class="p-6 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                    <div id="previewContent" class="p-4 md:p-6 border border-gray-300 dark:border-gray-600 rounded-md bg-white text-gray-900"> <!-- Force white bg and dark text -->
                         <div class="preview-top-section">
-                             <!-- Placeholder Logo -->
-                            <div class="placeholder-logo">LOGO</div>
+                             <!-- MODIFIED: Logo container -->
+                             <div class="logo-container">
+                                <!-- !!! THIS IS THE CORRECTED LINE for LOGO !!! -->
+                                <img src="Photo/1.png" alt="Logo" class="placeholder-logo">
+                                <div class="logo-name">មេកានិក<br>ឧស្សាហកម្ម</div>
+                             </div>
                              <div class="preview-header">
                                  <h1>ព្រះរាជាណាចក្រកម្ពុជា</h1>
                                  <h2>ជាតិ សាសនា ព្រះមហាក្សត្រ</h2>
@@ -376,102 +501,133 @@
                              </div>
                         </div>
 
-                         <h3 class="section-title">ពាក្យស្នើសុំ</h3>
+                         <!-- NEW: Main Title Added -->
+                         <h3 class="main-title" data-translate-key="preview_main_title">ពាក្យស្នើសុំចូលរៀន</h3>
+
+                         <!-- MODIFIED: Section Title Changed -->
+                         <h3 class="section-title" data-translate-key="preview_personal_info">ព័ត៌មានផ្ទាល់ខ្លួន</h3>
 
                          <!-- Personal Info Section -->
                         <div class="section-content">
-                            <div class="field-row">
-                                <span class="field-label" data-translate-key="register_form_lastname">នាមត្រកូល:</span>
-                                <span class="field-value" id="previewLastName"></span>
+                            <!-- MODIFIED: Grid layout for names -->
+                            <div class="field-grid">
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_lastname">នាមត្រកូល:</span>
+                                    <span class="field-value" id="previewLastName"></span>
+                                </div>
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_firstname">នាមខ្លួន:</span>
+                                    <span class="field-value" id="previewFirstName"></span>
+                                </div>
                             </div>
-                            <div class="field-row">
-                                <span class="field-label" data-translate-key="register_form_firstname">នាមខ្លួន:</span>
-                                <span class="field-value" id="previewFirstName"></span>
+                            <!-- MODIFIED: Single row for Latin Name -->
+                             <div class="field-single-row">
+                                <span class="field-label" data-translate-key="register_form_latin_name">ឈ្មោះជាឡាតាំង:</span>
+                                <span class="field-value" id="previewLatinName"></span>
                             </div>
-                             <div class="field-row">
-                                <span class="field-label">ឈ្មោះជាឡាតាំង:</span>
-                                <span class="field-value" id="previewLatinName"></span> <!-- Assuming combination -->
-                            </div>
-                            <div class="field-row">
-                                <span class="field-label" data-translate-key="register_form_gender">ភេទ:</span>
-                                <span class="field-value" id="previewGender"></span>
-                            </div>
-                            <div class="field-row">
-                                <span class="field-label" data-translate-key="register_form_dob">ថ្ងៃខែឆ្នាំកំណើត:</span>
-                                <span class="field-value" id="previewDob"></span>
-                            </div>
-                             <div class="field-row">
-                                <span class="field-label">សញ្ជាតិ:</span>
-                                <span class="field-value">-</span> <!-- Not in form -->
-                            </div>
-                             <div class="field-row">
-                                <span class="field-label">ជនជាតិ:</span>
-                                <span class="field-value">-</span> <!-- Not in form -->
-                            </div>
-                            <div class="field-row">
+                             <!-- MODIFIED: Grid layout for gender/dob -->
+                             <div class="field-grid">
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_gender">ភេទ:</span>
+                                    <span class="field-value" id="previewGender"></span>
+                                </div>
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_dob">ថ្ងៃខែឆ្នាំកំណើត:</span>
+                                    <span class="field-value" id="previewDob"></span>
+                                </div>
+                             </div>
+                            <!-- MODIFIED: Grid layout for nationality/race -->
+                             <div class="field-grid">
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_nationality">សញ្ជាតិ:</span>
+                                    <span class="field-value" id="previewNationality"></span>
+                                </div>
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_race">ជនជាតិ:</span>
+                                    <span class="field-value" id="previewRace"></span>
+                                </div>
+                             </div>
+                            <!-- MODIFIED: Single row for POB -->
+                            <div class="field-single-row" style="border-bottom: none;"> <!-- Remove border from last item in this group -->
                                 <span class="field-label" data-translate-key="register_form_pob">ទីកន្លែងកំណើត:</span>
                                 <span class="field-value" id="previewPob"></span>
                             </div>
-                            <!-- Add more fields as needed -->
                         </div>
 
                         <h3 class="section-title">ព័ត៌មានគ្រួសារ</h3>
                          <div class="section-content">
-                            <div class="field-row">
-                                <span class="field-label" data-translate-key="register_form_father">ឈ្មោះឪពុក:</span>
-                                <span class="field-value" id="previewFatherName"></span>
+                            <!-- MODIFIED: Grid layout for Father info -->
+                            <div class="field-grid">
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_father">ឈ្មោះឪពុក:</span>
+                                    <span class="field-value" id="previewFatherName"></span>
+                                </div>
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_father_occupation">មុខរបរ:</span>
+                                    <span class="field-value" id="previewFatherOccupation"></span>
+                                </div>
                             </div>
-                             <div class="field-row">
-                                <span class="field-label">មុខរបរ:</span>
-                                <span class="field-value">-</span> <!-- Not in form -->
-                            </div>
-                             <div class="field-row">
-                                <span class="field-label" data-translate-key="register_form_mother">ឈ្មោះម្តាយ:</span>
-                                <span class="field-value" id="previewMotherName"></span>
-                            </div>
-                             <div class="field-row">
-                                <span class="field-label">មុខរបរ:</span>
-                                <span class="field-value">-</span> <!-- Not in form -->
+                             <!-- MODIFIED: Grid layout for Mother info -->
+                             <div class="field-grid" style="border-bottom: none;"> <!-- Remove border from last item in this group -->
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_mother">ឈ្មោះម្តាយ:</span>
+                                    <span class="field-value" id="previewMotherName"></span>
+                                </div>
+                                <div class="field-item">
+                                     <span class="field-label" data-translate-key="register_form_mother_occupation">មុខរបរ:</span>
+                                    <span class="field-value" id="previewMotherOccupation"></span>
+                                </div>
                             </div>
                         </div>
 
                          <h3 class="section-title">ព័ត៌មានទំនាក់ទំនង</h3>
                          <div class="section-content">
-                             <div class="field-row">
-                                <span class="field-label" data-translate-key="register_form_phone_personal">លេខទូរស័ព្ទផ្ទាល់ខ្លួន:</span>
-                                <span class="field-value" id="previewPhonePersonal"></span>
+                             <!-- MODIFIED: Grid layout for phones -->
+                             <div class="field-grid">
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_phone_personal">លេខទូរស័ព្ទផ្ទាល់ខ្លួន:</span>
+                                    <span class="field-value" id="previewPhonePersonal"></span>
+                                </div>
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_phone_guardian">លេខទូរស័ព្ទអាណាព្យាបាល:</span>
+                                    <span class="field-value" id="previewPhoneGuardian"></span>
+                                </div>
                             </div>
-                            <div class="field-row">
-                                <span class="field-label" data-translate-key="register_form_phone_guardian">លេខទូរស័ព្ទអាណាព្យាបាល:</span>
-                                <span class="field-value" id="previewPhoneGuardian"></span>
-                            </div>
-                             <div class="field-row">
+                             <!-- MODIFIED: Single row for Email -->
+                             <div class="field-single-row">
                                 <span class="field-label" data-translate-key="register_form_email">អ៊ីមែល:</span>
                                 <span class="field-value" id="previewEmail"></span>
                             </div>
-                              <div class="field-row">
-                                <span class="field-label">អាសយដ្ឋានបច្ចុប្បន្ន:</span>
-                                <span class="field-value">-</span> <!-- Not in form -->
+                              <!-- MODIFIED: Single row for Address -->
+                              <div class="field-single-row" style="border-bottom: none;"> <!-- Remove border from last item in this group -->
+                                <span class="field-label" data-translate-key="register_form_residence">ទីលំនៅបច្ចុប្បន្ន:</span>
+                                <span class="field-value" id="previewAddress"></span>
                             </div>
                         </div>
 
                         <h3 class="section-title">ព័ត៌មានសិក្សា</h3>
                          <div class="section-content">
-                            <div class="field-row">
-                                <span class="field-label" data-translate-key="register_form_course">ជំនាញដែលជ្រើសរើស:</span>
-                                <span class="field-value" id="previewCourse"></span>
+                             <!-- MODIFIED: Grid layout for course/study level -->
+                             <div class="field-grid">
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_course">ជំនាញដែលជ្រើសរើស:</span>
+                                    <span class="field-value" id="previewCourse"></span>
+                                </div>
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_last_study">កម្រិតសិក្សាចុងក្រោយ:</span>
+                                    <span class="field-value" id="previewLastStudy"></span>
+                                </div>
                             </div>
-                             <div class="field-row">
-                                <span class="field-label">កម្រិតសិក្សាចុងក្រោយ:</span>
-                                <span class="field-value">-</span> <!-- Not in form -->
-                            </div>
-                             <div class="field-row">
-                                <span class="field-label">ឆ្នាំបញ្ចប់:</span>
-                                <span class="field-value">-</span> <!-- Not in form -->
-                            </div>
-                             <div class="field-row">
-                                <span class="field-label">និទ្ទេស:</span>
-                                <span class="field-value">-</span> <!-- Not in form -->
+                             <!-- MODIFIED: Grid layout for year/grade -->
+                             <div class="field-grid" style="border-bottom: none;"> <!-- Remove border from last item in this group -->
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_grad_year">ឆ្នាំបញ្ចប់:</span>
+                                    <span class="field-value" id="previewGradYear"></span>
+                                </div>
+                                <div class="field-item">
+                                    <span class="field-label" data-translate-key="register_form_grade">និទ្ទេស:</span>
+                                    <span class="field-value" id="previewGrade"></span>
+                                </div>
                             </div>
                         </div>
 
@@ -479,7 +635,8 @@
                         <div id="previewMessageSection" class="hidden">
                              <h3 class="section-title">សារបន្ថែម</h3>
                              <div class="section-content">
-                                 <div class="field-row" style="border-bottom: none;"> <!-- No border for last item -->
+                                 <!-- MODIFIED: Use field-single-row for consistency -->
+                                 <div class="field-single-row" style="border-bottom: none;">
                                      <span class="field-value" id="previewMessage"></span>
                                  </div>
                              </div>
@@ -487,7 +644,8 @@
 
                          <div class="loader hidden"></div> <!-- Loading indicator -->
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- MODIFIED: Grid layout for buttons, added Telegram button -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                         <button id="downloadPdfBtn" type="button" class="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 font-semibold transition inline-flex items-center justify-center">
                             <i class="fas fa-file-pdf mr-2"></i> <span data-translate-key="register_download_pdf">ទាញយក PDF</span>
                         </button>
@@ -496,6 +654,10 @@
                         </button>
                          <button id="editFormBtn" type="button" class="w-full bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 py-2 px-4 rounded-md hover:bg-gray-400 dark:hover:bg-gray-500 font-semibold transition inline-flex items-center justify-center">
                            <i class="fas fa-edit mr-2"></i> <span data-translate-key="register_edit_form">កែសម្រួល</span>
+                        </button>
+                        <!-- NEW: Telegram Button -->
+                        <button id="sendTelegramBtn" type="button" class="w-full bg-sky-500 text-white py-2 px-4 rounded-md hover:bg-sky-600 font-semibold transition inline-flex items-center justify-center">
+                           <i class="fab fa-telegram-plane mr-2"></i> <span data-translate-key="register_send_telegram">ផ្ញើ Telegram</span>
                         </button>
                     </div>
                      <p class="text-xs text-center text-gray-500 dark:text-gray-400" data-translate-key="register_download_note">ចំណាំ៖ ការទាញយកអាចចំណាយពេលបន្តិចអាស្រ័យលើទំហំទិន្នន័យ។</p>
@@ -653,10 +815,22 @@
                 register_download_image: "ទាញយករូបភាព",
                 register_edit_form: "កែសម្រួល",
                 register_download_note: "ចំណាំ៖ ការទាញយកអាចចំណាយពេលបន្តិចអាស្រ័យលើទំហំទិន្នន័យ។",
-                // NEW: Validation messages
                 validation_fill_all: "សូមបំពេញគ្រប់ប្រអប់ដែលត្រូវការ។",
                 validation_fill_email: "សូមបំពេញអ៊ីមែលរបស់អ្នក ឬជ្រើសរើស 'គ្មាន'។",
-                register_generating: "កំពុងបង្កើត..." // For loader text
+                register_generating: "កំពុងបង្កើត...",
+                register_form_latin_name: "ឈ្មោះជាឡាតាំង",
+                register_form_nationality: "សញ្ជាតិ",
+                register_form_race: "ជនជាតិ",
+                register_form_father_occupation: "មុខរបរឪពុក",
+                register_form_mother_occupation: "មុខរបរម្តាយ",
+                register_form_residence: "ទីលំនៅបច្ចុប្បន្ន",
+                register_form_last_study: "កម្រិតសិក្សាចុងក្រោយ",
+                register_form_grad_year: "ឆ្នាំបញ្ចប់",
+                register_form_grade: "និទ្ទេស",
+                register_send_telegram: "ផ្ញើ Telegram",
+                // NEW/MODIFIED: Preview titles
+                preview_main_title: "ពាក្យស្នើសុំចូលរៀន",
+                preview_personal_info: "ព័ត៌មានផ្ទាល់ខ្លួន"
             },
             en: {
                 page_title: "Application Form",
@@ -715,10 +889,22 @@
                 register_download_image: "Download Image",
                 register_edit_form: "Edit Form",
                 register_download_note: "Note: Download might take a moment depending on the data size.",
-                 // NEW: Validation messages
                 validation_fill_all: "Please fill all required fields.",
                 validation_fill_email: "Please enter your email or select 'No'.",
-                register_generating: "Generating..." // For loader text
+                register_generating: "Generating...",
+                register_form_latin_name: "Latin Name",
+                register_form_nationality: "Nationality",
+                register_form_race: "Race/Ethnicity",
+                register_form_father_occupation: "Father's Occupation",
+                register_form_mother_occupation: "Mother's Occupation",
+                register_form_residence: "Current Residence",
+                register_form_last_study: "Last Level of Study",
+                register_form_grad_year: "Year of Completion",
+                register_form_grade: "Grade/GPA",
+                register_send_telegram: "Send Telegram",
+                 // NEW/MODIFIED: Preview titles
+                preview_main_title: "Application for Admission",
+                preview_personal_info: "Personal Information"
             }
         };
 
@@ -752,22 +938,31 @@
                 // Collect all form data
                 const lastName = document.getElementById('regLastName').value;
                 const firstName = document.getElementById('regFirstName').value;
+                const latinName = document.getElementById('regLatinName').value;
                 const genderRadio = document.querySelector('input[name="gender"]:checked');
                 const dob = document.getElementById('regDob').value;
                 const pob = document.getElementById('regPob').value;
+                const nationality = document.getElementById('regNationality').value;
+                const race = document.getElementById('regRace').value;
                 const fatherName = document.getElementById('regFatherName').value;
+                const fatherOccupation = document.getElementById('regFatherOccupation').value;
                 const motherName = document.getElementById('regMotherName').value;
+                const motherOccupation = document.getElementById('regMotherOccupation').value;
                 const phonePersonal = document.getElementById('regPhonePersonal').value;
                 const phoneGuardian = document.getElementById('regPhoneGuardian').value;
+                const address = document.getElementById('regAddress').value;
                 const hasEmail = document.querySelector('input[name="hasEmail"]:checked').value;
                 const email = document.getElementById('regEmail').value;
                 const courseSelect = document.getElementById('regCourse');
                 const courseValue = courseSelect.value;
                 const courseText = courseSelect.options[courseSelect.selectedIndex].text;
+                const lastStudy = document.getElementById('regLastStudy').value;
+                const gradYear = document.getElementById('regGradYear').value;
+                const grade = document.getElementById('regGrade').value;
                 const message = document.getElementById('regMessage').value;
 
-                // Simple validation check
-                if (!lastName || !firstName || !genderRadio || !dob || !pob || !fatherName || !motherName || !phonePersonal || !phoneGuardian) {
+                // MODIFIED: Updated validation check to include latinName
+                if (!lastName || !firstName || !latinName || !genderRadio || !dob || !pob || !nationality || !race || !fatherName || !fatherOccupation || !motherName || !motherOccupation || !phonePersonal || !phoneGuardian || !address || !lastStudy || !gradYear || !grade) {
                     showCustomMessage(getTranslation('validation_fill_all') || 'Please fill all required fields.');
                     return;
                 }
@@ -780,21 +975,29 @@
                 // Get gender text based on current language
                 const genderValue = genderRadio.value;
                 const genderText = genderValue === 'male' ? (getTranslation('register_gender_male') || 'Male') : (getTranslation('register_gender_female') || 'Female');
-                const latinName = `${firstName} ${lastName}`; // Simple combination
 
                 // Populate preview content using IDs
                 document.getElementById('previewLastName').textContent = lastName;
                 document.getElementById('previewFirstName').textContent = firstName;
-                document.getElementById('previewLatinName').textContent = latinName; // Add Latin name
+                document.getElementById('previewLatinName').textContent = latinName;
                 document.getElementById('previewGender').textContent = genderText;
                 document.getElementById('previewDob').textContent = dob;
                 document.getElementById('previewPob').textContent = pob;
+                document.getElementById('previewNationality').textContent = nationality;
+                document.getElementById('previewRace').textContent = race;
                 document.getElementById('previewFatherName').textContent = fatherName;
+                document.getElementById('previewFatherOccupation').textContent = fatherOccupation;
                 document.getElementById('previewMotherName').textContent = motherName;
+                document.getElementById('previewMotherOccupation').textContent = motherOccupation;
                 document.getElementById('previewPhonePersonal').textContent = phonePersonal;
                 document.getElementById('previewPhoneGuardian').textContent = phoneGuardian;
                 document.getElementById('previewEmail').textContent = hasEmail === 'yes' ? email : (getTranslation('register_choice_no') || 'No');
+                document.getElementById('previewAddress').textContent = address;
                 document.getElementById('previewCourse').textContent = courseText;
+                document.getElementById('previewLastStudy').textContent = lastStudy;
+                document.getElementById('previewGradYear').textContent = gradYear;
+                document.getElementById('previewGrade').textContent = grade;
+
 
                 // Show/hide optional message section
                 const messageSection = document.getElementById('previewMessageSection');
@@ -828,107 +1031,134 @@
         async function downloadPdf() {
             const previewContent = document.getElementById('previewContent');
             const downloadBtn = document.getElementById('downloadPdfBtn');
-            const loader = previewContent.querySelector('.loader'); // Get loader inside preview
+            const loader = previewContent.querySelector('.loader');
 
             if (!previewContent || !downloadBtn) {
                 console.error('Preview content or PDF download button not found.');
                 return;
             }
-             if (loader) loader.classList.remove('hidden'); // Show loader
+             if (loader) loader.classList.remove('hidden');
              downloadBtn.disabled = true;
-             const originalBtnHTML = downloadBtn.innerHTML; // Store full HTML
+             const originalBtnHTML = downloadBtn.innerHTML;
              downloadBtn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> ${getTranslation('register_generating') || 'Generating...'}`;
 
+             // --- Force desktop layout and white background for capture ---
+             const originalStyles = {
+                 bg: previewContent.style.backgroundColor,
+                 color: previewContent.style.color
+             };
+             previewContent.classList.add('force-2-col');
+             previewContent.style.backgroundColor = '#ffffff'; // Force white background
+             previewContent.style.color = '#1f2937'; // Force dark text
+             // Apply force styles to children if necessary (more complex cases might need iterating)
+             // --- End force styles ---
+
+             await new Promise(resolve => setTimeout(resolve, 100)); // Allow re-render
 
             try {
-                 // Temporarily remove loader from the element to be captured
                  if (loader) loader.style.display = 'none';
 
                 const canvas = await html2canvas(previewContent, {
                      scale: 2,
                      useCORS: true,
-                      backgroundColor: document.documentElement.classList.contains('dark') ? '#374151' : '#f9fafb', // Match preview bg
-                      logging: false,
-                      // Ensure fonts are loaded - might need more robust solution
-                      onclone: (clonedDoc) => {
-                          // Try to apply styles again in cloned document if needed
-                      }
+                     backgroundColor: '#ffffff', // Explicitly set white background for canvas
+                     logging: false,
+                     windowWidth: 1200 // Simulate wider screen
                  });
 
-                 // Restore loader display after capture
-                  if (loader) loader.style.display = '';
+                 if (loader) loader.style.display = '';
 
-                const imgData = canvas.toDataURL('image/png');
+                const imgData = canvas.toDataURL('image/png', 1.0);
                 const pdf = new jsPDF({
                     orientation: 'p',
-                    unit: 'px',
-                    // Use A4 size and scale image to fit width
+                    unit: 'pt',
                     format: 'a4'
                 });
 
                 const pdfWidth = pdf.internal.pageSize.getWidth();
                 const pdfHeight = pdf.internal.pageSize.getHeight();
-                const imgWidth = canvas.width;
-                const imgHeight = canvas.height;
-                const ratio = imgWidth / imgHeight;
-                
-                let finalImgWidth = pdfWidth;
-                let finalImgHeight = pdfWidth / ratio;
+                // Adjust image dimensions based on scale used in html2canvas
+                const imgProps= pdf.getImageProperties(imgData);
+                const imgWidth = imgProps.width / 2; // Adjust for scale: 2
+                const imgHeight = imgProps.height / 2; // Adjust for scale: 2
 
-                // If scaled height exceeds page height, adjust based on height instead
-                if (finalImgHeight > pdfHeight) {
-                    finalImgHeight = pdfHeight;
-                    finalImgWidth = pdfHeight * ratio;
+                const ratio = imgWidth / imgHeight;
+
+                // Calculate width/height with margin (e.g., 0.9 = 90% of page)
+                let targetWidth = pdfWidth * 0.9;
+                let targetHeight = targetWidth / ratio;
+
+                // If calculated height is too big, scale based on height instead
+                if (targetHeight > pdfHeight * 0.95) { // Use 95% height to leave some margin
+                    targetHeight = pdfHeight * 0.95;
+                    targetWidth = targetHeight * ratio;
                 }
 
-                // Center the image (optional)
-                 const xPos = (pdfWidth - finalImgWidth) / 2;
-                 const yPos = 0; // Start from top
+                 // Center the image horizontally, align top vertically with margin
+                 const xPos = (pdfWidth - targetWidth) / 2;
+                 // MODIFIED: yPos calculation for top alignment with margin
+                 const yPos = pdfHeight * 0.025; // Example: 2.5% margin from top
 
 
-                 pdf.addImage(imgData, 'PNG', xPos, yPos, finalImgWidth, finalImgHeight);
+                 pdf.addImage(imgData, 'PNG', xPos, yPos, targetWidth, targetHeight);
                  const fileName = `application_${document.getElementById('previewLastName')?.textContent || 'applicant'}.pdf`;
                  pdf.save(fileName);
             } catch (error) {
                 console.error('Error generating PDF:', error);
                 showCustomMessage('Could not generate PDF.');
-                 // Restore loader display in case of error
-                  if (loader) loader.style.display = '';
+                 if (loader) loader.style.display = '';
             } finally {
-                 if (loader) loader.classList.add('hidden'); // Hide loader visually
+                 if (loader) loader.classList.add('hidden');
                  downloadBtn.disabled = false;
-                 downloadBtn.innerHTML = originalBtnHTML; // Restore original button content
+                 downloadBtn.innerHTML = originalBtnHTML;
+                 // --- Restore original styles ---
+                 previewContent.classList.remove('force-2-col');
+                 previewContent.style.backgroundColor = originalStyles.bg;
+                 previewContent.style.color = originalStyles.color;
+                  // Remove forced styles from children if applied
+                 // --- End restore styles ---
             }
         }
+
 
         // --- Download Image function ---
          async function downloadImage() {
              const previewContent = document.getElementById('previewContent');
              const downloadBtn = document.getElementById('downloadImageBtn');
-             const loader = previewContent.querySelector('.loader'); // Get loader inside preview
+             const loader = previewContent.querySelector('.loader');
 
              if (!previewContent || !downloadBtn) {
                  console.error('Preview content or Image download button not found.');
                  return;
              }
-              if (loader) loader.classList.remove('hidden'); // Show loader
+              if (loader) loader.classList.remove('hidden');
               downloadBtn.disabled = true;
-              const originalBtnHTML = downloadBtn.innerHTML; // Store full HTML
+              const originalBtnHTML = downloadBtn.innerHTML;
               downloadBtn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> ${getTranslation('register_generating') || 'Generating...'}`;
 
+              // --- Force desktop layout and white background for capture ---
+              const originalStyles = {
+                 bg: previewContent.style.backgroundColor,
+                 color: previewContent.style.color
+              };
+              previewContent.classList.add('force-2-col');
+              previewContent.style.backgroundColor = '#ffffff'; // Force white background
+              previewContent.style.color = '#1f2937'; // Force dark text
+              // --- End force styles ---
+
+              await new Promise(resolve => setTimeout(resolve, 100)); // Allow re-render
 
              try {
-                   // Temporarily remove loader from the element to be captured
                    if (loader) loader.style.display = 'none';
 
                   const canvas = await html2canvas(previewContent, {
                      scale: 2,
                      useCORS: true,
-                     backgroundColor: document.documentElement.classList.contains('dark') ? '#374151' : '#f9fafb', // Match preview bg
-                     logging: false
+                     backgroundColor: '#ffffff', // Explicitly set white background for canvas
+                     logging: false,
+                     windowWidth: 1200 // Simulate a wider screen
                  });
 
-                  // Restore loader display after capture
                    if (loader) loader.style.display = '';
 
                  const imageURL = canvas.toDataURL('image/png');
@@ -942,12 +1172,16 @@
              } catch (error) {
                  console.error('Error generating image:', error);
                  showCustomMessage('Could not generate image.');
-                 // Restore loader display in case of error
-                  if (loader) loader.style.display = '';
+                 if (loader) loader.style.display = '';
              } finally {
-                  if (loader) loader.classList.add('hidden'); // Hide loader visually
+                  if (loader) loader.classList.add('hidden');
                   downloadBtn.disabled = false;
-                  downloadBtn.innerHTML = originalBtnHTML; // Restore original button content
+                  downloadBtn.innerHTML = originalBtnHTML;
+                  // --- Restore original styles ---
+                  previewContent.classList.remove('force-2-col');
+                  previewContent.style.backgroundColor = originalStyles.bg;
+                  previewContent.style.color = originalStyles.color;
+                  // --- End restore styles ---
              }
          }
 
@@ -962,6 +1196,83 @@
              // Scroll back to form
              form.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+
+        // --- Send to Telegram function ---
+        function sendToTelegram() {
+            try {
+                // Get data from preview elements (as they are already populated and validated)
+                const lastName = document.getElementById('previewLastName')?.textContent;
+                const firstName = document.getElementById('previewFirstName')?.textContent;
+                const latinName = document.getElementById('previewLatinName')?.textContent;
+                const gender = document.getElementById('previewGender')?.textContent;
+                const dob = document.getElementById('previewDob')?.textContent;
+                const pob = document.getElementById('previewPob')?.textContent;
+                const nationality = document.getElementById('previewNationality')?.textContent;
+                const race = document.getElementById('previewRace')?.textContent;
+                const fatherName = document.getElementById('previewFatherName')?.textContent;
+                const fatherOccupation = document.getElementById('previewFatherOccupation')?.textContent;
+                const motherName = document.getElementById('previewMotherName')?.textContent;
+                const motherOccupation = document.getElementById('previewMotherOccupation')?.textContent;
+                const phonePersonal = document.getElementById('previewPhonePersonal')?.textContent;
+                const phoneGuardian = document.getElementById('previewPhoneGuardian')?.textContent;
+                const email = document.getElementById('previewEmail')?.textContent;
+                const address = document.getElementById('previewAddress')?.textContent;
+                const course = document.getElementById('previewCourse')?.textContent;
+                const lastStudy = document.getElementById('previewLastStudy')?.textContent;
+                const gradYear = document.getElementById('previewGradYear')?.textContent;
+                const grade = document.getElementById('previewGrade')?.textContent;
+                const message = document.getElementById('previewMessage')?.textContent || ''; // Handle optional message
+
+                // Basic check if preview data exists
+                if (!lastName || !firstName) {
+                     showCustomMessage('Please preview the form first.');
+                     return;
+                }
+
+                // Construct Telegram message text
+                 let telegramText = `*ពាក្យស្នើសុំចូលរៀនថ្មី*\n\n`;
+                 telegramText += `*ព័ត៌មានផ្ទាល់ខ្លួន*\n`;
+                 telegramText += `- នាមត្រកូល: ${lastName}\n`;
+                 telegramText += `- នាមខ្លួន: ${firstName}\n`;
+                 telegramText += `- ឈ្មោះឡាតាំង: ${latinName}\n`;
+                 telegramText += `- ភេទ: ${gender}\n`;
+                 telegramText += `- ថ្ងៃខែឆ្នាំកំណើត: ${dob}\n`;
+                 telegramText += `- ទីកន្លែងកំណើត: ${pob}\n`;
+                 telegramText += `- សញ្ជាតិ: ${nationality}\n`;
+                 telegramText += `- ជនជាតិ: ${race}\n\n`;
+
+                 telegramText += `*ព័ត៌មានគ្រួសារ*\n`;
+                 telegramText += `- ឪពុក: ${fatherName} (${fatherOccupation})\n`;
+                 telegramText += `- ម្តាយ: ${motherName} (${motherOccupation})\n\n`;
+
+                 telegramText += `*ព័ត៌មានទំនាក់ទំនង*\n`;
+                 telegramText += `- ទូរស័ព្ទផ្ទាល់ខ្លួន: ${phonePersonal}\n`;
+                 telegramText += `- ទូរស័ព្ទអាណាព្យាបាល: ${phoneGuardian}\n`;
+                 telegramText += `- អ៊ីមែល: ${email}\n`;
+                 telegramText += `- ទីលំនៅបច្ចុប្បន្ន: ${address}\n\n`;
+
+                 telegramText += `*ព័ត៌មានសិក្សា*\n`;
+                 telegramText += `- ជំនាញ: ${course}\n`;
+                 telegramText += `- កម្រិតសិក្សាចុងក្រោយ: ${lastStudy}\n`;
+                 telegramText += `- ឆ្នាំបញ្ចប់: ${gradYear}\n`;
+                 telegramText += `- និទ្ទេស: ${grade}\n\n`;
+
+                 if (message) {
+                     telegramText += `*សារបន្ថែម*\n${message}\n`;
+                 }
+
+                // Construct Telegram share URL (!!! THIS IS THE CORRECTED LINE !!!)
+                const telegramUrl = `https://t.me/chorkratana?text=${encodeURIComponent(telegramText)}`;
+
+                // Open Telegram link in a new tab
+                window.open(telegramUrl, '_blank');
+
+            } catch (error) {
+                console.error("Error sending to Telegram:", error);
+                showCustomMessage('Could not open Telegram.');
+            }
+        }
+
 
         // --- Custom Message Box ---
         function showCustomMessage(message, type = 'error') {
@@ -1303,17 +1614,21 @@
             if (hasEmailYes) hasEmailYes.addEventListener('change', toggleEmailField);
             if (hasEmailNo) hasEmailNo.addEventListener('change', toggleEmailField);
 
-            // 4. Attach listeners for new preview buttons
+            // 4. Attach listeners for preview buttons
             const downloadPdfBtn = document.getElementById('downloadPdfBtn');
             const downloadImageBtn = document.getElementById('downloadImageBtn');
             const editFormBtn = document.getElementById('editFormBtn');
+            // NEW: Get Telegram button
+            const sendTelegramBtn = document.getElementById('sendTelegramBtn');
 
             if (downloadPdfBtn) downloadPdfBtn.addEventListener('click', downloadPdf);
             if (downloadImageBtn) downloadImageBtn.addEventListener('click', downloadImage);
             if (editFormBtn) editFormBtn.addEventListener('click', editForm);
+            // NEW: Attach listener for Telegram button
+            if (sendTelegramBtn) sendTelegramBtn.addEventListener('click', sendToTelegram);
+
         });
 
     </script>
 </body>
 </html>
-
