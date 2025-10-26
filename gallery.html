@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="km" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- MODIFIED: Title changed for gallery page -->
+    <title data-translate-key="page_title">កម្រងរូបភាព - វិស្វកម្មមេកានិក</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class', // Enable class-based dark mode
+        theme: {
+          extend: {}
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Base font */
+        body {
+            font-family: 'Kantumruy Pro', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Specify fonts for different languages */
+        :lang(en) body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        /* Animation for page content */
+        .page-content {
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        .page-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Active nav link style */
+        .nav-link.active {
+            color: #2563EB; /* blue-600 */
+            font-weight: 600;
+            border-bottom: 2px solid #2563EB;
+        }
+        /* Dark mode active nav link style */
+        .dark .nav-link.active {
+            color: #60A5FA; /* blue-400 */
+            border-bottom-color: #60A5FA;
+        }
+        /* SVG Logo continuous rotation animation */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .logo-gear {
+            animation: spin 10s linear infinite;
+        }
+        /* Custom style for date picker calendar icon */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            filter: invert(0.5);
+        }
+        .dark input[type="date"]::-webkit-calendar-picker-indicator {
+             filter: invert(0.8);
+        }
+        /* Custom modal style */
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-content {
+             animation: zoomIn 0.3s ease-out;
+        }
+        @keyframes zoomIn {
+             from { transform: scale(0.95); opacity: 0; }
+             to { transform: scale(1); opacity: 1; }
+        }
+        /* Custom image fade in */
+        .detail-image {
+             animation: imageFadeIn 0.3s ease-in-out;
+        }
+        @keyframes imageFadeIn {
+             from { opacity: 0; }
+             to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+
+    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- MODIFIED: Link to index.html -->
+            <a href="index.html" class="flex items-center space-x-3 text-blue-600 dark:text-blue-400">
+                <svg class="logo-gear h-9 w-9 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M19.1255 7.96289L19.3755 7.71289C19.8635 7.22489 20.6275 7.22489 21.1155 7.71289L21.2875 7.88489C21.7755 8.37289 21.7755 9.13689 21.2875 9.62489L21.0375 9.87489" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4.87451 16.0371L4.62451 16.2871C4.13651 16.7751 3.37251 16.7751 2.88451 16.2871L2.71251 16.1151C2.22451 15.6271 2.22451 14.8631 2.71251 14.3751L2.96251 14.1251" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M7.96289 4.87451L7.71289 4.62451C7.22489 4.13651 7.22489 3.37251 7.71289 2.88451L7.88489 2.71251C8.37289 2.22451 9.13689 2.22451 9.62489 2.71251L9.87489 2.96251" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M16.0371 19.1255L16.2871 19.3755C16.7751 19.8635 16.7751 20.6275 16.2871 21.1155L16.1151 21.2875C15.6271 21.7755 14.8631 21.7755 14.3751 21.2875L14.1251 21.0375" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M22 12H19" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M5 12H2" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 5V2" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 22V19" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span class="text-2xl font-bold" data-translate-key="brand_name">វិស្វករមេកានិក</span>
+            </a>
+            
+            <!-- START: Desktop Navigation Update -->
+            <div class="hidden md:flex items-center space-x-8">
+                <!-- MODIFIED: Links point to index.html with hash, gallery.html is active -->
+                <a href="index.html#home" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-home fa-fw mr-2"></i><span data-translate-key="nav_home">ទំព័រដើម</span>
+                </a>
+                <a href="index.html#specializations" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-cogs fa-fw mr-2"></i><span data-translate-key="nav_specializations">ឯកទេស</span>
+                </a>
+                <a href="index.html#education" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-graduation-cap fa-fw mr-2"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
+                </a>
+                <a href="book.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-book fa-fw mr-2"></i><span data-translate-key="nav_book">សៀវភៅ</span>
+                </a>
+                <!-- MODIFIED: Removed onclick, set to active -->
+                <a href="gallery.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center active">
+                    <i class="fas fa-images fa-fw mr-2"></i><span data-translate-key="nav_gallery">កម្រងរូបភាព</span>
+                </a>
+                <a href="register.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-file-alt fa-fw mr-2"></i><span data-translate-key="nav_register">បំពេញពាក្យស្នើសុំ</span>
+                </a>
+            </div>
+            <!-- END: Desktop Navigation Update -->
+
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="flex p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition" aria-label="Toggle dark mode">
+                    <i id="theme-icon" class="fas fa-sun fa-lg"></i>
+                </button>
+
+                <div class="relative hidden md:block" id="lang-switcher-container">
+                    <button id="lang-switcher-btn" class="flex items-center p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <img id="current-lang-flag" src="https://flagcdn.com/kh.svg" alt="Language" class="w-8 h-5 rounded-sm border border-gray-200">
+                        <i class="fas fa-chevron-down w-4 h-4 ml-2 text-gray-500 dark:text-gray-400"></i>
+                    </button>
+                    <div id="lang-options" class="hidden absolute right-0 mt-2 w-40 bg-white dark:bg-gray-700 rounded-md shadow-lg py-1 z-50">
+                        <a href="#" onclick="setLanguage('km')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <img src="https://flagcdn.com/kh.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_km">ភាសាខ្មែរ</span>
+                        </a>
+                        <a href="#" onclick="setLanguage('en')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <img src="https://flagcdn.com/gb.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_en">English</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-600 dark:text-gray-300 focus:outline-none">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- START: Mobile Navigation Update -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 shadow-lg">
+            <!-- MODIFIED: Links point to index.html with hash -->
+            <a href="index.html#home" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-home fa-fw mr-3"></i><span data-translate-key="nav_home">ទំព័រដើម</span>
+            </a>
+            <a href="index.html#specializations" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-cogs fa-fw mr-3"></i><span data-translate-key="nav_specializations">ឯកទេស</span>
+            </a>
+            <a href="index.html#education" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-graduation-cap fa-fw mr-3"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
+            </a>
+            <a href="book.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-book fa-fw mr-3"></i><span data-translate-key="nav_book">សៀវភៅ</span>
+            </a>
+            <!-- MODIFIED: Removed onclick, set to active -->
+            <a href="gallery.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center active">
+                <i class="fas fa-images fa-fw mr-3"></i><span data-translate-key="nav_gallery">កម្រងរូបភាព</span>
+            </a>
+            <a href="register.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-file-alt fa-fw mr-3"></i><span data-translate-key="nav_register">បំពេញពាក្យស្នើសុំ</span>
+            </a>
+            
+            <a href="#" onclick="setLanguage('km')" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <img src="https://flagcdn.com/kh.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_km">ភាសាខ្មែរ</span>
+            </a>
+            <a href="#" onclick="setLanguage('en')" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <img src="https://flagcdn.com/gb.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_en">English</span>
+            </a>
+        </div>
+        <!-- END: Mobile Navigation Update -->
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <!-- Gallery Section -->
+        <section id="gallery" class="page-content active py-1">
+            <div class="text-center mb-12">
+                <!-- START: ADDED LOGO IMAGE -->
+                <img src="photo/1.png" alt="Mechanical Engineering Logo" class="w-24 h-24 mx-auto mb-4 object-contain">
+                <!-- END: ADDED LOGO IMAGE -->
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="gallery_title">កម្រងរូបភាពសកម្មភាព</h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="gallery_subtitle">ទិដ្ឋភាពខ្លះៗនៃសកម្មភាពសិក្សា និងគម្រោងរបស់និស្សិតយើង។</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Image 1: CAD - ADDED onclick handler and cursor-pointer -->
+                <div onclick="openDetailGallery('cad')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group cursor-pointer hover:ring-4 hover:ring-blue-500/50 transition duration-300">
+                    <img src="photo/R2.jpg" alt="រូបភាពការរចនា CAD" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_cad_title">ការរចនា 2D&3D (CAD)</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_cad_desc">ថ្នាក់រៀនគូរ 2D&3D ដោយប្រើ AutoCAD និង SolidWorks។</p>
+                    </div>
+                </div>
+                <!-- Image 2: CNC - ADDED onclick handler and cursor-pointer -->
+                <div onclick="openDetailGallery('cnc')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group cursor-pointer hover:ring-4 hover:ring-blue-500/50 transition duration-300">
+                    <img src="photo/R7.jpg" alt="រូបភាពម៉ាស៊ីន CNC" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_cnc_title">ការអនុវត្តម៉ាស៊ីន CNC</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_cnc_desc">និស្សិតរៀនបញ្ជា និងដំណើរការម៉ាស៊ីន CNC។</p>
+                    </div>
+                </div>
+                <!-- Image 3: Welding - ADDED onclick handler and cursor-pointer -->
+                <div onclick="openDetailGallery('welding')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group cursor-pointer hover:ring-4 hover:ring-blue-500/50 transition duration-300">
+                    <img src="photo/T1.jpg" alt="រូបភាពការផ្សារ" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_welding_title">ការផ្សារ</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_welding_desc">អនុវត្តបច្ចេកទេសផ្សារអគ្គីសនី និងឧស្ម័ន។</p>
+                    </div>
+                </div>
+                <!-- Image 4: Group Project - ADDED onclick handler and cursor-pointer -->
+                <div onclick="openDetailGallery('group')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group cursor-pointer hover:ring-4 hover:ring-blue-500/50 transition duration-300">
+                    <img src="photo/T2.jpg" alt="រូបភាពការងារក្រុម" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_group_title">ការងារក្រុម</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_group_desc">និស្សិតធ្វើការរួមគ្នាលើគម្រោងជាក់ស្តែង។</p>
+                    </div>
+                </div>
+                <!-- Image 5: Hydraulics - ADDED onclick handler and cursor-pointer -->
+                <div onclick="openDetailGallery('hydraulics')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group cursor-pointer hover:ring-4 hover:ring-blue-500/50 transition duration-300">
+                    <img src="photo/R11.jpg" alt="រូបភាពប្រព័ន្ធប្រេង និងខ្យល់" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_hydraulics_title">ប្រព័ន្ធប្រេង និង ខ្យល់</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_hydraulics_desc">សិក្សា និងតម្លើងប្រព័ន្ធបញ្ជាដោយប្រេង និងខ្យល់។</p>
+                    </div>
+                </div>
+                <!-- Image 6: FEA - ADDED onclick handler and cursor-pointer -->
+                <div onclick="openDetailGallery('fea')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group cursor-pointer hover:ring-4 hover:ring-blue-500/50 transition duration-300">
+                    <img src="photo/R14.jpg" alt="រូបភាពការវិភាគ FEA" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_fea_title">ការវិភាគធាតុកំណត់ (FEA)</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_fea_desc">ប្រើកម្មវិធីកុំព្យូទ័រដើម្បីវិភាគកម្លាំង និងសីតុណ្ហភាព។</p>
+                    </div>
+                </div>
+                <!-- Image 7: Automotive - ADDED onclick handler and cursor-pointer -->
+                <div onclick="openDetailGallery('auto')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group cursor-pointer hover:ring-4 hover:ring-blue-500/50 transition duration-300">
+                    <img src="photo/T3.jpg" alt="រូបភាពសិក្សាអំពីរថយន្ត" class="w-full h-60 object-cover group-hover:scale-1E05 transition-transform duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_auto_title">សិក្សាអំពីរថយន្ត</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_auto_desc">ស្វែងយល់ពីប្រព័ន្ធ និងគ្រឿងបង្គុំរបស់រថយន្ត។</p>
+                    </div>
+                </div>
+                <!-- Image 8: Arduino - ADDED onclick handler and cursor-pointer -->
+                <div onclick="openDetailGallery('arduino')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group cursor-pointer hover:ring-4 hover:ring-blue-500/50 transition duration-300">
+                    <img src="photo/T4.jpg" alt="រូបភាពប្រព័ន្ធ Arduino" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_arduino_title">Arduino System</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_arduino_desc">រៀនសរសេរកូដ និងបញ្ជាគ្រឿងអេឡិចត្រូនិក។</p>
+                    </div>
+                </div>
+            </div>
+            <!-- MODIFIED: Changed link to "register.html", updated icon and data-translate-key -->
+            <div class="mt-16 text-center">
+                <a href="register.html" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300 text-lg shadow-lg inline-flex items-center group">
+                    <i class="fas fa-file-alt mr-3"></i> <span data-translate-key="nav_register">បំពេញពាក្យស្នើសុំ</span>
+                </a>
+            </div>
+        </section>
+        <!-- END: Gallery Section -->
+
+    </main>
+
+    <!-- START: Detail Gallery Modal (Lightbox) -->
+    <div id="detailModal" class="modal fixed inset-0 z-[100] bg-black bg-opacity-90 flex items-center justify-center p-4 hidden" onclick="closeModal()">
+        <div class="modal-content relative w-full h-full max-w-7xl max-h-[90vh]" onclick="event.stopPropagation()">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-0 right-0 m-4 z-20 text-white text-4xl font-light opacity-80 hover:opacity-100 transition">
+                &times;
+            </button>
+            
+            <div class="flex flex-col h-full bg-gray-900 rounded-lg overflow-hidden">
+                <!-- Image Display Area -->
+                <div class="flex-grow flex items-center justify-center p-2 relative">
+                    <img id="detailImage" src="" alt="Gallery Image" class="detail-image max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl">
+                    
+                    <!-- Prev Button -->
+                    <button onclick="showPrevImage(event)" id="prevBtn" class="absolute left-0 ml-4 p-3 rounded-full bg-black/50 text-white text-2xl opacity-70 hover:opacity-100 transition disabled:opacity-30 disabled:cursor-not-allowed">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <!-- Next Button -->
+                    <button onclick="showNextImage(event)" id="nextBtn" class="absolute right-0 mr-4 p-3 rounded-full bg-black/50 text-white text-2xl opacity-70 hover:opacity-100 transition disabled:opacity-30 disabled:cursor-not-allowed">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Caption and Counter -->
+                <div class="p-4 bg-gray-800 flex justify-between items-center text-white/90 flex-shrink-0">
+                    <h3 id="detailTitle" class="text-lg font-semibold"></h3>
+                    <span id="detailCounter" class="text-sm"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Detail Gallery Modal (Lightbox) -->
+
+    <section class="container mx-auto px-6 py-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="contact_title">ទំនាក់ទំនងមកពួកយើង</h2>
+            <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="contact_subtitle">យើងរីករាយនឹងឆ្លើយតបរាល់សំណួររបស់អ្នក។ សូមទំនាក់ទំនងតាមរយៈបណ្តាញខាងក្រោម៖</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10 items-start">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full flex flex-col items-center justify-center">
+                <div class="flex space-x-4 md:space-x-6">
+                    <a href="https://web.facebook.com/profile.php?id=100075802995392" target="_blank" class="w-12 h-12 md:w-16 md:h-16 bg-blue-600 rounded-full flex items-center justify-center text-white hover:opacity-90 transform hover:scale-105 transition-all duration-300" aria-label="Facebook">
+                        <i class="fab fa-facebook-f fa-lg md:fa-2x"></i>
+                    </a>
+                    <a href="https://t.me/chorkratana" target="_blank" class="w-12 h-12 md:w-16 md:h-16 bg-sky-500 rounded-full flex items-center justify-center text-white hover:opacity-90 transform hover:scale-105 transition-all duration-300" aria-label="Telegram">
+                        <i class="fab fa-telegram-plane fa-lg md:fa-2x"></i>
+                    </a>
+                    <a href="tel:+85512521375" class="w-12 h-12 md:w-16 md:h-16 bg-green-500 rounded-full flex items-center justify-center text-white hover:opacity-90 transform hover:scale-105 transition-all duration-300" aria-label="Phone">
+                        <i class="fas fa-phone fa-lg md:fa-2x"></i>
+                    </a>
+                    <a href="mailto:ratana.lyon2uni@gmail.com" class="w-12 h-12 md:w-16 md:h-16 bg-red-500 rounded-full flex items-center justify-center text-white hover:opacity-90 transform hover:scale-105 transition-all duration-300" aria-label="Email">
+                        <i class="fas fa-envelope fa-lg md:fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full">
+                <h3 class="font-bold text-xl mb-4 text-gray-900 dark:text-gray-100" data-translate-key="contact_form_title">ផ្ញើសារ</h3>
+                
+                <button id="showContactFormBtn" onclick="toggleContactForm()" type="button" class="w-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 py-3 px-4 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 font-bold transition text-lg inline-flex items-center justify-center" data-translate-key="contact_show_form_btn">
+                    <i class="fas fa-pencil-alt mr-2"></i>
+                    ចុចទីនេះដើម្បីផ្ញើសារ
+                </button>
+
+                <form id="contactForm" class="space-y-6 hidden" onsubmit="event.preventDefault(); sendEmail();">
+                    <div>
+                        <label for="contactName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="contact_form_name">ឈ្មោះ</label>
+                        <div class="relative mt-1">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-gray-400"></i>
+                            </div>
+                            <input type="text" id="contactName" class="block w-full pl-10 pr-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="contactEmail" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="contact_form_email">អ៊ីមែល</label>
+                        <div class="relative mt-1">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                            <input type="email" id="contactEmail" class="block w-full pl-10 pr-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="contactMessage" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-translate-key="contact_form_message">សារ</label>
+                         <div class="relative mt-1">
+                             <div class="absolute top-0 left-0 pl-3 pt-3 flex items-center pointer-events-none">
+                                <i class="fas fa-pencil-alt text-gray-400"></i>
+                            </div>
+                            <textarea id="contactMessage" rows="4" class="block w-full pl-10 pr-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required></textarea>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button type="button" onclick="closeContactForm()" class="w-full bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200 py-3 px-4 rounded-md hover:bg-gray-300 dark:hover:bg-gray-500 font-semibold transition text-base" data-translate-key="contact_form_cancel">
+                            បោះបង់
+                        </button>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 font-bold transition text-base inline-flex items-center justify-center" data-translate-key="contact_form_submit">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            ផ្ញើសារ
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 dark:bg-gray-950 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400" data-translate-key="footer_text">ចាប់ផ្តើមដំណើររបស់អ្នកក្នុងវិស័យវិស្វកម្មមេកានិកនៅថ្ងៃនេះ ហើយរួមចំណែកបង្កើតបច្ចេកវិទ្យាថ្មីៗ។</p>
+            <div class="mt-4">
+                <p class="text-gray-500 text-sm" data-translate-key="footer_copyright">រក្សាសិទ្ធិគ្រប់យ៉ាង © 2025 | បង្កើតដោយ ខៀវ សំណាង</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODIFIED: Script now includes gallery detail logic -->
+    <script>
+        // Global variables for image tracking
+        let currentSubjectKey = null;
+        let currentImageIndex = 0;
+        
+        // Data structure for detail gallery images
+        const galleryData = {
+            cad: {
+                titleKey: 'gallery_cad_title',
+                images: [
+                    'photo/R2.jpg',
+                    'https://placehold.co/1000x700/0000FF/FFFFFF?text=CAD+Design+1',
+                    'https://placehold.co/1200x800/2563EB/FFFFFF?text=SolidWorks+Drawing',
+                    'https://placehold.co/800x600/60A5FA/000000?text=CAD+Rendering',
+                    'https://placehold.co/1100x750/3B82F6/FFFFFF?text=Advanced+3D+Model'
+                ]
+            },
+            cnc: {
+                titleKey: 'gallery_cnc_title',
+                images: [
+                    'photo/R7.jpg',
+                    'https://placehold.co/1200x900/10B981/FFFFFF?text=CNC+Operation+in+Lab',
+                    'https://placehold.co/900x600/059669/FFFFFF?text=CNC+Milling+Process',
+                    'https://placehold.co/1000x800/34D399/000000?text=G-Code+Programming'
+                ]
+            },
+            welding: {
+                titleKey: 'gallery_welding_title',
+                images: [
+                    'photo/T1.jpg',
+                    'https://placehold.co/1000x650/FBBF24/000000?text=Electric+Welding+Practice',
+                    'https://placehold.co/1300x700/F59E0B/000000?text=Gas+Welding+Setup',
+                    'https://placehold.co/800x500/FB923C/FFFFFF?text=Welding+Safety',
+                    'https://placehold.co/1100x800/FCD34D/000000?text=Finished+Weld'
+                ]
+            },
+            group: {
+                titleKey: 'gallery_group_title',
+                images: [
+                    'photo/T2.jpg',
+                    'https://placehold.co/1200x800/6366F1/FFFFFF?text=Team+Project+Meeting',
+                    'https://placehold.co/1000x700/4F46E5/FFFFFF?text=Group+Presentation',
+                    'https://placehold.co/900x600/818CF8/000000?text=Collaborative+Work'
+                ]
+            },
+            hydraulics: {
+                titleKey: 'gallery_hydraulics_title',
+                images: [
+                    'photo/R11.jpg',
+                    'https://placehold.co/1000x700/EF4444/FFFFFF?text=Hydraulic+System+Setup',
+                    'https://placehold.co/1200x800/DC2626/FFFFFF?text=Pneumatic+Valves',
+                    'https://placehold.co/800x600/F87171/000000?text=Circuit+Diagram'
+                ]
+            },
+            fea: {
+                titleKey: 'gallery_fea_title',
+                images: [
+                    'photo/R14.jpg',
+                    'https://placehold.co/1200x900/9333EA/FFFFFF?text=FEA+Stress+Analysis+Result',
+                    'https://placehold.co/1000x700/A855F7/FFFFFF?text=Thermal+Analysis+Simulation'
+                ]
+            },
+            auto: {
+                titleKey: 'gallery_auto_title',
+                images: [
+                    'photo/T3.jpg',
+                    'https://placehold.co/1100x750/06B6D4/FFFFFF?text=Engine+Disassembly+Class',
+                    'https://placehold.co/900x600/0891B2/FFFFFF?text=Vehicle+Systems+Diagram'
+                ]
+            },
+            arduino: {
+                titleKey: 'gallery_arduino_title',
+                images: [
+                    'photo/T4.jpg',
+                    'https://placehold.co/1000x700/F472B6/FFFFFF?text=Arduino+Microcontroller+Setup',
+                    'https://placehold.co/1200x800/EC4899/FFFFFF?text=Coding+Robotics',
+                    'https://placehold.co/800x600/F43F5E/000000?text=Sensor+Integration'
+                ]
+            }
+        };
+
+
+        // --- Gallery Modal Functions ---
+
+        function openDetailGallery(subjectKey) {
+            currentSubjectKey = subjectKey;
+            currentImageIndex = 0;
+            updateModalContent();
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+            currentSubjectKey = null;
+            currentImageIndex = 0;
+        }
+
+        function showNextImage(event) {
+            if (event) event.stopPropagation();
+            if (!currentSubjectKey) return;
+
+            const data = galleryData[currentSubjectKey];
+            if (currentImageIndex < data.images.length - 1) {
+                currentImageIndex++;
+                updateModalContent();
+            }
+        }
+
+        function showPrevImage(event) {
+            if (event) event.stopPropagation();
+            if (!currentSubjectKey) return;
+
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateModalContent();
+            }
+        }
+
+        function updateModalContent() {
+            if (!currentSubjectKey) return;
+
+            const data = galleryData[currentSubjectKey];
+            const totalImages = data.images.length;
+            const currentUrl = data.images[currentImageIndex];
+            const titleElement = document.getElementById('detailTitle');
+            const imageElement = document.getElementById('detailImage');
+            const counterElement = document.getElementById('detailCounter');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            // 1. Update Title (using translation helper)
+            titleElement.textContent = getTranslation(data.titleKey) + ` (${currentImageIndex + 1}/${totalImages})`;
+
+            // 2. Update Image Source
+            imageElement.src = currentUrl;
+            imageElement.classList.remove('detail-image'); // Force reflow to re-apply animation
+            void imageElement.offsetWidth;
+            imageElement.classList.add('detail-image');
+            
+            // 3. Update Counter
+            counterElement.textContent = `${currentImageIndex + 1} / ${totalImages}`;
+
+            // 4. Update Navigation Buttons
+            prevBtn.disabled = (currentImageIndex === 0);
+            nextBtn.disabled = (currentImageIndex === totalImages - 1);
+        }
+
+        // --- Keyboard Navigation (Bonus) ---
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('detailModal');
+            if (modal && !modal.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    showNextImage();
+                } else if (e.key === 'ArrowLeft') {
+                    showPrevImage();
+                } else if (e.key === 'Escape') {
+                    closeModal();
+                }
+            }
+        });
+
+
+        // --- Existing Functions for Page Setup (Unmodified logic) ---
+        const translations = {
+            km: {
+                page_title: "កម្រងរូបភាព - វិស្វកម្មមេកានិក", // MODIFIED
+                brand_name: "វិស្វករមេកានិក",
+                nav_home: "ទំព័រដើម",
+                nav_specializations: "ឯកទេស",
+                nav_education: "កម្រិតសិក្សា",
+                nav_book: "សៀវភៅ",
+                nav_register: "បំពេញពាក្យស្នើសុំ",
+                nav_gallery: "កម្រងរូបភាព",
+                nav_theme_toggle: "ប្តូរពន្លឺ",
+                lang_km: "ភាសាខ្មែរ",
+                lang_en: "English",
+                // REMOVED: back_to_home key
+                contact_title: "ទំនាក់ទំនងមកពួកយើង",
+                contact_subtitle: "យើងរីករាយនឹងឆ្លើយតបរាល់សំណួររបស់អ្នក។ សូមទំនាក់ទំនងតាមរយៈបណ្តាញខាងក្រោម៖",
+                contact_phone: "ទូរស័ព្ទ",
+                contact_facebook: "ហ្វេសប៊ុក",
+                contact_telegram: "តេឡេក្រាម",
+                contact_email: "អ៊ីមែល",
+                contact_form_title: "ផ្ញើសារ",
+                contact_show_form_btn: "ចុចទីនេះដើម្បីផ្ញើសារ",
+                contact_form_name: "ឈ្មោះ",
+                contact_form_email: "អ៊ីមែល",
+                contact_form_message: "សារ",
+                contact_form_submit: "ផ្ញើសារ",
+                contact_form_cancel: "បោះបង់",
+                footer_text: "ចាប់ផ្តើមដំណើររបស់អ្នកក្នុងវិស័យវិស្វកម្មមេកានិកនៅថ្ងៃនេះ ហើយរួមចំណែកបង្កើតបច្ចេកវិទ្យាថ្មីៗ។",
+                footer_copyright: "រក្សាសិទ្ធិគ្រប់យ៉ាង © 2025 | បង្កើតដោយ ខៀវ សំណាង",
+                gallery_title: "កម្រងរូបភាពសកម្មភាព",
+                gallery_subtitle: "ទិដ្ឋភាពខ្លះៗនៃសកម្មភាពសិក្សា និងគម្រោងរបស់និស្សិតយើង។",
+                gallery_cad_title: "ការរចនា 2D&3D (CAD)",
+                gallery_cad_desc: "ថ្នាក់រៀនគូរ 2D&3D ដោយប្រើ AutoCAD និង SolidWorks។",
+                gallery_cnc_title: "ការអនុវត្តម៉ាស៊ីន CNC",
+                gallery_cnc_desc: "និស្សិតរៀនបញ្ជា និងដំណើរការម៉ាស៊ីន CNC។",
+                gallery_welding_title: "ការផ្សារ",
+                gallery_welding_desc: "អនុវត្តបច្ចេកទេសផ្សារអគ្គីសនី និងឧស្ម័ន។",
+                gallery_group_title: "ការងារក្រុម",
+                gallery_group_desc: "និស្សិតធ្វើការរួមគ្នាលើគម្រោងជាក់ស្តែង។",
+                gallery_hydraulics_title: "ប្រព័ន្ធប្រេង និង ខ្យល់",
+                gallery_hydraulics_desc: "សិក្សា និងតម្លើងប្រព័ន្ធបញ្ជាដោយប្រេង និងខ្យល់។",
+                gallery_fea_title: "ការវិភាគធាតុកំណត់ (FEA)",
+                gallery_fea_desc: "ប្រើកម្មវិធីកុំព្យូទ័រដើម្បីវិភាគកម្លាំង និងសីតុណ្ហភាព។",
+                gallery_auto_title: "សិក្សាអំពីរថយន្ត",
+                gallery_auto_desc: "ស្វែងយល់ពីប្រព័ន្ធ និងគ្រឿងបង្គុំរបស់រថយន្ត។",
+                gallery_arduino_title: "Arduino System",
+                gallery_arduino_desc: "រៀនសរសេរកូដ និងបញ្ជាគ្រឿងអេឡិចត្រូនិក。"
+                // REMOVED: All other keys for home, specializations, education
+            },
+            en: {
+                page_title: "Gallery - Mechanical Engineering", // MODIFIED
+                brand_name: "Mechanical Engineer",
+                nav_home: "Home",
+                nav_specializations: "Specializations",
+                nav_education: "Education",
+                nav_book: "Book",
+                nav_register: "Application Form",
+                nav_gallery: "Gallery",
+                nav_theme_toggle: "Toggle Theme",
+                lang_km: "Khmer",
+                lang_en: "English",
+                // REMOVED: back_to_home key
+                contact_title: "Contact Us",
+                contact_subtitle: "We are happy to answer your questions. Please contact us through the channels below:",
+                contact_phone: "Phone",
+                contact_facebook: "Facebook",
+                contact_telegram: "Telegram",
+                contact_email: "Email",
+                contact_form_title: "Send Message",
+                contact_show_form_btn: "Click here to send a message",
+                contact_form_name: "Name",
+                contact_form_email: "Email",
+                contact_form_message: "Message",
+                contact_form_submit: "Send Message",
+                contact_form_cancel: "Cancel",
+                footer_text: "Start your journey in mechanical engineering today and contribute to creating new technologies.",
+                footer_copyright: "All rights reserved © 2025 | Built By Khiev Samnang",
+                gallery_title: "Activity Gallery",
+                gallery_subtitle: "A glimpse into our student activities and projects.",
+                gallery_cad_title: "2D&3D Design (CAD)",
+                gallery_cad_desc: "Class for 2D&3D drawing using AutoCAD and SolidWorks.",
+                gallery_cnc_title: "CNC Machine Practice",
+                gallery_cnc_desc: "Students learn to operate and run CNC machines.",
+                gallery_welding_title: "Welding",
+                gallery_welding_desc: "Practicing electric and gas welding techniques.",
+                gallery_group_title: "Group Project",
+                gallery_group_desc: "Students collaborating on a real-world project.",
+                gallery_hydraulics_title: "Hydraulics & Pneumatics",
+                gallery_hydraulics_desc: "Study and assembly of hydraulic and pneumatic systems.",
+                gallery_fea_title: "Finite Element Analysis (FEA)",
+                gallery_fea_desc: "Using software to analyze stress and temperature.",
+                gallery_auto_title: "Automotive Study",
+                gallery_auto_desc: "Understanding the systems and components of vehicles.",
+                gallery_arduino_title: "Arduino System",
+                gallery_arduino_desc: "Learning to code and control electronics."
+                // REMOVED: All other keys for home, specializations, education
+            }
+        };
+
+        // --- Email Sending (Mailto) ---
+        function sendEmail() {
+            try {
+                const name = document.getElementById('contactName').value;
+                const email = document.getElementById('contactEmail').value;
+                const message = document.getElementById('contactMessage').value;
+                
+                const subject = `Message from Website by ${name}`;
+                const body = `Message:\n${message}\n\nFrom: ${name}\nEmail: ${email}`;
+                
+                const recipientEmail = 'ratana.lyon2uni@gmail.com'; 
+                
+                if (!name || !email || !message) {
+                    showCustomMessage('Please fill in all fields.');
+                    return;
+                }
+
+                window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            } catch(error) {
+                console.error("Error sending email:", error);
+                showCustomMessage('Could not open email client. Please copy the address: ' + recipientEmail);
+            }
+        }
+
+        // --- Custom Message Box (to replace alert()) ---
+        function showCustomMessage(message) {
+            let existingBox = document.getElementById('customMessageBox');
+            if (existingBox) {
+                existingBox.remove();
+            }
+            const messageBox = document.createElement('div');
+            messageBox.id = 'customMessageBox';
+            messageBox.style = "position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: #EF4444; color: white; padding: 16px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 1000; font-family: 'Kantumruy Pro', sans-serif;";
+            
+            const messageText = document.createElement('p');
+            messageText.textContent = message;
+            messageText.style = "margin: 0; margin-right: 20px;";
+
+            const closeButton = document.createElement('button');
+            closeButton.textContent = '×';
+            closeButton.style = "position: absolute; top: 5px; right: 10px; background: none; border: none; color: white; font-size: 20px; cursor: pointer;";
+            closeButton.onclick = () => messageBox.remove();
+
+            messageBox.appendChild(messageText);
+            messageBox.appendChild(closeButton);
+            document.body.appendChild(messageBox);
+
+            setTimeout(() => {
+                if (document.getElementById('customMessageBox')) {
+                    messageBox.remove();
+                }
+            }, 5000);
+        }
+
+        // --- Contact Form Toggle ---
+        function toggleContactForm() {
+            try {
+                const form = document.getElementById('contactForm');
+                const button = document.getElementById('showContactFormBtn');
+                if (form) form.classList.remove('hidden');
+                if (button) button.classList.add('hidden');
+            } catch (error) {
+                console.error("Error showing contact form:", error);
+            }
+        }
+
+        function closeContactForm() {
+            try {
+                const form = document.getElementById('contactForm');
+                const button = document.getElementById('showContactFormBtn');
+                if (form) {
+                    form.classList.add('hidden');
+                    form.reset(); 
+                }
+                if (button) button.classList.remove('hidden');
+            } catch (error) {
+                console.error("Error closing contact form:", error);
+            }
+        }
+
+        // --- Theme Switching ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function updateTheme(isDark) {
+                 if (!htmlEl) {
+                     console.error("<html> element not found.");
+                     return;
+                 }
+            if (isDark) {
+                htmlEl.classList.add('dark');
+            } else {
+                htmlEl.classList.remove('dark');
+            }
+
+            if (themeIcon) {
+                if (isDark) {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                } else {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                }
+            } else {
+                 console.warn("Desktop theme icon element not found.");
+            }
+
+
+            try {
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            } catch (error) {
+                console.error("Could not save theme to localStorage:", error);
+            }
+        }
+        
+        function toggleDarkMode() {
+                 if (!htmlEl) {
+                     console.error("Cannot toggle dark mode: <html> element not found.");
+                     return;
+                 }
+            const isCurrentlyDark = htmlEl.classList.contains('dark');
+            updateTheme(!isCurrentlyDark);
+        }
+
+        // --- Language Switching ---
+        const currentLangFlag = document.getElementById('current-lang-flag');
+        const flagSources = {
+            km: 'https://flagcdn.com/kh.svg',
+            en: 'https://flagcdn.com/gb.svg'
+        };
+        
+        // Helper function to get translation safely
+        function getTranslation(key) {
+             try {
+                const currentLang = localStorage.getItem('preferredLanguage') || 'km';
+                // Check if translations and the specific language exist
+                if (typeof translations !== 'undefined' && translations[currentLang] && translations[currentLang][key]) {
+                    return translations[currentLang][key];
+                }
+                 // Fallback to English if Khmer key not found
+                 if (currentLang === 'km' && typeof translations !== 'undefined' && translations['en'] && translations['en'][key]) {
+                     // console.warn(`Khmer key "${key}" not found, using English fallback.`);
+                     return translations['en'][key];
+                 }
+                 // Fallback to the key itself if no translation found
+                  // console.warn(`Translation key "${key}" not found for language "${currentLang}" or fallback.`);
+                  return key; // Return the key as a last resort
+             } catch (e) {
+                  console.error("Error getting translation for key:", key, e);
+                  return key; // Return key on error
+             }
+        }
+
+
+        function setLanguage(lang) {
+            const langData = translations[lang];
+            if (!langData) {
+                console.error(`Translations for language "${lang}" not found.`);
+                return;
+            }
+
+            // Update localStorage FIRST
+            try {
+                localStorage.setItem('preferredLanguage', lang);
+                console.log("Saved language:", lang);
+            } catch (error) {
+                console.error("Could not save language preference to localStorage:", error);
+            }
+
+
+            if (htmlEl) {
+                htmlEl.lang = lang;
+            } else {
+                 console.error("<html> element not found for setting lang attribute.");
+            }
+
+            if (currentLangFlag) {
+                 currentLangFlag.src = flagSources[lang];
+            } else {
+                 // console.warn("Current language flag element not found.");
+            }
+
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.getAttribute('data-translate-key');
+                 const translatedText = getTranslation(key); // Use the helper
+
+                if (translatedText !== key || lang === 'en') { // Update if translation found or if target is English (to clear old Khmer)
+                    if (key.includes('_list') || key.includes('_details')) {
+                        el.innerHTML = translatedText;
+                    } else {
+                         if (el.tagName === 'OPTION') {
+                             el.textContent = translatedText;
+                         } else if (el.tagName === 'INPUT' && el.type === 'submit') {
+                            el.value = translatedText;
+                         } else if (el.tagName === 'TITLE') {
+                             el.textContent = translatedText;
+                         }
+                         else {
+                             let textUpdated = false;
+                             for (let node of el.childNodes) {
+                                if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
+                                    node.textContent = translatedText;
+                                    textUpdated = true;
+                                    break;
+                                } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SPAN' && !node.hasAttribute('data-translate-key')) {
+                                     // Check if it's likely the text span based on lack of key
+                                     if(node.childNodes.length === 1 && node.firstChild.nodeType === Node.TEXT_NODE){
+                                          node.firstChild.textContent = translatedText;
+                                           textUpdated = true;
+                                           break;
+                                     } else if (node.textContent.trim().length > 0) {
+                                         // More complex case, might replace all content
+                                         // node.textContent = translatedText; textUpdated = true; break;
+                                     }
+                                }
+                             }
+                              if (!textUpdated && !el.querySelector('i') && !el.querySelector('img')) { // Only update if no text node found and no icon/img
+                                   el.textContent = translatedText;
+                              }
+                         }
+                    }
+                } else {
+                      // console.warn(`Translation key "${key}" not found for language "${lang}". Keeping existing text:`, el.textContent.trim());
+                }
+            });
+
+            // Close mobile menu on lang select
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+            
+            // Close language dropdown
+            const langOptionsEl = document.getElementById('lang-options');
+            if (langOptionsEl) {
+                langOptionsEl.classList.add('hidden');
+            }
+
+        }
+        
+        // --- Language Dropdown Logic ---
+        const langSwitcherBtn = document.getElementById('lang-switcher-btn');
+        const langOptions = document.getElementById('lang-options');
+        
+        if (langSwitcherBtn && langOptions) {
+            langSwitcherBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langOptions.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', (e) => {
+                const container = document.getElementById('lang-switcher-container');
+                if (container && !container.contains(e.target)) {
+                    langOptions.classList.add('hidden');
+                }
+            });
+        } else {
+             console.warn("Language switcher button or options element not found.");
+        }
+        
+        // --- Mobile Menu Toggle ---
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+         if (menuBtn && mobileMenu) {
+             menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+             });
+
+             // Close menu when a link (that is not a language switcher) is clicked
+             mobileMenu.querySelectorAll('a').forEach(link => {
+                 if (!link.onclick || (link.onclick && !link.onclick.toString().includes("setLanguage"))) {
+                     link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+                 }
+             });
+         } else {
+              console.warn("Mobile menu button or menu not found.");
+         }
+
+        // --- Initial Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM fully loaded and parsed"); 
+
+            // 1. Initialize Theme
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                let initialIsDark = false; 
+                if (savedTheme === 'dark') {
+                    initialIsDark = true;
+                } else if (savedTheme === 'light'){
+                    initialIsDark = false;
+                }
+                console.log("Initial theme check:", { savedTheme, initialIsDark });
+                updateTheme(initialIsDark);
+            } catch (error) {
+                console.error("Error initializing theme:", error);
+                updateTheme(false); 
+            }
+            
+            const themeToggleBtnLoaded = document.getElementById('theme-toggle');
+            if (themeToggleBtnLoaded) {
+                 console.log("Attaching theme toggle listener.");
+                themeToggleBtnLoaded.addEventListener('click', toggleDarkMode);
+            } else {
+                 console.error("Theme toggle button not found after DOM load!");
+            }
+
+            // 2. Initialize Language
+            try {
+                const preferredLanguage = localStorage.getItem('preferredLanguage') || 'km';
+                 console.log("Initializing language:", preferredLanguage);
+                setLanguage(preferredLanguage); // Apply language FIRST
+
+                // 3. Activate the gallery nav link (since this is the gallery page)
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.getAttribute('href') === 'gallery.html') {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+                
+            } catch (error) {
+                 console.error("Error initializing language or setting active link:", error);
+            }
+
+        });
+    </script>
+</body>
+</html>

@@ -258,6 +258,7 @@
                 <span class="text-2xl font-bold" data-translate-key="brand_name">វិស្វករមេកានិក</span>
             </a>
             
+            <!-- START: Desktop Navigation Update -->
             <div class="hidden md:flex items-center space-x-8">
                 <a href="index.html#home" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
                     <i class="fas fa-home fa-fw mr-2"></i><span data-translate-key="nav_home">ទំព័រដើម</span>
@@ -268,13 +269,18 @@
                 <a href="index.html#education" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
                     <i class="fas fa-graduation-cap fa-fw mr-2"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
                 </a>
-                <a href="index.html#gallery" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                <!-- NEW: Added Book button -->
+                <a href="book.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-book fa-fw mr-2"></i><span data-translate-key="nav_book">សៀវភៅ</span>
+                </a>
+                <a href="gallery.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
                     <i class="fas fa-images fa-fw mr-2"></i><span data-translate-key="nav_gallery">កម្រងរូបភាព</span>
                 </a>
                 <a href="register.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center active">
                     <i class="fas fa-file-alt fa-fw mr-2"></i><span data-translate-key="nav_register">បំពេញពាក្យស្នើសុំ</span>
                 </a>
             </div>
+            <!-- END: Desktop Navigation Update -->
 
             <div class="flex items-center space-x-4">
                 <button id="theme-toggle" class="flex p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition" aria-label="Toggle dark mode">
@@ -303,6 +309,7 @@
             </div>
         </nav>
         
+        <!-- START: Mobile Navigation Update -->
         <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 shadow-lg">
             <a href="index.html#home" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
                 <i class="fas fa-home fa-fw mr-3"></i><span data-translate-key="nav_home">ទំព័រដើម</span>
@@ -313,7 +320,11 @@
             <a href="index.html#education" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
                 <i class="fas fa-graduation-cap fa-fw mr-3"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
             </a>
-            <a href="index.html#gallery" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+            <!-- NEW: Added Book button -->
+            <a href="book.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-book fa-fw mr-3"></i><span data-translate-key="nav_book">សៀវភៅ</span>
+            </a>
+            <a href="gallery.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
                 <i class="fas fa-images fa-fw mr-3"></i><span data-translate-key="nav_gallery">កម្រងរូបភាព</span>
             </a>
             <a href="register.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center active">
@@ -327,11 +338,14 @@
                 <img src="https://flagcdn.com/gb.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_en">English</span>
             </a>
         </div>
+        <!-- END: Mobile Navigation Update -->
     </header>
 
-    <main class="container mx-auto px-6 py-12">
+    <main class="container mx-auto px-6 py-1">
         <section id="register" class="py-10" style="animation: fadeIn 0.6s ease-in-out;">
             <div class="text-center mb-12">
+                <!-- START: ADDED LOGO IMAGE -->
+                <img src="photo/1.png" alt="Mechanical Engineering Logo" class="w-24 h-24 mx-auto mb-4 object-contain">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="register_title">បំពេញពាក្យស្នើសុំ</h2>
                 <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="register_subtitle">បំពេញទម្រង់ខាងក្រោមដើម្បីដាក់ពាក្យស្នើសុំចូលរៀន។</p>
             </div>
@@ -718,7 +732,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-envelope text-gray-400"></i>
                             </div>
-                            <input type="email" id="contactEmail" class="block w-full pl-10 pr-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100" required>
+                            <input type="email" id="contactEmail" class="block w-full pl-10 pr-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-5Two.html:100 text-gray-900 dark:text-gray-100" required>
                         </div>
                     </div>
                     <div>
@@ -764,6 +778,7 @@
                 nav_home: "ទំព័រដើម",
                 nav_specializations: "ឯកទេស",
                 nav_education: "កម្រិតសិក្សា",
+                nav_book: "សៀវភៅ", // NEW: Added translation
                 nav_register: "បំពេញពាក្យស្នើសុំ",
                 nav_gallery: "កម្រងរូបភាព",
                 nav_theme_toggle: "ប្តូរពន្លឺ",
@@ -838,6 +853,7 @@
                 nav_home: "Home",
                 nav_specializations: "Specializations",
                 nav_education: "Education",
+                nav_book: "Book", // NEW: Added translation
                 nav_register: "Application Form",
                 nav_gallery: "Gallery",
                 nav_theme_toggle: "Toggle Theme",

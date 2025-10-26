@@ -99,7 +99,12 @@
                 <a href="#education" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center" onclick="showPage('education')">
                     <i class="fas fa-graduation-cap fa-fw mr-2"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
                 </a>
-                <a href="#gallery" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center" onclick="showPage('gallery')">
+                <!-- NEW: Book Button Added -->
+                <a href="book.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-book fa-fw mr-2"></i><span data-translate-key="nav_book">សៀវភៅ</span>
+                </a>
+                <!-- MODIFIED: Changed link to gallery.html and removed onclick -->
+                <a href="gallery.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
                     <i class="fas fa-images fa-fw mr-2"></i><span data-translate-key="nav_gallery">កម្រងរូបភាព</span>
                 </a>
                 <!-- MODIFIED: Changed text and icon for Register, updated href, removed onclick -->
@@ -148,7 +153,12 @@
             <a href="#education" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center" onclick="showPage('education')">
                 <i class="fas fa-graduation-cap fa-fw mr-3"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
             </a>
-            <a href="#gallery" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center" onclick="showPage('gallery')">
+            <!-- NEW: Book Button Added -->
+            <a href="book.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-book fa-fw mr-3"></i><span data-translate-key="nav_book">សៀវភៅ</span>
+            </a>
+            <!-- MODIFIED: Changed link to gallery.html and removed onclick -->
+            <a href="gallery.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
                 <i class="fas fa-images fa-fw mr-3"></i><span data-translate-key="nav_gallery">កម្រងរូបភាព</span>
             </a>
             <!-- MODIFIED: Changed text and icon for Register, updated href, removed onclick -->
@@ -192,43 +202,63 @@
                         <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-translate-key="about_p2">ពួកគេធ្វើការលើអ្វីៗគ្រប់យ៉ាង ចាប់ពីឧបករណ៍តូចៗ រហូតដល់គ្រឿងម៉ាស៊ីនធំៗ ដូចជា យានយន្ត យន្តហោះ រោងចក្រថាមពល និងមនុស្សយន្តជាដើម។</p>
                      </div>
                 </div>
+                
+                <!-- START: Modified Skills Section -->
                 <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-gray-100" data-translate-key="about_skills_title">ជំនាញសំខាន់ៗរបស់មេកានិក</h3>
-                     <div class="grid grid-cols-2 gap-x-8 gap-y-6 max-w-md mx-auto md:max-w-xl md:gap-y-8 md:gap-x-12">
-                        <div class="flex flex-col items-center">
-                            <i class="fas fa-brain fa-2x text-blue-500 mb-2"></i>
-                            <p class="text-gray-900 dark:text-gray-100 text-center" data-translate-key="skill_analysis">ការគិតវិភាគ</p>
+                    <h3 class="text-2xl font-bold text-center mb-10 text-gray-900 dark:text-gray-100" data-translate-key="about_skills_title">ជំនាញសំខាន់ៗរបស់មេកានិក</h3>
+                    <!-- Changed to grid-cols-1 md:grid-cols-2 lg:grid-cols-4 for card layout -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Skill Card 1: Analytical Thinking -->
+                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+                            <i class="fas fa-brain fa-3x text-blue-500 mb-4"></i>
+                            <h4 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="skill_analysis">ការគិតវិភាគ</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="skill_analysis_desc">សមត្ថភាពក្នុងការបំបែកបញ្ហាស្មុគស្មាញ និងវាយតម្លៃព័ត៌មាន។</p>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <i class="fas fa-users-cog fa-2x text-blue-500 mb-2"></i>
-                            <p class="text-gray-900 dark:text-gray-100 text-center" data-translate-key="skill_problem_solving">ការដោះស្រាយបញ្ហា</p>
+                        <!-- Skill Card 2: Problem Solving -->
+                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+                            <i class="fas fa-users-cog fa-3x text-blue-500 mb-4"></i>
+                            <h4 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="skill_problem_solving">ការដោះស្រាយបញ្ហា</h4>
+                             <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="skill_problem_solving_desc">ការស្វែងរកដំណោះស្រាយប្រកបដោយប្រសិទ្ធភាព និងភាពច្នៃប្រឌិត។</p>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <i class="fas fa-calculator fa-2x text-blue-500 mb-2"></i>
-                            <p class="text-gray-900 dark:text-gray-100 text-center" data-translate-key="skill_math">គណិតវិទ្យា</p>
+                         <!-- Skill Card 3: Mathematics -->
+                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+                            <i class="fas fa-calculator fa-3x text-blue-500 mb-4"></i>
+                            <h4 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="skill_math">គណិតវិទ្យា</h4>
+                             <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="skill_math_desc">ការអនុវត្តគោលការណ៍គណិតវិទ្យា និងរូបវិទ្យា ដើម្បីវិភាគ និងរចនា។</p>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <i class="fas fa-drafting-compass fa-2x text-blue-500 mb-2"></i>
-                            <p class="text-gray-900 dark:text-gray-100 text-center" data-translate-key="skill_cad">ការរចនា (CAD)</p>
+                         <!-- Skill Card 4: CAD -->
+                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+                            <i class="fas fa-drafting-compass fa-3x text-blue-500 mb-4"></i>
+                            <h4 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="skill_cad">ការរចនា (CAD)</h4>
+                             <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="skill_cad_desc">ការប្រើប្រាស់កម្មវិធី Computer-Aided Design ដើម្បីបង្កើតគំរូ 2D និង 3D។</p>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <i class="fas fa-code fa-2x text-blue-500 mb-2"></i>
-                            <p class="text-gray-900 dark:text-gray-100 text-center" data-translate-key="skill_cnc_code">សរសេរកូដ CNC</p>
+                         <!-- Skill Card 5: CNC Programming -->
+                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+                            <i class="fas fa-code fa-3x text-blue-500 mb-4"></i>
+                            <h4 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="skill_cnc_code">សរសេរកូដ CNC</h4>
+                             <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="skill_cnc_code_desc">ការសរសេរ G-code និង M-code ដើម្បីបញ្ជាម៉ាស៊ីន CNC។</p>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <i class="fas fa-industry fa-2x text-blue-500 mb-2"></i>
-                            <p class="text-gray-900 dark:text-gray-100 text-center" data-translate-key="skill_cnc_machine">ប្រើប្រាស់ម៉ាស៊ីន CNC</p>
+                         <!-- Skill Card 6: CNC Machine Operation -->
+                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+                            <i class="fas fa-industry fa-3x text-blue-500 mb-4"></i>
+                            <h4 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="skill_cnc_machine">ប្រើប្រាស់ម៉ាស៊ីន CNC</h4>
+                             <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="skill_cnc_machine_desc">ការដំឡើង និងដំណើរការម៉ាស៊ីនក្រឡឹង និងហ្វ្រេស CNC។</p>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <i class="fas fa-project-diagram fa-2x text-blue-500 mb-2"></i>
-                            <p class="text-gray-900 dark:text-gray-100 text-center" data-translate-key="skill_hydraulics">ប្រព័ន្ធប្រេង និងខ្យល់</p>
+                         <!-- Skill Card 7: Hydraulics & Pneumatics -->
+                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+                            <i class="fas fa-project-diagram fa-3x text-blue-500 mb-4"></i>
+                            <h4 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="skill_hydraulics">ប្រព័ន្ធប្រេង និងខ្យល់</h4>
+                             <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="skill_hydraulics_desc">ការយល់ដឹង និងរចនាប្រព័ន្ធបញ្ជាដោយ Hydraulics និង Pneumatics។</p>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <i class="fas fa-microchip fa-2x text-blue-500 mb-2"></i>
-                            <p class="text-gray-900 dark:text-gray-100 text-center" data-translate-key="skill_electronics">គ្រឿងអេឡិចត្រូនិក</p>
+                         <!-- Skill Card 8: Electronics -->
+                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+                            <i class="fas fa-microchip fa-3x text-blue-500 mb-4"></i>
+                            <h4 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100" data-translate-key="skill_electronics">គ្រឿងអេឡិចត្រូនិក</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="skill_electronics_desc">ចំណេះដឹងមូលដ្ឋានគ្រឹះនៃសៀគ្វី និងគ្រឿងបង្គុំអេឡិចត្រូនិក។</p>
                         </div>
                     </div>
                 </div>
+                <!-- END: Modified Skills Section -->
 
                 <div class="py-16">
                     <h2 class="text-center text-3xl font-bold mb-10 text-gray-900 dark:text-gray-100" data-translate-key="home_why_title">ហេតុអ្វីត្រូវជ្រើសរើសជំនាញវិស្វកម្មមេកានិក?</h2>
@@ -259,8 +289,10 @@
             </div>
         </section>
 
-        <section id="specializations" class="page-content py-10">
+        <section id="specializations" class="page-content py-1">
             <div class="text-center mb-12">
+                <!-- START: ADDED LOGO IMAGE -->
+                <img src="photo/1.png" alt="Mechanical Engineering Logo" class="w-24 h-24 mx-auto mb-4 object-contain">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="spec_title">ផ្នែកឯកទេសសំខាន់ៗ</h2>
                 <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="spec_subtitle">វិស្វកម្មមេកានិកគឺជាជំនាញដ៏ធំទូលាយ ដែលមានឯកទេសជាច្រើនគួរឱ្យចាប់អារម្មណ៍។</p>
             </div>
@@ -303,8 +335,10 @@
             </div>
         </section>
         
-        <section id="education" class="page-content py-10">
+        <section id="education" class="page-content py-1">
             <div class="text-center mb-12">
+                <!-- START: ADDED LOGO IMAGE -->
+                <img src="photo/1.png" alt="Mechanical Engineering Logo" class="w-24 h-24 mx-auto mb-4 object-contain">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="education_title">កម្រិតសិក្សា</h2>
                 <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="education_subtitle">ស្វែងយល់អំពីកម្រិតសញ្ញាបត្រដែលអ្នកអាចបន្តការសិក្សាក្នុងជំនាញវិស្វកម្មមេកានិក។</p>
             </div>
@@ -331,92 +365,15 @@
                      </div>
                  </div>
             </div>
+            <!-- MODIFIED: Changed button to <a> tag linking to book.html -->
             <div class="mt-16 text-center">
-                <button onclick="showPage('gallery')" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300 text-lg shadow-lg inline-flex items-center group">
-                    <span data-translate-key="next_button_gallery">កម្រងរូបភាព</span> <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-2 transition-transform"></i>
-                </button>
-            </div>
-        </section>
-
-        <section id="gallery" class="page-content py-10">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100" data-translate-key="gallery_title">កម្រងរូបភាពសកម្មភាព</h2>
-                <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-3xl mx-auto" data-translate-key="gallery_subtitle">ទិដ្ឋភាពខ្លះៗនៃសកម្មភាពសិក្សា និងគម្រោងរបស់និស្សិតយើង។</p>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Image 1: CAD -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
-                    <img src="photo/R2.jpg" alt="រូបភាពការរចនា CAD" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_cad_title">ការរចនា 2D&3D (CAD)</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_cad_desc">ថ្នាក់រៀនគូរ 2D&3D ដោយប្រើ AutoCAD និង SolidWorks។</p>
-                    </div>
-                </div>
-                <!-- Image 2: CNC -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
-                    <img src="photo/R7.jpg" alt="រូបភាពម៉ាស៊ីន CNC" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_cnc_title">ការអនុវត្តម៉ាស៊ីន CNC</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_cnc_desc">និស្សិតរៀនបញ្ជា និងដំណើរការម៉ាស៊ីន CNC។</p>
-                    </div>
-                </div>
-                <!-- Image 3: Welding -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
-                    <img src="photo/T1.jpg" alt="រូបភាពការផ្សារ" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_welding_title">ការផ្សារ</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_welding_desc">អនុវត្តបច្ចេកទេសផ្សារអគ្គីសនី និងឧស្ម័ន។</p>
-                    </div>
-                </div>
-                <!-- Image 4: Group Project -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
-                    <img src="photo/T2.jpg" alt="រូបភាពការងារក្រុម" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_group_title">ការងារក្រុម</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_group_desc">និស្សិតធ្វើការរួមគ្នាលើគម្រោងជាក់ស្តែង។</p>
-                    </div>
-                </div>
-                <!-- Image 5: Hydraulics -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
-                    <img src="photo/R11.jpg" alt="រូបភាពប្រព័ន្ធប្រេង និងខ្យល់" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_hydraulics_title">ប្រព័ន្ធប្រេង និង ខ្យល់</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_hydraulics_desc">សិក្សា និងតម្លើងប្រព័ន្ធបញ្ជាដោយប្រេង និងខ្យល់។</p>
-                    </div>
-                </div>
-                <!-- Image 6: FEA -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
-                    <img src="photo/R14.jpg" alt="រូបភាពការវិភាគ FEA" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_fea_title">ការវិភាគធាតុកំណត់ (FEA)</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_fea_desc">ប្រើកម្មវិធីកុំព្យូទ័រដើម្បីវិភាគកម្លាំង និងសីតុណ្ហភាព។</p>
-                    </div>
-                </div>
-                <!-- Image 7: Automotive -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
-                    <img src="photo/T3.jpg" alt="រូបភាពសិក្សាអំពីរថយន្ត" class="w-full h-60 object-cover group-hover:scale-1E05 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_auto_title">សិក្សាអំពីរថយន្ត</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_auto_desc">ស្វែងយល់ពីប្រព័ន្ធ និងគ្រឿងបង្គុំរបស់រថយន្ត។</p>
-                    </div>
-                </div>
-                <!-- Image 8: Arduino -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
-                    <img src="photo/T4.jpg" alt="រូបភាពប្រព័ន្ធ Arduino" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-translate-key="gallery_arduino_title">Arduino System</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400" data-translate-key="gallery_arduino_desc">រៀនសរសេរកូដ និងបញ្ជាគ្រឿងអេឡិចត្រូនិក។</p>
-                    </div>
-                </div>
-            </div>
-            <!-- MODIFIED: Changed button to <a> tag, linking to register.html -->
-            <div class="mt-16 text-center">
-                <a href="register.html" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300 text-lg shadow-lg inline-flex items-center group">
-                    <span data-translate-key="next_button_register">បំពេញពាក្យស្នើសុំ</span> <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-2 transition-transform"></i>
+                <a href="book.html" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300 text-lg shadow-lg inline-flex items-center group">
+                    <span data-translate-key="next_button_book">ឃ្លាំងសៀវភៅ</span> <i class="fas fa-book ml-3 transform group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
         </section>
+
+        <!-- REMOVED: Gallery Section -->
 
         <!-- REMOVED: Register Section. It is now in register.html -->
 
@@ -511,6 +468,7 @@
                 nav_home: "ទំព័រដើម",
                 nav_specializations: "ឯកទេស",
                 nav_education: "កម្រិតសិក្សា",
+                nav_book: "សៀវភៅ", // NEW
                 nav_register: "បំពេញពាក្យស្នើសុំ", // MODIFIED
                 nav_gallery: "កម្រងរូបភាព",
                 nav_theme_toggle: "ប្តូរពន្លឺ",
@@ -533,13 +491,21 @@
                 about_p2: "ពួកគេធ្វើការលើអ្វីៗគ្រប់យ៉ាង ចាប់ពីឧបករណ៍តូចៗ រហូតដល់គ្រឿងម៉ាស៊ីនធំៗ ដូចជា យានយន្ត យន្តហោះ រោងចក្រថាមពល និងមនុស្សយន្តជាដើម។",
                 about_skills_title: "ជំនាញសំខាន់ៗរបស់មេកានិក",
                 skill_analysis: "ការគិតវិភាគ",
+                skill_analysis_desc: "សមត្ថភាពក្នុងការបំបែកបញ្ហាស្មុគស្មាញ និងវាយតម្លៃព័ត៌មាន។", // NEW
                 skill_problem_solving: "ការដោះស្រាយបញ្ហា",
+                skill_problem_solving_desc: "ការស្វែងរកដំណោះស្រាយប្រកបដោយប្រសិទ្ធភាព និងភាពច្នៃប្រឌិត។", // NEW
                 skill_math: "គណិតវិទ្យា",
+                skill_math_desc: "ការអនុវត្តគោលការណ៍គណិតវិទ្យា និងរូបវិទ្យា ដើម្បីវិភាគ និងរចនា។", // NEW
                 skill_cad: "ការរចនា (CAD)",
+                skill_cad_desc: "ការប្រើប្រាស់កម្មវិធី Computer-Aided Design ដើម្បីបង្កើតគំរូ 2D និង 3D។", // NEW
                 skill_cnc_code: "សរសេរកូដ CNC",
+                skill_cnc_code_desc: "ការសរសេរ G-code និង M-code ដើម្បីបញ្ជាម៉ាស៊ីន CNC។", // NEW
                 skill_cnc_machine: "ប្រើប្រាស់ម៉ាស៊ីន CNC",
+                skill_cnc_machine_desc: "ការដំឡើង និងដំណើរការម៉ាស៊ីនក្រឡឹង និងហ្វ្រេស CNC។", // NEW
                 skill_hydraulics: "ប្រព័ន្ធប្រេង និងខ្យល់",
+                skill_hydraulics_desc: "ការយល់ដឹង និងរចនាប្រព័ន្ធបញ្ជាដោយ Hydraulics និង Pneumatics។", // NEW
                 skill_electronics: "គ្រឿងអេឡិចត្រូនិក",
+                skill_electronics_desc: "ចំណេះដឹងមូលដ្ឋានគ្រឹះនៃសៀគ្វី និងគ្រឿងបង្គុំអេឡិចត្រូនិក។", // NEW
                 next_button_spec: "ផ្នែកឯកទេស", 
                 spec_title: "ផ្នែកឯកទេសសំខាន់ៗ",
                 spec_subtitle: "វិស្វកម្មមេកានិកគឺជាជំនាញដ៏ធំទូលាយ ដែលមានឯកទេសជាច្រើនគួរឱ្យចាប់អារម្មណ៍។",
@@ -583,7 +549,7 @@
                         </div>
                     </div>`,
                 next_button_education: "កម្រិតសិក្សា",
-                next_button_gallery: "កម្រងរូបភាព",
+                next_button_book: "ឃ្លាំងសៀវភៅ", // MODIFIED
                 next_button_register: "បំពេញពាក្យស្នើសុំ", // MODIFIED
                 education_title: "កម្រិតសិក្សា",
                 education_subtitle: "ស្វែងយល់អំពីកម្រិតសញ្ញាបត្រដែលអ្នកអាចបន្តការសិក្សាក្នុងជំនាញវិស្វកម្មមេកានិក។",
@@ -610,25 +576,8 @@
                 contact_form_submit: "ផ្ញើសារ",
                 contact_form_cancel: "បោះបង់",
                 footer_text: "ចាប់ផ្តើមដំណើររបស់អ្នកក្នុងវិស័យវិស្វកម្មមេកានិកនៅថ្ងៃនេះ ហើយរួមចំណែកបង្កើតបច្ចេកវិទ្យាថ្មីៗ។",
-                footer_copyright: "រក្សាសិទ្ធិគ្រប់យ៉ាង © 2025 | បង្កើតដោយ ខៀវ សំណាង",
-                gallery_title: "កម្រងរូបភាពសកម្មភាព",
-                gallery_subtitle: "ទិដ្ឋភាពខ្លះៗនៃសកម្មភាពសិក្សា និងគម្រោងរបស់និស្សិតយើង។",
-                gallery_cad_title: "ការរចនា 2D&3D (CAD)",
-                gallery_cad_desc: "ថ្នាក់រៀនគូរ 2D&3D ដោយប្រើ AutoCAD និង SolidWorks។",
-                gallery_cnc_title: "ការអនុវត្តម៉ាស៊ីន CNC",
-                gallery_cnc_desc: "និស្សិតរៀនបញ្ជា និងដំណើរការម៉ាស៊ីន CNC។",
-                gallery_welding_title: "ការផ្សារ",
-                gallery_welding_desc: "អនុវត្តបច្ចេកទេសផ្សារអគ្គីសនី និងឧស្ម័ន។",
-                gallery_group_title: "ការងារក្រុម",
-                gallery_group_desc: "និស្សិតធ្វើការរួមគ្នាលើគម្រោងជាក់ស្តែង។",
-                gallery_hydraulics_title: "ប្រព័ន្ធប្រេង និង ខ្យល់",
-                gallery_hydraulics_desc: "សិក្សា និងតម្លើងប្រព័ន្ធបញ្ជាដោយប្រេង និងខ្យល់។",
-                gallery_fea_title: "ការវិភាគធាតុកំណត់ (FEA)",
-                gallery_fea_desc: "ប្រើកម្មវិធីកុំព្យូទ័រដើម្បីវិភាគកម្លាំង និងសីតុណ្ហភាព។",
-                gallery_auto_title: "សិក្សាអំពីរថយន្ត",
-                gallery_auto_desc: "ស្វែងយល់ពីប្រព័ន្ធ និងគ្រឿងបង្គុំរបស់រថយន្ត។",
-                gallery_arduino_title: "Arduino System",
-                gallery_arduino_desc: "រៀនសរសេរកូដ និងបញ្ជាគ្រឿងអេឡិចត្រូនិក。"
+                footer_copyright: "រក្សាសិទ្ធិគ្រប់យ៉ាង © 2025 | បង្កើតដោយ ខៀវ សំណាង"
+                // REMOVED: gallery_... keys
             },
             en: {
                 page_title: "Mechanical Engineering",
@@ -636,6 +585,7 @@
                 nav_home: "Home",
                 nav_specializations: "Specializations",
                 nav_education: "Education",
+                nav_book: "Book", // NEW
                 nav_register: "Application Form", // MODIFIED
                 nav_gallery: "Gallery",
                 nav_theme_toggle: "Toggle Theme",
@@ -658,13 +608,21 @@
                 about_p2: "They work on everything from small devices to large machines, such as vehicles, aircraft, power plants, and robots.",
                 about_skills_title: "Key Skills in Mechanics",
                 skill_analysis: "Analytical Thinking",
+                skill_analysis_desc: "Ability to break down complex problems and evaluate information.", // NEW
                 skill_problem_solving: "Problem-Solving",
+                skill_problem_solving_desc: "Finding effective and creative solutions to challenges.", // NEW
                 skill_math: "Mathematics",
+                skill_math_desc: "Applying mathematical and physical principles for analysis and design.", // NEW
                 skill_cad: "Design (CAD)",
+                skill_cad_desc: "Using Computer-Aided Design software to create 2D and 3D models.", // NEW
                 skill_cnc_code: "CNC Programming",
+                skill_cnc_code_desc: "Writing G-code and M-code to control CNC machines.", // NEW
                 skill_cnc_machine: "CNC Machine Operation",
+                skill_cnc_machine_desc: "Setting up and operating CNC lathes and mills.", // NEW
                 skill_hydraulics: "Hydraulics & Pneumatics",
+                skill_hydraulics_desc: "Understanding and designing hydraulic and pneumatic control systems.", // NEW
                 skill_electronics: "Electronics",
+                skill_electronics_desc: "Basic knowledge of electronic circuits and components.", // NEW
                 next_button_spec: "Specializations",
                 spec_title: "Key Specializations",
                 spec_subtitle: "Mechanical engineering is a broad field with many interesting specializations.",
@@ -708,7 +666,7 @@
                         </div>
                     </div>`,
                 next_button_education: "Education Levels",
-                next_button_gallery: "Gallery",
+                next_button_book: "Book Library", // MODIFIED
                 next_button_register: "Application Form", // MODIFIED
                 education_title: "Education Levels",
                 education_subtitle: "Learn about the degree levels you can pursue in mechanical engineering.",
@@ -735,25 +693,8 @@
                 contact_form_submit: "Send Message",
                 contact_form_cancel: "Cancel",
                 footer_text: "Start your journey in mechanical engineering today and contribute to creating new technologies.",
-                footer_copyright: "All rights reserved © 2025 | Built By Khiev Samnang",
-                gallery_title: "Activity Gallery",
-                gallery_subtitle: "A glimpse into our student activities and projects.",
-                gallery_cad_title: "2D&3D Design (CAD)",
-                gallery_cad_desc: "Class for 2D&3D drawing using AutoCAD and SolidWorks.",
-                gallery_cnc_title: "CNC Machine Practice",
-                gallery_cnc_desc: "Students learn to operate and run CNC machines.",
-                gallery_welding_title: "Welding",
-                gallery_welding_desc: "Practicing electric and gas welding techniques.",
-                gallery_group_title: "Group Project",
-                gallery_group_desc: "Students collaborating on a real-world project.",
-                gallery_hydraulics_title: "Hydraulics & Pneumatics",
-                gallery_hydraulics_desc: "Study and assembly of hydraulic and pneumatic systems.",
-                gallery_fea_title: "Finite Element Analysis (FEA)",
-                gallery_fea_desc: "Using software to analyze stress and temperature.",
-                gallery_auto_title: "Automotive Study",
-                gallery_auto_desc: "Understanding the systems and components of vehicles.",
-                gallery_arduino_title: "Arduino System",
-                gallery_arduino_desc: "Learning to code and control electronics."
+                footer_copyright: "All rights reserved © 2025 | Built By Khiev Samnang"
+                // REMOVED: gallery_... keys
             }
         };
 
@@ -925,12 +866,44 @@
             en: 'https://flagcdn.com/gb.svg'
         };
         
+        // Helper function to get translation safely
+        function getTranslation(key) {
+             try {
+                const currentLang = localStorage.getItem('preferredLanguage') || 'km';
+                // Check if translations and the specific language exist
+                if (typeof translations !== 'undefined' && translations[currentLang] && translations[currentLang][key]) {
+                    return translations[currentLang][key];
+                }
+                 // Fallback to English if Khmer key not found
+                 if (currentLang === 'km' && typeof translations !== 'undefined' && translations['en'] && translations['en'][key]) {
+                     // console.warn(`Khmer key "${key}" not found, using English fallback.`);
+                     return translations['en'][key];
+                 }
+                 // Fallback to the key itself if no translation found
+                  // console.warn(`Translation key "${key}" not found for language "${currentLang}" or fallback.`);
+                  return key; // Return the key as a last resort
+             } catch (e) {
+                  console.error("Error getting translation for key:", key, e);
+                  return key; // Return key on error
+             }
+        }
+
+
         function setLanguage(lang) {
             const langData = translations[lang];
             if (!langData) {
                 console.error(`Translations for language "${lang}" not found.`);
                 return;
             }
+
+            // Update localStorage FIRST
+            try {
+                localStorage.setItem('preferredLanguage', lang);
+                console.log("Saved language:", lang);
+            } catch (error) {
+                console.error("Could not save language preference to localStorage:", error);
+            }
+
 
             if (htmlEl) {
                 htmlEl.lang = lang;
@@ -941,33 +914,64 @@
             if (currentLangFlag) {
                  currentLangFlag.src = flagSources[lang];
             } else {
-                 console.warn("Current language flag element not found.");
+                 // console.warn("Current language flag element not found.");
             }
 
             document.querySelectorAll('[data-translate-key]').forEach(el => {
                 const key = el.getAttribute('data-translate-key');
-                if (langData[key] !== undefined) {
-                    // Update email and phone text content directly if it's the specific <p> tag
+                 const translatedText = getTranslation(key); // Use the helper
+
+                if (translatedText !== key || lang === 'en') { // Update if translation found or if target is English (to clear old Khmer)
                     if (key.includes('_list') || key.includes('_details')) {
-                        el.innerHTML = langData[key]; // Inject HTML for lists/details
+                        el.innerHTML = translatedText;
                     } else {
-                        el.textContent = langData[key]; // Set text for simple elements
+                         if (el.tagName === 'OPTION') {
+                             el.textContent = translatedText;
+                         } else if (el.tagName === 'INPUT' && el.type === 'submit') {
+                            el.value = translatedText;
+                         } else if (el.tagName === 'TITLE') {
+                             el.textContent = translatedText;
+                         }
+                         else {
+                             let textUpdated = false;
+                             for (let node of el.childNodes) {
+                                if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
+                                    node.textContent = translatedText;
+                                    textUpdated = true;
+                                    break;
+                                } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SPAN' && !node.hasAttribute('data-translate-key')) {
+                                     // Check if it's likely the text span based on lack of key
+                                     if(node.childNodes.length === 1 && node.firstChild.nodeType === Node.TEXT_NODE){
+                                          node.firstChild.textContent = translatedText;
+                                           textUpdated = true;
+                                           break;
+                                     } else if (node.textContent.trim().length > 0) {
+                                         // More complex case, might replace all content
+                                         // node.textContent = translatedText; textUpdated = true; break;
+                                     }
+                                }
+                             }
+                              if (!textUpdated && !el.querySelector('i') && !el.querySelector('img')) { // Only update if no text node found and no icon/img
+                                   el.textContent = translatedText;
+                              }
+                         }
                     }
                 } else {
-                     console.warn(`Translation key "${key}" not found for language "${lang}".`);
+                      // console.warn(`Translation key "${key}" not found for language "${lang}". Keeping existing text:`, el.textContent.trim());
                 }
             });
+
+            // Close mobile menu on lang select
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
             
+            // Close language dropdown
             const langOptionsEl = document.getElementById('lang-options');
             if (langOptionsEl) {
                 langOptionsEl.classList.add('hidden');
             }
 
-            try {
-                localStorage.setItem('preferredLanguage', lang);
-            } catch (error) {
-                console.error("Could not save language preference to localStorage:", error);
-            }
         }
         
         // --- Language Dropdown Logic ---
@@ -1005,12 +1009,13 @@
              const mobileMenuEl = document.getElementById('mobile-menu');
              if (mobileMenuEl) {
                  mobileMenuEl.querySelectorAll('a').forEach(link => {
-                     if (link.id !== 'mobile-theme-toggle') {
+                     // Check if it's a language link
+                     if (!link.onclick || (link.onclick && !link.onclick.toString().includes("setLanguage"))) {
                          link.addEventListener('click', () => mobileMenuEl.classList.add('hidden'));
                      }
                  });
              } else {
-                  console.warn("Mobile menu element not found for attaching link listeners.");
+                  // console.warn("Mobile menu element not found for attaching link listeners.");
              }
          } else {
               console.warn("Mobile menu button not found.");
@@ -1052,8 +1057,8 @@
                 
                 const hash = window.location.hash;
                 let page = hash ? hash.substring(1) : 'home';
-                // MODIFIED: Removed 'register' from validPageIds
-                const validPageIds = ['home', 'specializations', 'education', 'gallery'];
+                // MODIFIED: Removed 'register' and 'gallery' from validPageIds
+                const validPageIds = ['home', 'specializations', 'education'];
                 if (!validPageIds.includes(page)) {
                     console.warn(`Invalid page ID "${page}" in hash, defaulting to home.`);
                     page = 'home';
@@ -1088,8 +1093,8 @@
              console.log("onpopstate triggered");
              const hash = window.location.hash;
              let page = hash ? hash.substring(1) : 'home';
-             // MODIFIED: Removed 'register' from validPageIds
-             const validPageIds = ['home', 'specializations', 'education', 'gallery'];
+             // MODIFIED: Removed 'register' and 'gallery' from validPageIds
+             const validPageIds = ['home', 'specializations', 'education'];
              if (!validPageIds.includes(page)) {
                  console.warn(`Invalid page ID "${page}" in popstate, defaulting to home.`);
                  page = 'home';
@@ -1115,4 +1120,3 @@
     </script>
 </body>
 </html>
-
