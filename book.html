@@ -232,7 +232,8 @@
             <div id="book-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 
                 <!-- Book 1 - UPDATED: សមត្ថភាពស្នូល (Core Capability) - MOVED TO FRONT -->
-                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="associate bachelor c1 c2 c3">
+                <!-- MODIFICATION: Removed 'c1', 'c2', 'c3' from data-level -->
+                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="associate bachelor">
                     <!-- EDITED: Changed h-96 to h-[30rem] -->
                     <img src="photo/TB1-2 Core Capability.jpg" alt="Core Capability Cover" class="w-full h-[30rem] object-cover">
                     <div class="p-6 flex-grow">
@@ -261,13 +262,13 @@
                     </div>
                 </div>
 
-                <!-- Book 2 - Remove associate -->
-                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="bachelor c1">
+                <!-- Book 2 - MODIFICATION: Changed data-level to 'c1', title and desc keys updated in script -->
+                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="c1">
                     <!-- EDITED: Changed h-96 to h-[30rem] -->
-                    <img src="https://placehold.co/400x600/10B981/FFFFFF?text=AutoCAD" alt="Lesson 2 Cover" class="w-full h-[30rem] object-cover">
+                    <img src="photo/Book cover/1.jpg" alt="Lesson 2 Cover" class="w-full h-[30rem] object-cover">
                     <div class="p-6 flex-grow">
-                        <h3 class="book-title text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2" data-translate-key="book2_title">ការគូរប្លង់ 2D (AutoCAD)</h3>
-                        <p class="book-desc text-sm text-gray-600 dark:text-gray-400" data-translate-key="book2_desc">សៀវភៅណែនាំអំពីការប្រើប្រាស់កម្មវិធី AutoCAD សម្រាប់បង្កើតគំនូសប្លង់បច្ចេកទេស 2D។</p>
+                        <h3 class="book-title text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2" data-translate-key="book2_title">មេរៀនកម្រិត១ (C1)</h3>
+                        <p class="book-desc text-sm text-gray-600 dark:text-gray-400" data-translate-key="book2_desc">មេរៀនសម្រាប់កម្រិត C1 ປະກອບមាន ៤ ម៉ូឌុលដំបូងនៃសមត្ថភាពស្នូល។</p>
                     </div>
                     <div class="p-6 bg-gray-50 dark:bg-gray-700">
                         <button onclick="openModal('book2')" class="w-full text-center bg-blue-600 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300 inline-flex items-center justify-center group">
@@ -276,8 +277,8 @@
                     </div>
                 </div>
 
-                <!-- Book 3 - Remove associate -->
-                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="bachelor c2">
+                <!-- Book 3 - MODIFICATION: Removed 'c2' from data-level -->
+                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="bachelor">
                     <!-- EDITED: Changed h-96 to h-[30rem] -->
                     <img src="https://placehold.co/400x600/EF4444/FFFFFF?text=SolidWorks" alt="Lesson 3 Cover" class="w-full h-[30rem] object-cover">
                     <div class="p-6 flex-grow">
@@ -291,8 +292,8 @@
                     </div>
                 </div>
 
-                <!-- Book 4 - Remove associate -->
-                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="bachelor c3">
+                <!-- Book 4 - MODIFICATION: Removed 'c3' from data-level -->
+                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="bachelor">
                     <!-- EDITED: Changed h-96 to h-[30rem] -->
                     <img src="https://placehold.co/400x600/F59E0B/FFFFFF?text=CNC" alt="Lesson 4 Cover" class="w-full h-[30rem] object-cover">
                     <div class="p-6 flex-grow">
@@ -306,8 +307,8 @@
                     </div>
                 </div>
 
-                <!-- Book 5 - Keep existing data-level -->
-                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="bachelor c2">
+                <!-- Book 5 - MODIFICATION: Removed 'c2' from data-level -->
+                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="bachelor">
                     <!-- EDITED: Changed h-96 to h-[30rem] -->
                     <img src="https://placehold.co/400x600/6366F1/FFFFFF?text=Hydraulics" alt="Lesson 5 Cover" class="w-full h-[30rem] object-cover">
                     <div class="p-6 flex-grow">
@@ -321,8 +322,8 @@
                     </div>
                 </div>
                 
-                <!-- Book 6 - Keep existing data-level -->
-                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="bachelor c3">
+                <!-- Book 6 - MODIFICATION: Removed 'c3' from data-level -->
+                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="bachelor">
                     <!-- EDITED: Changed h-96 to h-[30rem] -->
                     <img src="https://placehold.co/400x600/8B5CF6/FFFFFF?text=រថយន្ត" alt="Lesson 6 Cover" class="w-full h-[30rem] object-cover">
                     <div class="p-6 flex-grow">
@@ -331,6 +332,34 @@
                     </div>
                     <div class="p-6 bg-gray-50 dark:bg-gray-700">
                          <button onclick="openModal('book6')" class="w-full text-center bg-blue-600 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300 inline-flex items-center justify-center group">
+                            <span data-translate-key="book_view_btn">មើលមេរៀន</span> <i class="fas fa-eye ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- NEW: Book 8 (Level C2) -->
+                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="c2">
+                    <img src="photo/Book cover/2.jpg" alt="Lesson C2 Cover" class="w-full h-[30rem] object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="book-title text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2" data-translate-key="book8_title">មេរៀនកម្រិត២ (C2)</h3>
+                        <p class="book-desc text-sm text-gray-600 dark:text-gray-400" data-translate-key="book8_desc">មេរៀនសម្រាប់កម្រិត C2។</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 dark:bg-gray-700">
+                         <button onclick="openModal('book8')" class="w-full text-center bg-blue-600 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300 inline-flex items-center justify-center group">
+                            <span data-translate-key="book_view_btn">មើលមេរៀន</span> <i class="fas fa-eye ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- NEW: Book 9 (Level C3) -->
+                <div class="book-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group flex flex-col" data-level="c3">
+                    <img src="photo/Book cover/3.jpg" alt="Lesson C3 Cover" class="w-full h-[30rem] object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="book-title text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2" data-translate-key="book9_title">មេរៀនកម្រិត៣ (C3)</h3>
+                        <p class="book-desc text-sm text-gray-600 dark:text-gray-400" data-translate-key="book9_desc">មេរៀនសម្រាប់កម្រិត C3។</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 dark:bg-gray-700">
+                         <button onclick="openModal('book9')" class="w-full text-center bg-blue-600 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300 inline-flex items-center justify-center group">
                             <span data-translate-key="book_view_btn">មើលមេរៀន</span> <i class="fas fa-eye ml-2"></i>
                         </button>
                     </div>
@@ -467,8 +496,9 @@
                 // MODIFIED: Renamed "មូលដ្ឋានគ្រឹះមេកានិក" to "សមត្ថភាពស្នូល"
                 book1_title: "សមត្ថភាពស្នូល",
                 book1_desc: "ឯកសារណែនាំអំពីគោលការណ៍គ្រឹះនៃវិស្វកម្មមេកានិក ស្ថានភាពលំនឹង និងកម្លាំង។",
-                book2_title: "ការគូរប្លង់ 2D (AutoCAD)",
-                book2_desc: "សៀវភៅណែនាំអំពីការប្រើប្រាស់កម្មវិធី AutoCAD សម្រាប់បង្កើតគំនូសប្លង់បច្ចេកទេស 2D។",
+                // MODIFICATION: Changed book 2 title and desc
+                book2_title: "មេរៀនកម្រិត១ (C1)",
+                book2_desc: "មេរៀនសម្រាប់កម្រិត C1 រួមមានម៉ូឌុលចំនួន ៤ នៃសមត្ថភាពស្នូល។",
                 book3_title: "ការរចនា 3D (SolidWorks)",
                 book3_desc: "ស្វែងយល់ពីការបង្កើតគំរូ 3D ការផ្គុំគ្រឿង និងការវិភាគស្ត្រេស (Stress Analysis) ជាមួយ SolidWorks។",
                 book4_title: "បច្ចេកវិទ្យា CNC",
@@ -480,6 +510,11 @@
                 // NEW: Added Basic Competency Book (Book 7)
                 book7_title: "សមត្ថភាពមូលដ្ឋាន",
                 book7_desc: "មុខវិជ្ជាស្នូលសម្រាប់កម្រិតបរិញ្ញាបត្ររងផ្តោតលើជំនាញមូលដ្ឋានគ្រឹះនៃមេកានិក។",
+                // NEW: Added Book 8 and 9
+                book8_title: "មេរៀនកម្រិត២ (C2)",
+                book8_desc: "មេរៀនសម្រាប់កម្រិត C2។",
+                book9_title: "មេរៀនកម្រិត៣ (C3)",
+                book9_desc: "មេរៀនសម្រាប់កម្រិត C3។",
                 book_view_btn: "មើលមេរៀន",
                 book_read_btn: "អាន",
                 book_download_btn: "ទាញយក",
@@ -495,6 +530,15 @@
                 module_9: "ម៉ូឌុលទី៩",
                 module_10: "ម៉ូឌុលទី១០",
                 module_11: "ម៉ូឌុលទី១១",
+                
+                // NEW C1, C2, C3 MODULES (Corrected Comment Syntax)
+                c1_mod_1: "មុខវិជ្ជា ប្រមុំ",
+                c1_mod_2: "មុខវិជ្ជា ជំនាញទន់",
+                c1_mod_3: "មុខវិជ្ជា ការបន្សីលោហៈ កម្រិត១",
+                c1_mod_4: "មុខវិជ្ជា ការបន្ស៉ីលោហៈ កម្រិត២",
+                c2_mod_1: "មុខវិជ្ជា ការបន្ស៉ីលោហៈ កម្រិត៣",
+                c3_mod_1: "មុខវិជ្ជា ការបន្ស៉ីលោហៈ កម្រិត៤",
+
                 no_lessons_yet: "មិនទាន់មានឯកសារមេរៀនសម្រាប់មុខវិជ្ជានេះទេ។",
                 contact_title: "ទំនាក់ទំនងមកពួកយើង",
                 contact_subtitle: "យើងរីករាយនឹងឆ្លើយតបរាល់សំណួររបស់អ្នក។ សូមទំនាក់ទំនងតាមរយៈបណ្តាញខាងក្រោម៖",
@@ -539,8 +583,9 @@
                 // MODIFIED: Renamed "Mechanical Fundamentals" to "Core Capability"
                 book1_title: "Core Capability",
                 book1_desc: "Introduction to the core principles of mechanical engineering, equilibrium, and forces.",
-                book2_title: "2D Drafting (AutoCAD)",
-                book2_desc: "A guide to using AutoCAD for creating 2D technical drawings.",
+                // MODIFICATION: Changed book 2 title and desc
+                book2_title: "Level 1 Lessons (C1)",
+                book2_desc: "Lessons for C1 level, includes the first 4 modules of Core Capability.",
                 book3_title: "3D Design (SolidWorks)",
                 book3_desc: "Learn 3D modeling, assembly, and Stress Analysis with SolidWorks.",
                 book4_title: "CNC Technology",
@@ -552,6 +597,11 @@
                 // NEW: Added Basic Competency Book (Book 7)
                 book7_title: "Basic Competency",
                 book7_desc: "Core subject for Associate degree focusing on foundational mechanical skills.",
+                // NEW: Added Book 8 and 9
+                book8_title: "Level 2 Lessons (C2)",
+                book8_desc: "Lessons for C2 level.",
+                book9_title: "Level 3 Lessons (C3)",
+                book9_desc: "Lessons for C3 level.",
                 book_view_btn: "View Lessons",
                 book_read_btn: "Read",
                 book_download_btn: "Download",
@@ -567,6 +617,15 @@
                 module_9: "Module 9",
                 module_10: "Module 10",
                 module_11: "Module 11",
+
+                // NEW C1, C2, C3 MODULES (Corrected Comment Syntax + Keys)
+                c1_mod_1: "Subject: Assembly",
+                c1_mod_2: "Subject: Soft Skills",
+                c1_mod_3: "Subject: Metal Tempering Level 1",
+                c1_mod_4: "Subject: Metal Tempering Level 2",
+                c2_mod_1: "Subject: Metal Tempering Level 3",
+                c3_mod_1: "Subject: Metal Tempering Level 4",
+
                 no_lessons_yet: "No lesson documents are available for this subject yet.",
                 contact_title: "Contact Us",
                 contact_subtitle: "We are happy to answer your questions. Please contact us through the channels below:",
@@ -600,12 +659,8 @@
 
         // Data structure for modal links
         const subjectLinks = {
-            // UPDATED: Book 1 is Core Capability, kept 7 modules
+            // MODIFICATION: Removed modules 1-4
             'book1': { titleKey: 'book1_title', links: [
-                { textKey: 'module_1', path: 'PDF/BT1-2/Module_1_Performing_technical_drawings_and_inspection.pdf' }, 
-                { textKey: 'module_2', path: 'PDF/BT1-2/Module 2- Performing lathe operation_khmer.pdf' }, 
-                { textKey: 'module_3', path: 'PDF/BT1-2/Module 3- Performing milling operation_Khmer.pdf' },
-                { textKey: 'module_4', path: 'PDF/BT1-2/Module 4- Performing grinding operation_Khmer.pdf' },
                 { textKey: 'module_5', path: 'PDF/BT1-2/Module_5_Performing_CNC_lathe_programming_and_operation.pdf' },
                 { textKey: 'module_6', path: 'PDF/BT1-2/Module_6_Performing_CNC_milling_programming_and_operation.pdf' },
                 { textKey: 'module_7', path: 'PDF/BT1-2/Module 7- 3D CAD-CAM application_Khmer.pdf' }
@@ -624,12 +679,27 @@
                 { textKey: 'module_10', path: 'PDF/BY1-2/Level 5-Module 10 Supervise preparation use and maintenance of tools and equipment-Khmer.pdf' },
                 { textKey: 'module_11', path: 'PDF/BY1-2/Level 5-Module 11 Supervise Interpretation of Technical Drawings- Plans and Mathematic Calculations-Khmer.pdf' }
             ]},
+            // MODIFICATION: Changed book 2 links to new C1 modules
+            'book2': { titleKey: 'book2_title', links: [
+                { textKey: 'c1_mod_1', path: 'PDF/C1 to C3/ប្រមុំ.pdf' }, 
+                { textKey: 'c1_mod_2', path: 'PDF/C1 to C3/ជំនាញទន់.pdf' }, 
+                { textKey: 'c1_mod_3', path: 'PDF/C1 to C3/ការបន្សីលោហៈ_សមត្ថភាពស្នូល 1.pdf' },
+                { textKey: 'c1_mod_4', path: 'PDF/C1 to C3/ឧបសម្ព័ន្ធទី២០CSការបន្ស៉ីលោហៈ_កម្រិត២.pdf' }
+            ]},
             // Temporarily hide links for these books
-            'book2': { titleKey: 'book2_title', links: [] },
             'book3': { titleKey: 'book3_title', links: [] },
             'book4': { titleKey: 'book4_title', links: [] },
             'book5': { titleKey: 'book5_title', links: [] },
-            'book6': { titleKey: 'book6_title', links: [] }
+            'book6': { titleKey: 'book6_title', links: [] },
+            // NEW: Added Book 8 and 9 links (using a placeholder PDF for now)
+            // MODIFICATION: Changed book 8 link to new C2 module
+            'book8': { titleKey: 'book8_title', links: [
+                { textKey: 'c2_mod_1', path: 'PDF/C1 to C3/ឧបសម្ព័ន្ធទី២០CSការបន្ស៉ីលោហៈ_កម្រិត៣.pdf' }
+            ]},
+            // MODIFICATION: Changed book 9 link to new C3 module
+            'book9': { titleKey: 'book9_title', links: [
+                { textKey: 'c3_mod_1', path: 'PDF/C1 to C3/ឧបសម្ព័ន្ធទី២០CSការបន្ស៉ីលោហៈ_កម្រិត៤.pdf' }
+            ]}
         };
 
         // Modal Functions
@@ -647,8 +717,9 @@
             const data = subjectLinks[subjectKey];
             modalTitle.textContent = getTranslation(data.titleKey);
 
-            // NEW: Check if the book should be temporarily hidden (Book 2, 3, 4, 5, 6)
-            const isTemporarilyHidden = (['book2', 'book3', 'book4', 'book5', 'book6'].includes(subjectKey));
+            // NEW: Check if the book should be temporarily hidden (Book 3, 4, 5, 6)
+            // MODIFICATION: Book 2, 8, 9 are no longer hidden
+            const isTemporarilyHidden = (['book3', 'book4', 'book5', 'book6'].includes(subjectKey));
 
 
             if (isTemporarilyHidden || (data.links && data.links.length === 0)) {
@@ -933,4 +1004,3 @@
     </script>
 </body>
 </html>
-
