@@ -107,6 +107,10 @@
                 <a href="gallery.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
                     <i class="fas fa-images fa-fw mr-2"></i><span data-translate-key="nav_gallery">កម្រងរូបភាព</span>
                 </a>
+                <!-- NEW: Schedule Button Added -->
+                <a href="schedule.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-calendar-alt fa-fw mr-2"></i><span data-translate-key="nav_schedule">ឈ្មោះនិងកាលវិភាគ</span>
+                </a>
                 <!-- MODIFIED: Changed text and icon for Register, updated href, removed onclick -->
                 <a href="register.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
                     <i class="fas fa-file-alt fa-fw mr-2"></i><span data-translate-key="nav_register">បំពេញពាក្យស្នើសុំ</span>
@@ -160,6 +164,10 @@
             <!-- MODIFIED: Changed link to gallery.html and removed onclick -->
             <a href="gallery.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
                 <i class="fas fa-images fa-fw mr-3"></i><span data-translate-key="nav_gallery">កម្រងរូបភាព</span>
+            </a>
+            <!-- NEW: Schedule Button Added -->
+            <a href="schedule.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-calendar-alt fa-fw mr-3"></i><span data-translate-key="nav_schedule">ឈ្មោះនិងកាលវិភាគ</span>
             </a>
             <!-- MODIFIED: Changed text and icon for Register, updated href, removed onclick -->
             <a href="register.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
@@ -471,6 +479,7 @@
                 nav_book: "សៀវភៅ", // NEW
                 nav_register: "បំពេញពាក្យស្នើសុំ", // MODIFIED
                 nav_gallery: "កម្រងរូបភាព",
+                nav_schedule: "ឈ្មោះនិងកាលវិភាគ", // NEW
                 nav_theme_toggle: "ប្តូរពន្លឺ",
                 lang_km: "ភាសាខ្មែរ",
                 lang_en: "English",
@@ -588,6 +597,7 @@
                 nav_book: "Book", // NEW
                 nav_register: "Application Form", // MODIFIED
                 nav_gallery: "Gallery",
+                nav_schedule: "Schedule & Lists", // NEW
                 nav_theme_toggle: "Toggle Theme",
                 lang_km: "Khmer",
                 lang_en: "English",
@@ -1117,6 +1127,48 @@
                }
               window.scrollTo(0, 0);
         };
+        
+        // --- Secret Admin Access (NEW) ---
+        // មុខងារសម្ងាត់សម្រាប់ Admin
+        try {
+            let adminClickCount = 0;
+            let adminClickTimer = null;
+            // ជ្រើសរើសឡូហ្គោ
+            const logoLink = document.querySelector('header nav a[href="#home"]'); 
+
+            if (logoLink) {
+                logoLink.addEventListener('click', () => {
+                    adminClickCount++; // រាប់ចំនួនចុច
+                    
+                    // បើមាន Timer កំពុងដំណើរការ សូមលុបវាចោល
+                    if (adminClickTimer) {
+                        clearTimeout(adminClickTimer);
+                    }
+                    
+                    // ចាប់ផ្តើម Timer ថ្មី (2 វិនាទី)
+                    // បើលើសពី 2 វិនាទី ទើបចុចម្តងទៀត វានឹងរាប់ជា 1 ឡើងវិញ
+                    adminClickTimer = setTimeout(() => {
+                        adminClickCount = 0;
+                        // console.log("Admin click count reset.");
+                    }, 2000); 
+
+                    // បើចុចបាន 5 ដង
+                    if (adminClickCount >= 5) {
+                        console.log("Admin access triggered!");
+                        window.location.href = 'admin.html'; // បញ្ជូនទៅទំព័រ admin
+                        adminClickCount = 0; // Reset ការរាប់
+                        clearTimeout(adminClickTimer); // លុប Timer
+                    }
+                });
+                console.log("Secret admin click listener attached to logo.");
+            } else {
+                console.warn("Logo link for admin access not found.");
+            }
+        } catch (error) {
+            console.error("Error setting up admin click listener:", error);
+        }
+        // --- End of Secret Admin Access ---
+        
     </script>
 </body>
 </html>

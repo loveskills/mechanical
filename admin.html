@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Kantumruy Pro', sans-serif; }
+        .progress-bar-container {
+            width: 100%; height: 8px; background-color: #e0e0e0;
+            border-radius: 4px; overflow: hidden; display: none;
+        }
+        .progress-bar {
+            width: 0%; height: 100%; background-color: #2563eb;
+            transition: width 0.3s ease;
+        }
+        .uploaded-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background-color: #f9fafb; /* gray-50 */
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb; /* gray-200 */
+        }
+        .dark .uploaded-item {
+            background-color: #374151; /* gray-700 */
+            border-color: #4b5563; /* gray-600 */
+        }
+        .icon-btn {
+             background: none; border: none;
+             cursor: pointer; font-size: 1.1rem;
+             padding: 0.25rem 0.5rem;
+             border-radius: 0.25rem;
+        }
+        .delete-btn { color: #ef4444; /* red-500 */ }
+        .delete-btn:hover { color: #dc2626; /* red-600 */ background-color: #fee2e2; }
+        .dark .delete-btn:hover { background-color: #7f1d1d; }
+        
+        /* NEW: Edit Button Style */
+        .edit-btn { color: #3b82f6; /* blue-500 */ }
+        .edit-btn:hover { color: #2563eb; /* blue-600 */ background-color: #dbeafe; }
+        .dark .edit-btn:hover { background-color: #1e3a8a; }
+
+        @keyframes animate-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animated-gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6, #10b981, #3b82f6);
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: animate-gradient 5s ease infinite;
+        }
+        
+        /* NEW: Modal Styles */
+        #edit-modal {
+            transition: opacity 0.3s ease;
+        }
+        #edit-modal-content {
+            transition: all 0.3s ease;
+            transform: translateY(-20px);
+        }
+        #edit-modal.opacity-100 {
+            pointer-events: all;
+        }
+        #edit-modal.opacity-100 #edit-modal-content {
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-blue-50 dark:from-gray-900 dark:to-blue-950 text-gray-900 dark:text-gray-100 min-h-screen">
+
+    <!-- 1. Login Section (Unchanged) -->
+    <div id="login-section" class="flex items-center justify-center min-h-screen p-4">
+        <div class="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col items-center">
+            
+            <i class="fas fa-user-shield text-5xl text-blue-500 mb-4"></i>
+            <h2 class="text-3xl font-bold text-center animated-gradient-text">
+                ADMIN
+            </h2>
+            <p class="text-center text-gray-500 dark:text-gray-400 -mt-4 pb-4">Please login to continue</p>
+
+            <div class="w-full">
+                <label for="login-email" class="block text-sm font-medium mb-1">Email</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i class="fas fa-envelope text-gray-400"></i>
+                    </span>
+                    <input type="email" id="login-email" class="mt-1 block w-full pl-10 px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="your-email@gmail.com">
+                </div>
+            </div>
+
+            <div class="w-full">
+                <label for="login-password" class="block text-sm font-medium mb-1">Password</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i class="fas fa-lock text-gray-400"></i>
+                    </span>
+                    <input type="password" id="login-password" class="mt-1 block w-full pl-10 px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="••••••••">
+                </div>
+            </div>
+
+            <button id="login-button" class="w-full px-4 py-3 font-bold text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 flex items-center justify-center">
+                <i class="fas fa-sign-in-alt mr-2"></i>
+                Login
+            </button>
+            
+            <p id="error-message" class="text-red-500 text-center font-medium"></p>
+        </div>
+    </div>
+
+    <!-- 2. Admin Panel Section (MODIFIED Cards) -->
+    <div id="admin-panel-section" class="hidden">
+        
+        <!-- Header Bar (Unchanged) -->
+        <header class="bg-white dark:bg-gray-800 shadow-md w-full sticky top-0 z-40">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-200 flex items-center">
+                    <i class="fas fa-tachometer-alt mr-3 text-blue-500"></i>
+                    <span class="animated-gradient-text">Admin</span>
+                </h1>
+                <button id="logout-button" class="p-2 font-medium text-red-600 bg-red-100 rounded-full w-10 h-10 justify-center hover:bg-red-200 dark:bg-red-900 dark:text-red-300 dark:hover:bg-red-800 flex items-center">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </nav>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="container mx-auto p-4 md:p-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Card 1: Schedule -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 space-y-4">
+                    <h2 class="text-2xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-calendar-alt mr-3 text-blue-500"></i>
+                        បន្ថែម-កាលវិភាគថ្មី
+                    </h2>
+                    <div class="mb-4">
+                        <label for="schedule-title-input" class="block text-sm font-medium">ចំណងជើង (Title)</label>
+                        <input type="text" id="schedule-title-input" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="ឧ. វេន ចន្ទ-សុក្រ (ព្រឹក)">
+                    </div>
+                    <!-- MODIFIED: Added 'multiple' attribute -->
+                    <input type="file" id="schedule-file-input" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900 dark:file:text-blue-300 dark:hover:file:bg-blue-800" accept="image/*,.pdf" multiple>
+                    <!-- MODIFIED: Button text -->
+                    <button id="upload-schedule-button" class="mt-4 w-full px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50">
+                        Upload File(s)
+                    </button>
+                    <div id="schedule-progress-container" class="progress-bar-container mt-4">
+                        <div id="schedule-progress-bar" class="progress-bar"></div>
+                    </div>
+                    <p id="schedule-status" class="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center"></p>
+                    
+                    <hr class="border-t border-gray-200 dark:border-gray-700 my-4">
+
+                    <h3 class="text-lg font-semibold mb-3">កាលវិភាគបច្ចុប្បន្ន</h3>
+                    <div id="current-schedules-list" class="space-y-2 max-h-60 overflow-y-auto pr-2">
+                        <span class="text-gray-500 dark:text-gray-400">កំពុងទាញយក...</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Student List -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 space-y-4">
+                    <h2 class="text-2xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-users mr-3 text-green-500"></i>
+                        បន្ថែម-បញ្ជីឈ្មោះថ្មី
+                    </h2>
+                    <div class="mb-4">
+                        <label for="student-list-title-input" class="block text-sm font-medium">ចំណងជើង (Title)</label>
+                        <input type="text" id="student-list-title-input" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="ឧ. បញ្ជីឈ្មោះ ក្រុម A">
+                    </div>
+                    <!-- MODIFIED: Added 'multiple' attribute -->
+                    <input type="file" id="student-list-file-input" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 dark:file:bg-green-900 dark:file:text-green-300 dark:hover:file:bg-green-800" accept="image/*,.pdf" multiple>
+                    <!-- MODIFIED: Button text -->
+                    <button id="upload-student-list-button" class="mt-4 w-full px-4 py-2 font-bold text-white bg-green-600 rounded-md hover:bg-green-700 disabled:opacity-50">
+                        Upload File(s)
+                    </button>
+                    <div id="student-list-progress-container" class="progress-bar-container mt-4">
+                        <div id="student-list-progress-bar" class="progress-bar bg-green-600"></div>
+                    </div>
+                    <p id="student-list-status" class="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center"></p>
+
+                    <hr class="border-t border-gray-200 dark:border-gray-700 my-4">
+
+                    <h3 class="text-lg font-semibold mb-3">បញ្ជីឈ្មោះបច្ចុប្បន្ន</h3>
+                    <div id="current-student-lists-list" class="space-y-2 max-h-60 overflow-y-auto pr-2">
+                        <span class="text-gray-500 dark:text-gray-400">កំពុងទាញយក...</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- NEW: Edit Modal -->
+    <div id="edit-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900 bg-opacity-75 opacity-0 pointer-events-none">
+        <div id="edit-modal-content" class="w-full max-w-lg bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 space-y-4">
+            <h2 id="edit-modal-title" class="text-2xl font-semibold">កែសម្រួល (Edit Item)</h2>
+            
+            <div>
+                <label for="edit-modal-title-input" class="block text-sm font-medium">ចំណងជើង (Title)</label>
+                <input type="text" id="edit-modal-title-input" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            
+            <div>
+                <label for="edit-modal-file-input" class="block text-sm font-medium">ជំនួស File (Replace File)</label>
+                <span class="text-xs text-gray-500 dark:text-gray-400">ទុកឱ្យនៅទទេ ប្រសិនបើអ្នកមិនចង់ជំនួស file ចាស់។</span>
+                <input type="file" id="edit-modal-file-input" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100 dark:file:bg-gray-700 dark:file:text-gray-300 dark:hover:file:bg-gray-600" accept="image/*,.pdf">
+            </div>
+
+            <div id="edit-modal-progress-container" class="progress-bar-container mt-4">
+                <div id="edit-modal-progress-bar" class="progress-bar"></div>
+            </div>
+            <p id="edit-modal-status" class="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center"></p>
+
+            <div class="flex justify-end space-x-3 pt-4">
+                <button id="edit-modal-cancel-button" class="px-4 py-2 font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">បោះបង់ (Cancel)</button>
+                <button id="edit-modal-save-button" class="px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50">
+                    រក្សាទុក (Save)
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Firebase SDKs (JavaScript MODIFIED for Multi-upload & Edit) -->
+    <script type="module">
+        // Import Firebase services
+        import { initializeApp, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            signOut, 
+            onAuthStateChanged 
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, 
+            doc, 
+            getDoc, 
+            setDoc,
+            onSnapshot,
+            updateDoc,
+            arrayUnion, 
+            arrayRemove
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // --- Cloudinary Configuration ---
+        const CLOUDINARY_CLOUD_NAME = "dcrfl6lty"; 
+        const CLOUDINARY_UPLOAD_PRESET = "my_preset_auto"; 
+        const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`;
+
+        // --- Firebase Config and Init ---
+        const firebaseConfig = {
+          apiKey: "AIzaSyCwYkGfjRMOhTKhDq7aLDURqUpksfPTfrI",
+          authDomain: "mechanical-website-bce9a.firebaseapp.com",
+          projectId: "mechanical-website-bce9a",
+          storageBucket: "mechanical-website-bce9a.firebasestorage.app",
+          messagingSenderId: "599745985805",
+          appId: "1:599745985805:web:c7b9ab1738913249d70444"
+        };
+        const appId = firebaseConfig.projectId;
+
+        let app, auth, db, userId;
+        let unsubscribeFromContent;
+        let currentSchedules = []; 
+        let currentStudentLists = []; 
+
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            setLogLevel('Debug');
+            console.log("Firebase initialized successfully.");
+        } catch (e) {
+            console.error("Firebase initialization error:", e);
+            document.getElementById("error-message").textContent = "Error connecting to Firebase.";
+        }
+        
+        // --- DOM Elements ---
+        const loginSection = document.getElementById('login-section');
+        const adminPanelSection = document.getElementById('admin-panel-section');
+        const errorMessage = document.getElementById('error-message');
+        const loginButton = document.getElementById('login-button');
+        const logoutButton = document.getElementById('logout-button');
+
+        const scheduleTitleInput = document.getElementById('schedule-title-input'); 
+        const scheduleFileInput = document.getElementById('schedule-file-input');
+        const uploadScheduleButton = document.getElementById('upload-schedule-button');
+        const scheduleProgressContainer = document.getElementById('schedule-progress-container');
+        const scheduleProgressBar = document.getElementById('schedule-progress-bar');
+        const scheduleStatus = document.getElementById('schedule-status');
+        const currentSchedulesList = document.getElementById('current-schedules-list'); 
+
+        const studentListTitleInput = document.getElementById('student-list-title-input'); 
+        const studentListFileInput = document.getElementById('student-list-file-input');
+        const uploadStudentListButton = document.getElementById('upload-student-list-button');
+        const studentListProgressContainer = document.getElementById('student-list-progress-container');
+        const studentListProgressBar = document.getElementById('student-list-progress-bar');
+        const studentListStatus = document.getElementById('student-list-status');
+        const currentStudentListsList = document.getElementById('current-student-lists-list'); 
+
+        // NEW: Modal DOM Elements
+        const editModal = document.getElementById('edit-modal');
+        const editModalContent = document.getElementById('edit-modal-content');
+        const editModalTitle = document.getElementById('edit-modal-title');
+        const editModalTitleInput = document.getElementById('edit-modal-title-input');
+        const editModalFileInput = document.getElementById('edit-modal-file-input');
+        const editModalSaveButton = document.getElementById('edit-modal-save-button');
+        const editModalCancelButton = document.getElementById('edit-modal-cancel-button');
+        const editModalProgressContainer = document.getElementById('edit-modal-progress-container');
+        const editModalProgressBar = document.getElementById('edit-modal-progress-bar');
+        const editModalStatus = document.getElementById('edit-modal-status');
+        
+        // --- Authentication Logic (Unchanged) ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const uid = user.uid;
+                const isAdmin = await checkUserRole(uid);
+                
+                if (isAdmin) {
+                    userId = uid;
+                    loginSection.style.display = 'none';
+                    adminPanelSection.style.display = 'block';
+                    errorMessage.textContent = '';
+                    listenToCurrentContent(); 
+                } else {
+                    await auth.signOut();
+                    showLoginError('You do not have permission to access this page.');
+                }
+            } else {
+                loginSection.style.display = 'flex';
+                adminPanelSection.style.display = 'none';
+                userId = null;
+                if (unsubscribeFromContent) {
+                    unsubscribeFromContent(); 
+                }
+            }
+        });
+
+        async function checkUserRole(uid) {
+            try {
+                const userDocRef = doc(db, 'users', uid);
+                const userDoc = await getDoc(userDocRef);
+                return userDoc.exists() && userDoc.data().role === 'admin';
+            } catch (error) {
+                console.error("Error checking user role:", error);
+                return false;
+            }
+        }
+
+        loginButton.addEventListener('click', () => {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            if (!email || !password) { showLoginError("Please fill in Email and Password"); return; }
+            loginButton.disabled = true;
+            loginButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Logging in...';
+            
+            signInWithEmailAndPassword(auth, email, password)
+                .catch((error) => {
+                    if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+                        showLoginError("Incorrect Email or Password!");
+                    } else { showLoginError(error.message); }
+                })
+                .finally(() => {
+                    loginButton.disabled = false;
+                    loginButton.innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i>Login';
+                });
+        });
+
+        logoutButton.addEventListener('click', () => { auth.signOut(); });
+        function showLoginError(message) { errorMessage.textContent = message; }
+
+        // --- Read/Write/Delete Logic (MODIFIED) ---
+        const docRef = doc(db, `artifacts/${appId}/public/data/siteContent`, 'currentFiles');
+
+        function listenToCurrentContent() {
+            if (unsubscribeFromContent) { unsubscribeFromContent(); }
+
+            unsubscribeFromContent = onSnapshot(docRef, (docSnap) => {
+                const data = docSnap.exists() ? docSnap.data() : {};
+                
+                currentSchedules = data.schedules || [];
+                currentStudentLists = data.studentLists || [];
+
+                // Sort by createdAt date, newest first
+                currentSchedules.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                currentStudentLists.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                currentSchedulesList.innerHTML = '';
+                if (currentSchedules.length > 0) {
+                    currentSchedules.forEach(item => {
+                        currentSchedulesList.appendChild(createDisplayItem(item, 'schedules'));
+                    });
+                } else {
+                    currentSchedulesList.innerHTML = `<span class="text-gray-500 dark:text-gray-400">មិនមានកាលវិភាគ</span>`;
+                }
+
+                currentStudentListsList.innerHTML = '';
+                if (currentStudentLists.length > 0) {
+                    currentStudentLists.forEach(item => {
+                        currentStudentListsList.appendChild(createDisplayItem(item, 'studentLists'));
+                    });
+                } else {
+                    currentStudentListsList.innerHTML = `<span class="text-gray-500 dark:text-gray-400">មិនមានបញ្ជីឈ្មោះ</span>`;
+                }
+            }, (error) => {
+                console.error("Error listening to content:", error);
+                currentSchedulesList.innerHTML = `<span class="text-red-500">Error loading data</span>`;
+                currentStudentListsList.innerHTML = `<span class="text-red-500">Error loading data</span>`;
+            });
+        }
+
+        // MODIFIED: Added Edit button
+        function createDisplayItem(item, fileType) {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'uploaded-item';
+
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'flex items-center overflow-hidden mr-2';
+
+            const icon = document.createElement('i');
+            const isPdf = (item.fileType === 'application/pdf') || (!item.fileType && item.url && item.url.endsWith('.pdf'));
+            icon.className = `fas ${isPdf ? 'fa-file-pdf' : 'fa-file-image'} text-lg mr-3 flex-shrink-0 ${fileType === 'schedules' ? 'text-blue-500' : 'text-green-500'}`;
+            
+            const titleSpan = document.createElement('span');
+            titleSpan.className = 'font-medium truncate';
+            titleSpan.textContent = item.title;
+            titleSpan.title = item.title;
+            
+            infoDiv.appendChild(icon);
+            infoDiv.appendChild(titleSpan);
+
+            // NEW: Button Group
+            const buttonGroup = document.createElement('div');
+            buttonGroup.className = 'flex items-center flex-shrink-0';
+
+            const editButton = document.createElement('button');
+            editButton.className = 'icon-btn edit-btn';
+            editButton.innerHTML = '<i class="fas fa-edit"></i>';
+            editButton.onclick = () => openEditModal(fileType, item.id);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'icon-btn delete-btn';
+            deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+            deleteButton.dataset.id = item.id;
+            deleteButton.onclick = () => handleDelete(fileType, item.id);
+
+            buttonGroup.appendChild(editButton);
+            buttonGroup.appendChild(deleteButton);
+
+            itemDiv.appendChild(infoDiv);
+            itemDiv.appendChild(buttonGroup);
+            return itemDiv;
+        }
+
+        async function handleDelete(fileType, fileId) {
+            if (!confirm(`តើអ្នកប្រាកដទេថាចង់លុបឯកសារនេះ?`)) return;
+
+            try {
+                let itemToDelete;
+                if (fileType === 'schedules') {
+                    itemToDelete = currentSchedules.find(item => item.id === fileId);
+                } else {
+                    itemToDelete = currentStudentLists.find(item => item.id === fileId);
+                }
+
+                if (!itemToDelete) {
+                    throw new Error("Item not found. Please refresh.");
+                }
+
+                await updateDoc(docRef, {
+                    [fileType]: arrayRemove(itemToDelete)
+                });
+
+                console.log(`Item ${fileId} from ${fileType} deleted.`);
+            } catch (error) {
+                console.error("Error deleting item from array:", error);
+                alert("Error deleting: " + error.message);
+            }
+        }
+
+
+        // --- Cloudinary Upload Function (Unchanged) ---
+        function uploadToCloudinary(file, progressBar, progressContainer, statusEl) {
+            return new Promise((resolve, reject) => {
+                if (!CLOUDINARY_CLOUD_NAME || CLOUDINARY_CLOUD_NAME === "YOUR_CLOUD_NAME") {
+                    reject(new Error("Cloudinary Cloud Name មិនទាន់បានកំណត់!")); return;
+                }
+                if (!CLOUDINARY_UPLOAD_PRESET || CLOUDINARY_UPLOAD_PRESET === "YOUR_UPLOAD_PRESET") {
+                    reject(new Error("Cloudinary Upload Preset មិនទាន់បានកំណត់!")); return;
+                }
+
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+                formData.append('resource_type', 'auto');
+                
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', CLOUDINARY_UPLOAD_URL, true);
+
+                progressContainer.style.display = 'block';
+                progressBar.style.width = '0%';
+                statusEl.textContent = 'កំពុងរៀបចំ Upload...';
+
+                xhr.upload.onprogress = (event) => {
+                    if (event.lengthComputable) {
+                        const percentComplete = Math.round((event.loaded / event.total) * 100);
+                        progressBar.style.width = percentComplete + '%';
+                        statusEl.textContent = `កំពុង Upload... ${percentComplete}%`;
+                    }
+                };
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        statusEl.textContent = 'Upload ជោគជ័យ!';
+                        progressBar.style.width = '100%';
+                        setTimeout(() => { progressContainer.style.display = 'none'; }, 2000);
+                        resolve(response); // Resolve with the full response
+                    } else {
+                        let errorMsg = xhr.statusText;
+                        try {
+                            const errorResponse = JSON.parse(xhr.responseText);
+                            errorMsg = errorResponse.error.message || xhr.statusText;
+                        } catch(e) {}
+                        statusEl.textContent = `Upload បរាជ័យ: ${errorMsg}`;
+                        reject(new Error(errorMsg));
+                    }
+                };
+                xhr.onerror = () => {
+                    statusEl.textContent = 'Upload បរាជ័យ (Network Error)';
+                    reject(new Error('Network error occurred during upload.'));
+                };
+                xhr.send(formData);
+            });
+        }
+        
+        // NEW: Convert PDF URL to PNG
+        function convertToImageURL(url, fileType) {
+             if (fileType === 'application/pdf' && url.toLowerCase().endsWith('.pdf')) {
+                return {
+                    finalDownloadURL: url.slice(0, -4) + ".png",
+                    finalFileType: 'image/png'
+                };
+            }
+            return { finalDownloadURL: url, finalFileType: fileType };
+        }
+
+
+        // --- File Handling Logic (MODIFIED for Multi-upload) ---
+        /**
+         * @param {'schedules' | 'studentLists'} fileType
+         * @param {string} title
+         * @param {FileList} files
+         * @param {HTMLElement} uploadButton
+         * @param {HTMLElement} progressBar
+         * @param {HTMLElement} progressContainer
+         * @param {HTMLElement} statusEl
+         * @param {HTMLElement} titleInputEl
+         * @param {HTMLElement} fileInputEl
+         */
+        async function handleUpload(fileType, title, files, uploadButton, progressBar, progressContainer, statusEl, titleInputEl, fileInputEl) {
+            if (files.length === 0) {
+                statusEl.textContent = 'សូមជ្រើសរើសឯកសារសិន!';
+                return;
+            }
+            if (!title) {
+                statusEl.textContent = 'សូមបំពេញចំណងជើង!';
+                titleInputEl.focus();
+                return;
+            }
+
+            uploadButton.disabled = true;
+            uploadButton.textContent = `កំពុងដំណើរការ (${files.length} files)...`;
+
+            let newFileEntries = []; // Array to hold all new file objects
+
+            try {
+                statusEl.textContent = `កំពុង Upload 0/${files.length}...`;
+                
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const entryTitle = files.length > 1 ? `${title} (${i + 1})` : title;
+                    
+                    statusEl.textContent = `កំពុង Upload ${i + 1}/${files.length}: ${file.name}`;
+                    
+                    // 1. Upload ទៅ Cloudinary
+                    const uploadResponse = await uploadToCloudinary(file, progressBar, progressContainer, statusEl);
+                    const originalDownloadURL = uploadResponse.secure_url;
+
+                    // 2. Convert PDF ទៅ Image URL
+                    const { finalDownloadURL, finalFileType } = convertToImageURL(originalDownloadURL, file.type);
+                    
+                    // 3. បង្កើត Object ថ្មី
+                    const newFileEntry = {
+                        id: crypto.randomUUID(),
+                        title: entryTitle,
+                        url: finalDownloadURL, 
+                        createdAt: new Date().toISOString(),
+                        fileType: finalFileType,
+                        originalUrl: originalDownloadURL, // Store original URL just in case
+                        assetId: uploadResponse.asset_id // Store asset_id for future management
+                    };
+                    
+                    newFileEntries.push(newFileEntry);
+                }
+
+                // 4. រក្សាទុក Array ទាំងមូលទៅ Firestore ក្នុងពេលតែមួយ
+                statusEl.textContent = 'កំពុងរក្សាទុកទៅ Database...';
+                
+                const docSnap = await getDoc(docRef);
+                if (!docSnap.exists()) {
+                    await setDoc(docRef, {
+                        [fileType]: newFileEntries
+                    });
+                } else {
+                    // Use arrayUnion with spread operator to add all new entries
+                    await updateDoc(docRef, {
+                        [fileType]: arrayUnion(...newFileEntries) 
+                    });
+                }
+
+                statusEl.textContent = `Upload ${files.length} files ជោគជ័យ!`;
+                titleInputEl.value = ''; // សម្អាត Title Input
+                fileInputEl.value = ''; // សម្អាត File Input
+                
+                setTimeout(() => { statusEl.textContent = ''; }, 3000);
+
+            } catch (error) {
+                console.error("Error during upload or save:", error);
+                statusEl.textContent = `មានបញ្ហា: ${error.message}`;
+            } finally {
+                uploadButton.disabled = false;
+                uploadButton.textContent = (fileType === 'schedules') ? 'Upload File(s)' : 'Upload File(s)';
+            }
+        }
+
+        // Event Listeners សម្រាប់ប៊ូតុង Upload (MODIFIED)
+        uploadScheduleButton.addEventListener('click', () => {
+            const files = scheduleFileInput.files; // Get FileList
+            const title = scheduleTitleInput.value;
+            handleUpload('schedules', title, files, uploadScheduleButton, scheduleProgressBar, scheduleProgressContainer, scheduleStatus, scheduleTitleInput, scheduleFileInput);
+        });
+
+        uploadStudentListButton.addEventListener('click', () => {
+            const files = studentListFileInput.files; // Get FileList
+            const title = studentListTitleInput.value;
+            handleUpload('studentLists', title, files, uploadStudentListButton, studentListProgressBar, studentListProgressContainer, studentListStatus, studentListTitleInput, studentListFileInput);
+        });
+        
+        // --- NEW: Edit Modal Logic ---
+        
+        function openEditModal(fileType, fileId) {
+            // Find the item
+            const list = (fileType === 'schedules') ? currentSchedules : currentStudentLists;
+            const item = list.find(i => i.id === fileId);
+            if (!item) {
+                alert("Error: Could not find item to edit.");
+                return;
+            }
+
+            // Populate modal
+            editModalTitle.textContent = `កែសម្រួល: ${item.title}`;
+            editModalTitleInput.value = item.title;
+            editModalFileInput.value = ''; // Clear file input
+            editModalStatus.textContent = '';
+            editModalProgressContainer.style.display = 'none';
+            
+            // Store data on the modal for the save function
+            editModal.dataset.fileType = fileType;
+            editModal.dataset.fileId = fileId;
+            editModal.dataset.originalUrl = item.url;
+            editModal.dataset.originalFileType = item.fileType;
+
+            // Show modal
+            editModal.classList.remove('opacity-0', 'pointer-events-none');
+        }
+        
+        function closeEditModal() {
+            editModal.classList.add('opacity-0', 'pointer-events-none');
+        }
+        
+        editModalCancelButton.addEventListener('click', closeEditModal);
+        // Close modal if clicking on the background overlay
+        editModal.addEventListener('click', (e) => {
+             if (e.target === editModal) {
+                 closeEditModal();
+             }
+        });
+
+        // Handle Save
+        editModalSaveButton.addEventListener('click', async () => {
+            const fileType = editModal.dataset.fileType;
+            const fileId = editModal.dataset.fileId;
+            const newTitle = editModalTitleInput.value;
+            const newFile = editModalFileInput.files[0];
+            
+            if (!newTitle) {
+                editModalStatus.textContent = 'សូមបំពេញចំណងជើង!';
+                return;
+            }
+
+            editModalSaveButton.disabled = true;
+            editModalSaveButton.textContent = 'កំពុងរក្សាទុក...';
+            editModalStatus.textContent = '';
+            
+            try {
+                let finalDownloadURL = editModal.dataset.originalUrl;
+                let finalFileType = editModal.dataset.originalFileType;
+                let originalUrl = editModal.dataset.originalUrl; // Keep track of original for PDF conversion
+                let assetId = null; // We don't have this for old items, but will for new
+                
+                // 1. If new file is selected, upload it
+                if (newFile) {
+                    editModalStatus.textContent = 'កំពុង Upload file ថ្មី...';
+                    const uploadResponse = await uploadToCloudinary(
+                        newFile, 
+                        editModalProgressBar, 
+                        editModalProgressContainer, 
+                        editModalStatus
+                    );
+                    
+                    originalUrl = uploadResponse.secure_url; // This is the new original URL
+                    assetId = uploadResponse.asset_id;
+
+                    // Convert to image if it was a PDF
+                    const converted = convertToImageURL(originalUrl, newFile.type);
+                    finalDownloadURL = converted.finalDownloadURL;
+                    finalFileType = converted.finalFileType;
+                    
+                    editModalStatus.textContent = 'File ថ្មីបាន Upload ជោគជ័យ!';
+                }
+
+                // 2. Update the array in memory
+                const list = (fileType === 'schedules') ? currentSchedules : currentStudentLists;
+                
+                const newArray = list.map(item => {
+                    // If this is the item we're editing
+                    if (item.id === fileId) {
+                        return {
+                            ...item, // Keep old properties like id, createdAt
+                            title: newTitle, // Update title
+                            url: finalDownloadURL, // Update URL (new or old)
+                            fileType: finalFileType, // Update fileType (new or old)
+                            originalUrl: originalUrl, // Update original URL (new or old)
+                            ...(assetId && { assetId: assetId }) // Add assetId if we have a new one
+                        };
+                    }
+                    // Otherwise, return the item unchanged
+                    return item;
+                });
+                
+                // 3. Save the entire new array back to Firestore
+                editModalStatus.textContent = 'កំពុងរក្សាទុកទៅ Database...';
+                await updateDoc(docRef, {
+                    [fileType]: newArray
+                });
+                
+                editModalStatus.textContent = 'រក្សាទុកជោគជ័យ!';
+                setTimeout(() => {
+                    closeEditModal();
+                }, 1000);
+
+            } catch (error) {
+                console.error("Error saving edit:", error);
+                editModalStatus.textContent = `Error: ${error.message}`;
+            } finally {
+                editModalSaveButton.disabled = false;
+                editModalSaveButton.textContent = 'រក្សាទុក (Save)';
+            }
+        });
+
+
+    </script>
+</body>
+</html>

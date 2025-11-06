@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="km" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate-key="page_title_schedule">កាលវិភាគ និង បញ្ជីឈ្មោះ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+      tailwind.config = {
+        darkMode: 'class', 
+        theme: {
+          extend: {}
+        }
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Kantumruy Pro', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        :lang(en) body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .nav-link.active {
+            color: #2563EB; /* blue-600 */
+            font-weight: 600;
+            border-bottom: 2px solid #2563EB;
+        }
+        .dark .nav-link.active {
+            color: #60A5FA; /* blue-400 */
+            border-bottom-color: #60A5FA;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .logo-gear {
+            animation: spin 10s linear infinite;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        /* MODIFIED: Updated content-item style for the grid card */
+        .content-item {
+            border: 1px solid #e5e7eb; /* gray-200 */
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-bottom: 1rem; /* mb-4 */
+            background-color: #ffffff; /* bg-white */
+            /* Removed padding, will add it to content area inside */
+        }
+        .dark .content-item {
+            border-color: #4b5563; /* dark:border-gray-600 */
+            background-color: #374151; /* dark:bg-gray-700 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html#home" class="flex items-center space-x-3 text-blue-600 dark:text-blue-400">
+                <svg class="logo-gear h-9 w-9 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M19.1255 7.96289L19.3755 7.71289C19.8635 7.22489 20.6275 7.22489 21.1155 7.71289L21.2875 7.88489C21.7755 8.37289 21.7755 9.13689 21.2875 9.62489L21.0375 9.87489" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4.87451 16.0371L4.62451 16.2871C4.13651 16.7751 3.37251 16.7751 2.88451 16.2871L2.71251 16.1151C2.22451 15.6271 2.22451 14.8631 2.71251 14.3751L2.96251 14.1251" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M7.96289 4.87451L7.71289 4.62451C7.22489 4.13651 7.22489 3.37251 7.71289 2.88451L7.88489 2.71251C8.37289 2.22451 9.13689 2.22451 9.62489 2.71251L9.87489 2.96251" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M16.0371 19.1255L16.2871 19.3755C16.7751 19.8635 16.7751 20.6275 16.2871 21.1155L16.1151 21.2875C15.6271 21.7755 14.8631 21.7755 14.3751 21.2875L14.1251 21.0375" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M22 12H19" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M5 12H2" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 5V2" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 22V19" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span class="text-2xl font-bold" data-translate-key="brand_name">វិស្វករមេកានិក</span>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html#home" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-home fa-fw mr-2"></i><span data-translate-key="nav_home">ទំព័រដើម</span>
+                </a>
+                <a href="index.html#specializations" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-cogs fa-fw mr-2"></i><span data-translate-key="nav_specializations">ឯកទេស</span>
+                </a>
+                <a href="index.html#education" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-graduation-cap fa-fw mr-2"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
+                </a>
+                <a href="book.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-book fa-fw mr-2"></i><span data-translate-key="nav_book">សៀវភៅ</span>
+                </a>
+                <a href="gallery.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-images fa-fw mr-2"></i><span data-translate-key="nav_gallery">កម្រងរូបភាព</span>
+                </a>
+                <a href="schedule.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center active">
+                    <i class="fas fa-calendar-alt fa-fw mr-2"></i><span data-translate-key="nav_schedule">ឈ្មោះនិងកាលវិភាគ</span>
+                </a>
+                <a href="register.html" class="nav-link text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition duration-300 pb-1 inline-flex items-center">
+                    <i class="fas fa-file-alt fa-fw mr-2"></i><span data-translate-key="nav_register">បំពេញពាក្យស្នើសុំ</span>
+                </a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="flex p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition" aria-label="Toggle dark mode">
+                    <i id="theme-icon" class="fas fa-sun fa-lg"></i>
+                </button>
+                <!-- START: បានបន្ថែមប៊ូតុងប្តូរភាសា (Desktop) -->
+                <div class="relative hidden md:block" id="lang-switcher-container">
+                    <button id="lang-switcher-btn" class="flex items-center p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <img id="current-lang-flag" src="https://flagcdn.com/kh.svg" alt="Language" class="w-8 h-5 rounded-sm border border-gray-200">
+                        <i class="fas fa-chevron-down w-4 h-4 ml-2 text-gray-500 dark:text-gray-400"></i>
+                    </button>
+                    <div id="lang-options" class="hidden absolute right-0 mt-2 w-40 bg-white dark:bg-gray-700 rounded-md shadow-lg py-1 z-50">
+                        <a href="#" onclick="setLanguage('km')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <img src="https://flagcdn.com/kh.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_km">ភាសាខ្មែរ</span>
+                        </a>
+                        <a href="#" onclick="setLanguage('en')" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <img src="https://flagcdn.com/gb.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_en">English</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- END: បានបន្ថែមប៊ូតុងប្តូរភាសា (Desktop) -->
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-600 dark:text-gray-300 focus:outline-none">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- START: បានបន្ថែម Mobile Menu ពេញលេញ -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 shadow-lg">
+            <a href="index.html#home" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-home fa-fw mr-3"></i><span data-translate-key="nav_home">ទំព័រដើម</span>
+            </a>
+            <a href="index.html#specializations" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-cogs fa-fw mr-3"></i><span data-translate-key="nav_specializations">ឯកទេស</span>
+            </a>
+            <a href="index.html#education" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-graduation-cap fa-fw mr-3"></i><span data-translate-key="nav_education">កម្រិតសិក្សា</span>
+            </a>
+            <a href="book.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-book fa-fw mr-3"></i><span data-translate-key="nav_book">សៀវភៅ</span>
+            </a>
+            <a href="gallery.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-images fa-fw mr-3"></i><span data-translate-key="nav_gallery">កម្រងរូបភាព</span>
+            </a>
+            <a href="schedule.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-calendar-alt fa-fw mr-3"></i><span data-translate-key="nav_schedule">ឈ្មោះនិងកាលវិភាគ</span>
+            </a>
+            <a href="register.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <i class="fas fa-file-alt fa-fw mr-3"></i><span data-translate-key="nav_register">បំពេញពាក្យស្នើសុំ</span>
+            </a>
+            
+            <a href="#" onclick="setLanguage('km')" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <img src="https://flagcdn.com/kh.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_km">ភាសាខ្មែរ</span>
+            </a>
+            <a href="#" onclick="setLanguage('en')" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center">
+                <img src="https://flagcdn.com/gb.svg" class="w-6 h-4 mr-3 rounded-sm"> <span data-translate-key="lang_en">English</span>
+            </a>
+        </div>
+        <!-- END: បានបន្ថែម Mobile Menu ពេញលេញ -->
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <!-- MODIFIED: Changed max-w-3xl to max-w-7xl for wider grid -->
+        <div class="max-w-7xl mx-auto">
+            <img src="photo/1.png" alt="Mechanical Engineering Logo" class="w-24 h-24 mx-auto mb-4 object-contain">
+            <h1 class="text-3xl font-bold text-center mb-8" data-translate-key="schedule_main_title">ឈ្មោះនិងកាលវិភាគ</h1>
+
+            <div class="space-y-12">
+                
+                <!-- Schedule Section -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-calendar-alt mr-3 text-blue-500"></i>
+                        <span data-translate-key="schedule_section_title">កាលវិភាគសិក្សា</span>
+                    </h2>
+                    <!-- MODIFIED: Removed p-4, min-h, flex, etc. Grid layout will be applied by JS -->
+                    <div id="schedule-content" class="bg-gray-50 dark:bg-gray-700 rounded-md">
+                        <div class="loading-spinner mx-auto my-10"></div>
+                    </div>
+                </div>
+
+                <!-- Student List Section -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-users mr-3 text-green-500"></i>
+                        <span data-translate-key="student_list_section_title">បញ្ជីឈ្មោះសិស្ស</span>
+                    </h2>
+                    <!-- MODIFIED: Removed p-4, min-h, flex, etc. Grid layout will be applied by JS -->
+                    <div id="student-list-content" class="bg-gray-50 dark:bg-gray-700 rounded-md">
+                        <div class="loading-spinner mx-auto my-10"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Unchanged) -->
+    <footer class="bg-gray-800 dark:bg-gray-950 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400" data-translate-key="footer_text">ចាប់ផ្តើមដំណើររបស់អ្នកក្នុងវិស័យវិស្វកម្មមេកានិកនៅថ្ងៃនេះ ហើយរួមចំណែកបង្កើតបច្ចេកវិទ្យាថ្មីៗ។</p>
+            <div class="mt-4">
+                <p class="text-gray-500 text-sm" data-translate-key="footer_copyright">រក្សាសិទ្ធិគ្រប់យ៉ាង © 2025 | បង្កើតដោយ ខៀវ សំណាង</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Firebase SDKs (Module Script) -->
+    <script type="module">
+        // Import Firebase services
+        import { initializeApp, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, 
+            signInAnonymously,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, 
+            doc, 
+            onSnapshot 
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- Firebase Config and Init (Unchanged) ---
+        const firebaseConfig = {
+          apiKey: "AIzaSyCwYkGfjRMOhTKhDq7aLDURqUpksfPTfrI",
+          authDomain: "mechanical-website-bce9a.firebaseapp.com",
+          projectId: "mechanical-website-bce9a",
+          storageBucket: "mechanical-website-bce9a.firebasestorage.app",
+          messagingSenderId: "599745985805",
+          appId: "1:599745985805:web:c7b9ab1738913249d70444"
+        };
+        const appId = firebaseConfig.projectId;
+
+        let app, auth, db;
+        let unsubscribeFromContent; 
+
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            setLogLevel('Debug');
+            console.log("Firebase (Public) initialized successfully.");
+        } catch (e) {
+            console.error("Firebase initialization error:", e);
+        }
+
+        // --- DOM Elements (Unchanged) ---
+        const scheduleContent = document.getElementById('schedule-content');
+        const studentListContent = document.getElementById('student-list-content');
+        
+        // --- Helper to get translation (Unchanged) ---
+        function getTranslation(key) {
+            if (window.getTranslation) {
+                return window.getTranslation(key);
+            }
+            console.warn('getTranslation function not found on window. Returning key.');
+            return key; 
+        }
+
+        // --- Authentication (Anonymous) (Unchanged) ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log("Signed in anonymously:", user.uid);
+                listenToCurrentContent();
+            } else {
+                signInAnonymously(auth).catch((error) => {
+                    console.error("Anonymous sign-in error:", error);
+                    scheduleContent.innerHTML = `<span class="text-red-500" data-translate-key="error_connecting">${getTranslation('error_connecting')}</span>`;
+                    studentListContent.innerHTML = `<span class="text-red-500" data-translate-key="error_connecting">${getTranslation('error_connecting')}</span>`;
+                });
+            }
+        });
+
+        // --- Real-time Data Listener (MODIFIED) ---
+        function listenToCurrentContent() {
+            const docRef = doc(db, `artifacts/${appId}/public/data/siteContent`, 'currentFiles');
+
+            if (unsubscribeFromContent) {
+                unsubscribeFromContent(); 
+            }
+
+            unsubscribeFromContent = onSnapshot(docRef, (docSnap) => {
+                const data = docSnap.exists() ? docSnap.data() : {};
+
+                const scheduleList = data.schedules || [];
+                const studentListList = data.studentLists || [];
+
+                // Sort by createdAt date, newest first
+                scheduleList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                studentListList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                // --- Update Schedule Display ---
+                scheduleContent.innerHTML = ''; 
+                // MODIFIED: Changed from grid-cols-2 to grid-cols-1 for mobile, sm:grid-cols-2
+                scheduleContent.className = 'p-4 bg-gray-50 dark:bg-gray-700 rounded-md grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4';
+                if (scheduleList.length > 0) {
+                    scheduleList.forEach(item => {
+                        scheduleContent.appendChild(createDisplayItem(item, 'schedule'));
+                    });
+                } else {
+                    scheduleContent.innerHTML = `<span class="text-gray-500 dark:text-gray-400 col-span-full text-center" data-translate-key="no_schedule_found">${getTranslation('no_schedule_found')}</span>`;
+                }
+
+                // --- Update Student List Display ---
+                studentListContent.innerHTML = ''; 
+                // MODIFIED: Changed from grid-cols-2 to grid-cols-1 for mobile, sm:grid-cols-2
+                studentListContent.className = 'p-4 bg-gray-50 dark:bg-gray-700 rounded-md grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4';
+                if (studentListList.length > 0) {
+                    studentListList.forEach(item => {
+                        studentListContent.appendChild(createDisplayItem(item, 'studentList'));
+                    });
+                } else {
+                    studentListContent.innerHTML = `<span class="text-gray-500 dark:text-gray-400 col-span-full text-center" data-translate-key="no_student_list_found">${getTranslation('no_student_list_found')}</span>`;
+                }
+
+            }, (error) => {
+                console.error("Error listening to content:", error);
+                const errorMsg = getTranslation('error_loading');
+                scheduleContent.innerHTML = `<span class="text-red-500 col-span-full text-center" data-translate-key="error_loading">${errorMsg} ${error.message}</span>`;
+                studentListContent.innerHTML = `<span class="text-red-500 col-span-full text-center" data-translate-key="error_loading">${errorMsg} ${error.message}</span>`;
+            });
+        }
+        
+        // --- Create Display Item (MODIFIED) ---
+        // This function now creates a grid card with an image
+        function createDisplayItem(item, itemType) {
+            const itemDiv = document.createElement('div');
+            // MODIFIED: Removed p-0, added border
+            itemDiv.className = 'content-item w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col';
+
+            // --- NEW: Create Image Area ---
+            const imageContainer = document.createElement('a');
+            imageContainer.href = createViewableUrl(item); 
+            imageContainer.target = '_blank';
+            imageContainer.className = 'block h-48 overflow-hidden relative'; // Fixed height
+            
+            const img = document.createElement('img');
+            // item.url is the image URL (PNG for both images and converted PDFs)
+            img.src = item.url; 
+            img.alt = item.title;
+            img.className = "w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-110";
+            
+            // Fallback image
+            img.onerror = (e) => {
+                e.target.onerror = null; 
+                e.target.src = 'https://placehold.co/400x300/e2e8f0/94a3b8?text=Image+Error';
+                e.target.className = "w-full h-full object-contain p-4"; // Use contain for placeholder
+            };
+            
+            imageContainer.appendChild(img);
+            itemDiv.appendChild(imageContainer);
+            // --- END NEW ---
+
+            // --- Create Content Area (for text and buttons) ---
+            const contentArea = document.createElement('div');
+            // MODIFIED: p-4 instead of p-6
+            contentArea.className = 'p-4 flex flex-col flex-grow'; 
+
+            const titleEl = document.createElement('h3');
+            // MODIFIED: Smaller text, truncate, adjust height
+            titleEl.className = 'text-base font-bold mb-3 text-gray-900 dark:text-gray-100 truncate h-6'; 
+            titleEl.textContent = item.title;
+            titleEl.title = item.title; // Show full title on hover
+            contentArea.appendChild(titleEl);
+            
+            const spacer = document.createElement('div');
+            spacer.className = 'flex-grow'; // Pushes buttons to the bottom
+            contentArea.appendChild(spacer);
+
+            const buttonGroup = document.createElement('div');
+            // MODIFIED: Changed from grid to flex-col for stacked buttons
+            buttonGroup.className = 'flex flex-col gap-2 mt-3'; 
+
+            // 1. View Button
+            const viewButton = document.createElement('a');
+            viewButton.href = createViewableUrl(item); 
+            viewButton.target = '_blank';
+            // MODIFIED: Smaller button
+            viewButton.className = 'px-3 py-2 text-sm bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 transition duration-300 inline-flex items-center justify-center';
+            viewButton.innerHTML = `<i class="fas fa-eye mr-2"></i> <span data-translate-key="button_view">${getTranslation('button_view')}</span>`;
+            
+            // 2. Download Button
+            const downloadButton = document.createElement('a');
+            // MODIFIED: Use originalUrl for download if it exists, otherwise fall back
+            downloadButton.href = createDownloadUrl(item); 
+            
+            let extension = '.file';
+            // Use originalUrl if available (for correct PDF download), else guess from fileType/url
+            const urlForExt = item.originalUrl || item.url || '';
+            const typeForExt = item.fileType || '';
+
+            if (typeForExt === 'application/pdf' || urlForExt.toLowerCase().endsWith('.pdf')) {
+                extension = '.pdf';
+            } else if (typeForExt.startsWith('image/')) {
+                try { extension = '.' + typeForExt.split('/')[1]; } catch(e) { extension = '.jpg'; }
+            } else if (urlForExt.toLowerCase().endsWith('.jpg') || urlForExt.toLowerCase().endsWith('.jpeg')) {
+                extension = '.jpg';
+            } else if (urlForExt.toLowerCase().endsWith('.png')) {
+                extension = '.png';
+            }
+            
+            downloadButton.download = item.title.replace(/[^a-zA-Z0-9 ]/g, "") + extension;
+            // MODIFIED: Smaller button
+            downloadButton.className = 'px-3 py-2 text-sm bg-green-600 text-white font-bold rounded-md hover:bg-green-700 transition duration-300 inline-flex items-center justify-center';
+            downloadButton.innerHTML = `<i class="fas fa-download mr-2"></i> <span data-translate-key="button_download">${getTranslation('button_download')}</span>`;
+
+            buttonGroup.appendChild(viewButton);
+            buttonGroup.appendChild(downloadButton);
+            
+            contentArea.appendChild(buttonGroup); 
+            itemDiv.appendChild(contentArea); 
+
+            return itemDiv;
+        }
+
+        // --- Cloudinary URL Functions (MODIFIED) ---
+        function createViewableUrl(item) {
+            // The item.url is already the converted PNG, which is perfect for viewing
+            let viewableUrl = item.url; 
+            
+            // Fallback for old data that might not have been converted
+            if (!viewableUrl || !viewableUrl.includes("res.cloudinary.com")) {
+                return viewableUrl; 
+            }
+            if (item.fileType === 'application/pdf' && viewableUrl.toLowerCase().endsWith('.pdf')) {
+                 if (viewableUrl.includes("/image/upload/") && !viewableUrl.includes("fl_inline")) {
+                    viewableUrl = viewableUrl.replace("/image/upload/", "/image/upload/fl_inline/");
+                }
+                else if (viewableUrl.includes("/raw/upload/") && !viewableUrl.includes("fl_inline")) {
+                    viewableUrl = viewableUrl.replace("/raw/upload/", "/raw/upload/fl_inline/");
+                }
+            }
+            return viewableUrl;
+        }
+
+        function createDownloadUrl(item) {
+            // MODIFIED: Prioritize 'originalUrl' for downloading the *actual* file (e.g., the PDF)
+            let downloadUrl = item.originalUrl || item.url; 
+            
+            if (!downloadUrl || !downloadUrl.includes("res.cloudinary.com")) {
+                return downloadUrl;
+            }
+            
+            // Check file type based on 'originalUrl' if it exists, otherwise use fileType/url
+            const isPdf = (item.originalUrl && item.originalUrl.toLowerCase().endsWith('.pdf')) || 
+                          (!item.originalUrl && item.fileType === 'application/pdf') ||
+                          (!item.originalUrl && !item.fileType && item.url && item.url.toLowerCase().endsWith('.pdf'));
+            
+            if (isPdf) {
+                 // PDFs might be in /raw/ or /image/
+                if (downloadUrl.includes("/image/upload/") && !downloadUrl.includes("fl_attachment")) {
+                    downloadUrl = downloadUrl.replace("/image/upload/", "/image/upload/fl_attachment/");
+                }
+                else if (downloadUrl.includes("/raw/upload/") && !downloadUrl.includes("fl_attachment")) {
+                    downloadUrl = downloadUrl.replace("/raw/upload/", "/raw/upload/fl_attachment/");
+                }
+            } else {
+                // Images are usually in /image/
+                if (downloadUrl.includes("/image/upload/") && !downloadUrl.includes("fl_attachment")) {
+                    downloadUrl = downloadUrl.replace("/image/upload/", "/image/upload/fl_attachment/");
+                }
+            }
+            return downloadUrl;
+        }
+    </script>
+
+    <!-- Global UI Script (MODIFIED) -->
+    <script>
+        // --- Translations Object (REDUCED) ---
+        const translations = {
+            km: {
+                page_title_schedule: "កាលវិភាគ និង បញ្ជីឈ្មោះ", 
+                brand_name: "វិស្វករមេកានិក",
+                nav_home: "ទំព័រដើម",
+                nav_specializations: "ឯកទេស",
+                nav_education: "កម្រិតសិក្សា",
+                nav_book: "សៀវភៅ",
+                nav_register: "បំពេញពាក្យស្នើសុំ",
+                nav_gallery: "កម្រងរូបភាព",
+                nav_schedule: "ឈ្មោះនិងកាលវិភាគ",
+                lang_km: "ភាសាខ្មែរ",
+                lang_en: "English",
+                schedule_main_title: "ឈ្មោះនិងកាលវិភាគ", 
+                schedule_section_title: "កាលវិភាគសិក្សា",
+                student_list_section_title: "បញ្ជីឈ្មោះសិស្ស",
+                no_schedule_found: "មិនទាន់មានកាលវិភាគនៅឡើយ",
+                no_student_list_found: "មិនទាន់មានបញ្ជីឈ្មោះនៅឡើយ",
+                button_view: "បើកមើល",
+                button_download: "ទាញយក",
+                error_connecting: "Error connecting to server.",
+                error_loading: "Error loading data.",
+                footer_text: "ចាប់ផ្តើមដំណើររបស់អ្នកក្នុងវិស័យវិស្វកម្មមេកានិកនៅថ្ងៃនេះ ហើយរួមចំណែកបង្កើតបច្ចេកវិទ្យាថ្មីៗ។",
+                footer_copyright: "រក្សាសិទ្ធិគ្រប់យ៉ាង © 2025 | បង្កើតដោយ ខៀវ សំណាង"
+            },
+            en: {
+                page_title_schedule: "Schedule & Lists", 
+                brand_name: "Mechanical Engineer",
+                nav_home: "Home",
+                nav_specializations: "Specializations",
+                nav_education: "Education",
+                nav_book: "Book",
+                nav_register: "Application Form",
+                nav_gallery: "Gallery",
+                nav_schedule: "Schedule & Lists",
+                lang_km: "Khmer",
+                lang_en: "English",
+                schedule_main_title: "Schedule & Lists", 
+                schedule_section_title: "Academic Schedule",
+                student_list_section_title: "Student Lists",
+                no_schedule_found: "No schedule found yet",
+                no_student_list_found: "No student list found yet",
+                button_view: "View",
+                button_download: "Download",
+                error_connecting: "Error connecting to server.",
+                error_loading: "Error loading data.",
+                footer_text: "Start your journey in mechanical engineering today and contribute to creating new technologies.",
+                footer_copyright: "All rights reserved © 2025 | Built By Khiev Samnang"
+            }
+        };
+
+        // --- Translation Helper (Unchanged) ---
+        window.getTranslation = function(key) {
+             try {
+                const currentLang = localStorage.getItem('preferredLanguage') || 'km';
+                if (typeof translations !== 'undefined' && translations[currentLang] && translations[currentLang][key]) {
+                    return translations[currentLang][key];
+                }
+                 if (currentLang === 'km' && typeof translations !== 'undefined' && translations['en'] && translations['en'][key]) {
+                     // Fallback to English if Khmer key is missing
+                     return translations['en'][key];
+                 }
+                  return key; // Return key if not found
+             } catch (e) {
+                  console.error("Error getting translation for key:", key, e);
+                  return key; 
+             }
+        }
+
+        // --- REMOVED: sendEmail() ---
+        // --- REMOVED: showCustomMessage() ---
+        // --- REMOVED: toggleContactForm() ---
+        // --- REMOVED: closeContactForm() ---
+
+        // --- Theme Switching (Unchanged) ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function updateTheme(isDark) {
+            if (!htmlEl) {
+                console.error("<html> element not found.");
+                return;
+            }
+            htmlEl.classList.toggle('dark', isDark);
+            if (themeIcon) {
+                themeIcon.classList.toggle('fa-sun', !isDark);
+                themeIcon.classList.toggle('fa-moon', isDark);
+            }
+            try {
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            } catch (error) {
+                console.error("Could not save theme to localStorage:", error);
+            }
+        }
+        
+        function toggleDarkMode() {
+            if (!htmlEl) return;
+            const isCurrentlyDark = htmlEl.classList.contains('dark');
+            updateTheme(!isCurrentlyDark);
+        }
+
+        // --- Language Switching (Unchanged) ---
+        const currentLangFlag = document.getElementById('current-lang-flag');
+        const flagSources = {
+            km: 'https://flagcdn.com/kh.svg',
+            en: 'https://flagcdn.com/gb.svg'
+        };
+
+        function setLanguage(lang) {
+            const langData = translations[lang];
+            if (!langData) {
+                console.error(`Translations for language "${lang}" not found.`);
+                return;
+            }
+            try {
+                localStorage.setItem('preferredLanguage', lang);
+            } catch (error) {
+                console.error("Could not save language preference to localStorage:", error);
+            }
+
+            if (htmlEl) htmlEl.lang = lang;
+            if (currentLangFlag) currentLangFlag.src = flagSources[lang];
+
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.getAttribute('data-translate-key');
+                const translatedText = window.getTranslation(key); 
+
+                if (translatedText !== key || lang === 'en') {
+                    if (key.includes('_list') || key.includes('_details')) {
+                        // This case might not be needed anymore, but keep for safety
+                        el.innerHTML = translatedText;
+                    } else {
+                        // Find the target text node to replace
+                        let targetNode = el.querySelector('span:not([data-translate-key])') || el;
+                        if (targetNode.childNodes.length === 1 && targetNode.childNodes[0].nodeType === 3) {
+                             // Simple case: <a><span>Text</span></a>
+                             targetNode.childNodes[0].textContent = translatedText;
+                        } else if (el.tagName === 'TITLE') {
+                             el.textContent = translatedText;
+                        } else {
+                             // Complex case: <a><i ...></i><span>Text</span></a> or <h1><i..></i>Text</h1>
+                             // Find the first text node that isn't just whitespace
+                             const textNodes = Array.from(el.childNodes).filter(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0);
+                             if (textNodes.length > 0) {
+                                 textNodes[0].textContent = translatedText;
+                             } else if (el.querySelector('span')) {
+                                // Fallback for <span> inside
+                                el.querySelector('span').textContent = translatedText;
+                             } else if (el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'P') {
+                                // Handle headings/paragraphs that might have icons
+                                const span = el.querySelector('span[data-translate-key]');
+                                if(span) {
+                                    // if the span itself has the key, target it
+                                    span.textContent = translatedText;
+                                } else {
+                                     // Find first text node child
+                                     let found = false;
+                                     for (let node of el.childNodes) {
+                                         if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
+                                             node.textContent = translatedText;
+                                             found = true;
+                                             break;
+                                         }
+                                     }
+                                     if (!found && !el.querySelector('i')) { 
+                                         // If no icon and no text node, just set textContent
+                                         el.textContent = translatedText;
+                                     }
+                                }
+                             }
+                        }
+                    }
+                }
+            });
+
+            // Close mobile menu on lang change
+            const mobileMenuEl = document.getElementById('mobile-menu');
+            if (mobileMenuEl) mobileMenuEl.classList.add('hidden');
+            
+            // Close lang dropdown on lang change
+            const langOptionsEl = document.getElementById('lang-options');
+            if (langOptionsEl) langOptionsEl.classList.add('hidden');
+            
+            // Re-translate dynamic content (buttons)
+            document.querySelectorAll('#schedule-content [data-translate-key], #student-list-content [data-translate-key]').forEach(el => {
+                 const key = el.getAttribute('data-translate-key');
+                 const translatedText = window.getTranslation(key);
+                 if (key === 'button_view' || key === 'button_download') {
+                     // Target the span inside the button
+                     el.textContent = translatedText;
+                 } else {
+                     // For 'no schedule' text
+                     el.textContent = translatedText;
+                 }
+            });
+        }
+        
+        // --- Language Dropdown Logic (Unchanged) ---
+        const langSwitcherBtn = document.getElementById('lang-switcher-btn');
+        const langOptions = document.getElementById('lang-options');
+        
+        if (langSwitcherBtn && langOptions) {
+            langSwitcherBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langOptions.classList.toggle('hidden');
+            });
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                const container = document.getElementById('lang-switcher-container');
+                if (container && !container.contains(e.target)) {
+                    langOptions.classList.add('hidden');
+                }
+            });
+        }
+        
+        // --- Mobile Menu Toggle (Unchanged) ---
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+         if (menuBtn && mobileMenu) {
+             menuBtn.addEventListener('click', () => {
+                 mobileMenu.classList.toggle('hidden');
+             });
+             // Close menu when a link is clicked
+             mobileMenu.querySelectorAll('a').forEach(link => {
+                 link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+             });
+         }
+
+        // --- Initial Load (Unchanged) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM fully loaded and parsed"); 
+
+            // 1. Initialize Theme
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                let initialIsDark = (savedTheme === 'dark'); 
+                console.log("Initial theme check:", { savedTheme, initialIsDark });
+                updateTheme(initialIsDark);
+            } catch (error) {
+                console.error("Error initializing theme:", error);
+                updateTheme(false); // Default to light mode on error
+            }
+            
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', toggleDarkMode);
+            } else {
+                 console.error("Theme toggle button not found after DOM load!");
+            }
+
+            // 2. Initialize Language
+            try {
+                const preferredLanguage = localStorage.getItem('preferredLanguage') || 'km';
+                console.log("Initializing language:", preferredLanguage);
+                setLanguage(preferredLanguage); // Apply language
+            } catch (error) {
+                 console.error("Error initializing language:", error);
+            }
+            
+            // 3. Set Active Nav Link for this page
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === 'schedule.html') {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+        });
+    </script>
+
+</body>
+</html>
